@@ -10,7 +10,7 @@ const environment = {
   CI: true,
   GITHUB_STEP_SUMMARY: "summary.txt",
   COMMIT_SHA: "5ec689eeecdbeccd6de488fd3ab6d61561e33404",
-  CLOUDFLARE_PROJECT_NAME: "netcore-webapi-starter-livingdoc",
+  CLOUDFLARE_PROJECT_NAME: "waw-backend-cs-livingdoc",
   IS_INITIAL_EDIT: ["false", "true"][0],
   BUILD_CONCLUSION: ["success", "failed"][1],
   TEST_REPORT: JSON.stringify({
@@ -22,10 +22,10 @@ const environment = {
   }),
   CLOUDFLARE: JSON.stringify({
     id: "4582ada4-b99f-4599-bb12-0bf9a2e6291d",
-    url: "https://4582ada4.netcore-webapi-starter-livingdoc.pages.dev",
+    url: "https://4582ada4.waw-backend-cs-livingdoc.pages.dev",
     environment: "production",
-    projectName: "netcore-webapi-starter-livingdoc",
-    logsUrl: "https://dash.cloudflare.com/?to=/:account/pages/view/netcore-webapi-starter-livingdoc/4582ada4-b99f-4599-bb12-0bf9a2e6291d",
+    projectName: "waw-backend-cs-livingdoc",
+    logsUrl: "https://dash.cloudflare.com/?to=/:account/pages/view/waw-backend-cs-livingdoc/4582ada4-b99f-4599-bb12-0bf9a2e6291d",
   }),
   RUN_INFO: JSON.stringify({
     sourceHeadRepo: "dalbitresb12/netcore-webapi-starter",

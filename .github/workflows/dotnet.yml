@@ -11,7 +11,7 @@ jobs:
     name: Build and Test
     env:
       PROJECT_NAME: Starter.API
-      CLOUDFLARE_PROJECT_NAME: netcore-webapi-starter-livingdoc
+      CLOUDFLARE_PROJECT_NAME: waw-backend-cs-livingdoc
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

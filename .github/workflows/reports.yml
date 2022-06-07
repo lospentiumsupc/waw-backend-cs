@@ -29,7 +29,7 @@ jobs:
     if: ${{ github.event.action == 'requested' && fromJSON(needs.vars.outputs.is_pr) }}
     runs-on: ubuntu-latest
     env:
-      CLOUDFLARE_PROJECT_NAME: netcore-webapi-starter-livingdoc
+      CLOUDFLARE_PROJECT_NAME: waw-backend-cs-livingdoc
     steps:
       - uses: actions/checkout@v3
       - name: Create body for pull request comment (initial edit)
@@ -65,7 +65,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PROJECT_NAME: Starter.API
-      CLOUDFLARE_PROJECT_NAME: netcore-webapi-starter-livingdoc
+      CLOUDFLARE_PROJECT_NAME: waw-backend-cs-livingdoc
     outputs:
       deployment: ${{ toJSON(steps.cloudflare.outputs) }}
     steps:
@@ -113,7 +113,7 @@ jobs:
     if: ${{ github.event.action == 'completed' }}
     runs-on: ubuntu-latest
     env:
-      CLOUDFLARE_PROJECT_NAME: netcore-webapi-starter-livingdoc
+      CLOUDFLARE_PROJECT_NAME: waw-backend-cs-livingdoc
     steps:
       - uses: actions/checkout@v3
       - name: Publish status to job summary and generate pull request comment
