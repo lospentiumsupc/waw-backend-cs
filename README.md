@@ -10,15 +10,15 @@ This project was generated using Rider's .NET Core Web API template using versio
 
 ## Repository Setup
 
-You should start by replacing almost all the references to the `Starter.API` project. This is a non-exhaustive list of possible changes you'll have to make (use your IDEs refactor option so that it helps you):
+You should start by replacing almost all the references to the `WAW.API` project. This is a non-exhaustive list of possible changes you'll have to make (use your IDEs refactor option so that it helps you):
 
 - C# namespaces in projects
 - Root namespaces in `.csproj` files (see the `RootNamespace` property in it)
-- Project filenames: `Starter.API.csproj` and `Starter.API.Tests.csproj`
+- Project filenames: `WAW.API.csproj` and `WAW.API.Tests.csproj`
 - After renaming projects: `InternalsVisibleTo` and `ProjectReference` properties in `.csproj` files
-- Migration files (they include the `Starter.API.Migrations` namespace)
-- `Starter.API` and `Starter.API.Tests` folders should be renamed to your new root namespace
-- Project references and folder names in `Starter.API.sln`
+- Migration files (they include the `WAW.API.Migrations` namespace)
+- `WAW.API` and `WAW.API.Tests` folders should be renamed to your new root namespace
+- Project references and folder names in `WAW.API.sln`
 - GitHub Actions workflow files
   - `dotnet.yml`: change the `PROJECT_NAME` environment variable
   - `reports.yml`: change the `PROJECT_NAME` environment variable (its in two different places)
@@ -106,10 +106,10 @@ To allow the app to connect to the database, set the connection string as a secr
 
 ```sh
 # Don't forget to replace {YOUR_CONNECTION_STRING} with the appropriate value
-$ dotnet user-secrets set "DbConnectionString" "{YOUR_CONNECTION_STRING}" --project Starter.API
+$ dotnet user-secrets set "DbConnectionString" "{YOUR_CONNECTION_STRING}" --project WAW.API
 Successfully saved DbConnectionString = {YOUR_CONNECTION_STRING} to the secret store.
 # Alternatively, move to project directory to avoid having to use `--project`
-$ cd Starter.API/
+$ cd WAW.API/
 $ dotnet user-secrets set "DbConnectionString" "{YOUR_CONNECTION_STRING}"
 Successfully saved DbConnectionString = {YOUR_CONNECTION_STRING} to the secret store.
 # Check that your value has been saved correctly
