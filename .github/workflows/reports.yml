@@ -64,7 +64,7 @@ jobs:
     if: ${{ github.event.action == 'completed' }}
     runs-on: ubuntu-latest
     env:
-      PROJECT_NAME: Starter.API
+      PROJECT_NAME: WAW.API
       CLOUDFLARE_PROJECT_NAME: waw-backend-cs-livingdoc
     outputs:
       deployment: ${{ toJSON(steps.cloudflare.outputs) }}
@@ -94,7 +94,7 @@ jobs:
     if: ${{ github.event.action == 'completed' }}
     runs-on: ubuntu-latest
     env:
-      PROJECT_NAME: Starter.API
+      PROJECT_NAME: WAW.API
     outputs:
       report: ${{ toJSON(steps.report.outputs) }}
     steps:

@@ -10,7 +10,7 @@ jobs:
   build-test:
     name: Build and Test
     env:
-      PROJECT_NAME: Starter.API
+      PROJECT_NAME: WAW.API
       CLOUDFLARE_PROJECT_NAME: waw-backend-cs-livingdoc
     runs-on: ubuntu-latest
     steps:
