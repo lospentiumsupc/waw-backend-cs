@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WAW.API", "WAW.API\WAW.API.csproj", "{C1027DD5-602B-4CC7-A2FC-AB2DB126892B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starter.API.Tests", "Starter.API.Tests\Starter.API.Tests.csproj", "{67488BB5-401C-4B9E-A2D5-3759E6284DB6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WAW.API.Tests", "WAW.API.Tests\WAW.API.Tests.csproj", "{67488BB5-401C-4B9E-A2D5-3759E6284DB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

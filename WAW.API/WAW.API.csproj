@@ -20,7 +20,7 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <InternalsVisibleTo Include="Starter.API.Tests" />
+    <InternalsVisibleTo Include="WAW.API.Tests" />
   </ItemGroup>
   <Target Name="RestoreTools" BeforeTargets="Restore;CollectPackageReferences;Husky">
     <Exec Command="dotnet tool restore" StandardOutputImportance="Low" StandardErrorImportance="High" />
