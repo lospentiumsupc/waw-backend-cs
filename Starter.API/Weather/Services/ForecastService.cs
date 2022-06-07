@@ -1,10 +1,10 @@
-using Starter.API.Shared.Extensions;
-using Starter.API.Weather.Domain.Models;
-using Starter.API.Weather.Domain.Repositories;
-using Starter.API.Weather.Domain.Services;
-using Starter.API.Weather.Domain.Services.Communication;
+using WAW.API.Shared.Extensions;
+using WAW.API.Weather.Domain.Models;
+using WAW.API.Weather.Domain.Repositories;
+using WAW.API.Weather.Domain.Services;
+using WAW.API.Weather.Domain.Services.Communication;
 
-namespace Starter.API.Weather.Services;
+namespace WAW.API.Weather.Services;
 
 public class ForecastService : IForecastService {
   private readonly IForecastRepository repository;

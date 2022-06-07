@@ -1,6 +1,6 @@
-using Starter.API.Weather.Domain.Models;
+using WAW.API.Weather.Domain.Models;
 
-namespace Starter.API.Weather.Domain.Repositories;
+namespace WAW.API.Weather.Domain.Repositories;
 
 public interface IForecastRepository {
   Task<IEnumerable<Forecast>> ListAll();

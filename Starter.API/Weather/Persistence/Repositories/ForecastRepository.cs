@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using Starter.API.Weather.Domain.Models;
-using Starter.API.Weather.Domain.Repositories;
-using Starter.API.Weather.Persistence.Contexts;
+using WAW.API.Weather.Domain.Models;
+using WAW.API.Weather.Domain.Repositories;
+using WAW.API.Weather.Persistence.Contexts;
 
-namespace Starter.API.Weather.Persistence.Repositories;
+namespace WAW.API.Weather.Persistence.Repositories;
 
 public class ForecastRepository : BaseRepository, IForecastRepository {
   public ForecastRepository(AppDbContext context) : base(context) {}

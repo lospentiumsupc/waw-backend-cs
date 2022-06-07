@@ -1,4 +1,4 @@
-namespace Starter.API.Shared.Extensions;
+namespace WAW.API.Shared.Extensions;
 
 public static class StringExtensions {
   private static IEnumerable<char> Convert(CharEnumerator e) {

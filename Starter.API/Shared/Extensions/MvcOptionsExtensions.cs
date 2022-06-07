@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using Starter.API.Shared.Utils;
+using WAW.API.Shared.Utils;
 
-namespace Starter.API.Shared.Extensions;
+namespace WAW.API.Shared.Extensions;
 
 // Adapted from https://stackoverflow.com/a/58406404/15040387
 public static class MvcOptionsExtensions {

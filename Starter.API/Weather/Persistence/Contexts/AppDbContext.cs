@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using Starter.API.Shared.Extensions;
-using Starter.API.Weather.Domain.Models;
+using WAW.API.Shared.Extensions;
+using WAW.API.Weather.Domain.Models;
 
-namespace Starter.API.Weather.Persistence.Contexts;
+namespace WAW.API.Weather.Persistence.Contexts;
 
 public class AppDbContext : DbContext {
   private DbSet<Forecast>? forecasts;

@@ -1,11 +1,11 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Starter.API.Shared.Extensions;
-using Starter.API.Weather.Domain.Models;
-using Starter.API.Weather.Domain.Services;
-using Starter.API.Weather.Resources;
+using WAW.API.Shared.Extensions;
+using WAW.API.Weather.Domain.Models;
+using WAW.API.Weather.Domain.Services;
+using WAW.API.Weather.Resources;
 
-namespace Starter.API.Weather.Controllers;
+namespace WAW.API.Weather.Controllers;
 
 [ApiController]
 [Route("[controller]")]

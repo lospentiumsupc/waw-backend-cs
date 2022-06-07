@@ -1,4 +1,4 @@
-namespace Starter.API.Weather.Resources;
+namespace WAW.API.Weather.Resources;
 
 public class ForecastResource {
   public long Id { get; set; }

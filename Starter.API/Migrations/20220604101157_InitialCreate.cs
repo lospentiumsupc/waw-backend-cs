@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Starter.API.Migrations
+namespace WAW.API.Migrations
 {
     public partial class InitialCreate : Migration
     {

@@ -1,6 +1,6 @@
-using Starter.API.Shared.Domain.Model;
+using WAW.API.Shared.Domain.Model;
 
-namespace Starter.API.Weather.Domain.Models;
+namespace WAW.API.Weather.Domain.Models;
 
 public class Forecast : BaseModel {
   public DateTime Date { get; set; }

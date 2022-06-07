@@ -4,13 +4,13 @@ using System.Net.Mime;
 using System.Text;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
-using Starter.API.Weather.Domain.Models;
-using Starter.API.Weather.Domain.Repositories;
-using Starter.API.Weather.Resources;
 using TechTalk.SpecFlow.Assist;
+using WAW.API.Weather.Domain.Models;
+using WAW.API.Weather.Domain.Repositories;
+using WAW.API.Weather.Resources;
 using Xunit;
 
-namespace Starter.API.Tests.Steps;
+namespace WAW.API.Tests.Steps;
 
 [Binding]
 public class ForecastStepDefinitions {

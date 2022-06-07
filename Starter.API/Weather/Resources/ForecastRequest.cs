@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Starter.API.Weather.Resources;
+namespace WAW.API.Weather.Resources;
 
 public class ForecastRequest {
   [Required]

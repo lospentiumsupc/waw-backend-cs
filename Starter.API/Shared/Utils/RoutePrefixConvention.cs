@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.Routing;
 
-namespace Starter.API.Shared.Utils;
+namespace WAW.API.Shared.Utils;
 
 // Adapted from https://stackoverflow.com/a/58406404/15040387
 public class RoutePrefixConvention : IApplicationModelConvention {

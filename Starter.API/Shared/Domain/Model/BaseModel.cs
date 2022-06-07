@@ -1,6 +1,6 @@
-using Starter.API.Shared.Extensions;
+using WAW.API.Shared.Extensions;
 
-namespace Starter.API.Shared.Domain.Model;
+namespace WAW.API.Shared.Domain.Model;
 
 public class BaseModel {
   public long Id { get; set; }

@@ -1,7 +1,7 @@
-using Starter.API.Weather.Domain.Models;
-using Starter.API.Weather.Domain.Services.Communication;
+using WAW.API.Weather.Domain.Models;
+using WAW.API.Weather.Domain.Services.Communication;
 
-namespace Starter.API.Weather.Domain.Services;
+namespace WAW.API.Weather.Domain.Services;
 
 public interface IForecastService {
   Task<IEnumerable<Forecast>> ListAll();

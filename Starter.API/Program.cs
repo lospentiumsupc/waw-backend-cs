@@ -1,13 +1,13 @@
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Starter.API.Shared.Extensions;
-using Starter.API.Weather.Domain.Repositories;
-using Starter.API.Weather.Domain.Services;
-using Starter.API.Weather.Mapping;
-using Starter.API.Weather.Persistence.Contexts;
-using Starter.API.Weather.Persistence.Repositories;
-using Starter.API.Weather.Services;
+using WAW.API.Shared.Extensions;
+using WAW.API.Weather.Domain.Repositories;
+using WAW.API.Weather.Domain.Services;
+using WAW.API.Weather.Mapping;
+using WAW.API.Weather.Persistence.Contexts;
+using WAW.API.Weather.Persistence.Repositories;
+using WAW.API.Weather.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

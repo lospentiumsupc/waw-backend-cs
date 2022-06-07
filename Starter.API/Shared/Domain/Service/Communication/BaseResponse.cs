@@ -1,7 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Starter.API.Shared.Domain.Service.Communication;
+namespace WAW.API.Shared.Domain.Service.Communication;
 
 public abstract class BaseResponse<T> {
   public bool Success { get; set; }

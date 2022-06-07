@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace Starter.API.Shared.Extensions;
+namespace WAW.API.Shared.Extensions;
 
 public static class ObjectExtensions {
   // Adapted from https://stackoverflow.com/a/8724150/15040387

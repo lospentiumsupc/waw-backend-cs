@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Starter.API.Shared.Extensions;
+namespace WAW.API.Shared.Extensions;
 
 public static class ModelBuilderExtensions {
   public static void UseSnakeCase(this ModelBuilder builder) {

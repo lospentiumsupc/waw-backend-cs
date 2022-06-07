@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Starter.API.Weather.Domain.Repositories;
-using Starter.API.Weather.Persistence.Contexts;
 using TechTalk.SpecFlow.Assist.ValueRetrievers;
+using WAW.API.Weather.Domain.Repositories;
+using WAW.API.Weather.Persistence.Contexts;
 
-namespace Starter.API.Tests.Hooks;
+namespace WAW.API.Tests.Hooks;
 
 [Binding]
 public class ForecastHooks {
