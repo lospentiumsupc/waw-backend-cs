@@ -39,9 +39,9 @@ public class AppDbContext : DbContext {
     companyEntity.ToTable("Companies");
     companyEntity.HasKey(p => p.Id);
     companyEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-    companyEntity.Property(p => p.Name).IsRequired();
-    companyEntity.Property(p => p.Address);
-    companyEntity.Property(p => p.Email).IsRequired();
+    companyEntity.Property(p => p.Name).IsRequired().HasMaxLength(30);
+    companyEntity.Property(p => p.Address).HasMaxLength(100);
+    companyEntity.Property(p => p.Email).IsRequired().HasMaxLength(40);
 
     builder.UseSnakeCase();
   }
