@@ -9,9 +9,16 @@ using WAW.API.Company.Domain.Models;
 public class AppDbContext : DbContext {
   private DbSet<Forecast>? forecasts;
 
+  private DbSet<Company>? companies;
+
   public DbSet<Forecast> Forecasts {
     get => GetContext(forecasts);
     set => forecasts = value;
+  }
+
+  public DbSet<Company> Companies {
+    get => GetContext(companies);
+    set => companies = value;
   }
 
   public AppDbContext(DbContextOptions options) : base(options) {}
