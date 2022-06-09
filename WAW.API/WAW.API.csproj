@@ -22,6 +22,16 @@
   <ItemGroup>
     <InternalsVisibleTo Include="WAW.API.Tests" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Company\Controllers" />
+    <Folder Include="Company\Domain\Models" />
+    <Folder Include="Company\Domain\Repositories" />
+    <Folder Include="Company\Domain\Services" />
+    <Folder Include="Company\Mapping" />
+    <Folder Include="Company\Persistence" />
+    <Folder Include="Company\Resources" />
+    <Folder Include="Company\Services" />
+  </ItemGroup>
   <Target Name="RestoreTools" BeforeTargets="Restore;CollectPackageReferences;Husky">
     <Exec Command="dotnet tool restore" StandardOutputImportance="Low" StandardErrorImportance="High" />
   </Target>
