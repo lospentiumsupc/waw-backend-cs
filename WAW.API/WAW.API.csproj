@@ -24,9 +24,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Company\Controllers" />
-    <Folder Include="Company\Mapping" />
     <Folder Include="Company\Persistence" />
-    <Folder Include="Company\Resources" />
     <Folder Include="Company\Services" />
   </ItemGroup>
   <Target Name="RestoreTools" BeforeTargets="Restore;CollectPackageReferences;Husky">
