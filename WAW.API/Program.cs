@@ -1,6 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using WAW.API.Company.Domain.Repositories;
+using WAW.API.Company.Domain.Services;
+using WAW.API.Company.Persistence.Repositories;
+using WAW.API.Company.Services;
 using WAW.API.Shared.Extensions;
 using WAW.API.Weather.Domain.Repositories;
 using WAW.API.Weather.Domain.Services;
@@ -53,6 +57,10 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 // Dependency Injection configuration
 builder.Services.AddScoped<IForecastRepository, ForecastRepository>();
 builder.Services.AddScoped<IForecastService, ForecastService>();
+
+builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
+builder.Services.AddScoped<ICompanyService, CompanyService>();
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // AutoMapper configuration
