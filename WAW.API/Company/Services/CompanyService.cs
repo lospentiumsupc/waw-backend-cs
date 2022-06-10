@@ -21,11 +21,13 @@ public class CompanyService: ICompanyService {
   }
 
   public async Task<CompanyResponse> Create(Company company) {
-    // Validate company name
+    /*
+    Pending validation
+
     var existingCompanyWithName = await repository.FindByName(company.Name);
 
     if (existingCompanyWithName != null) return new CompanyResponse("Company name already exists");
-
+    */
     try {
       await repository.Add(company);
       await unitOfWork.Complete();
@@ -36,11 +38,13 @@ public class CompanyService: ICompanyService {
   }
 
   public async Task<CompanyResponse> Update(long id, Company company) {
-    // Validate company name
+    /*
+    Pending validation
+
     var existingCompanyWithName = await repository.FindByName(company.Name);
 
     if (existingCompanyWithName != null) return new CompanyResponse("Company name already exists");
-
+    */
 
     var currentCompany = await repository.FindById(id);
 
