@@ -23,7 +23,7 @@ jobs:
           echo "Branch rule exception: Continuous Integration branches must only be merged into main"
           echo 1
       - name: Branch is not based on develop
-        if: ${{ github.base_ref != 'develop' }}
+        if: ${{ github.base_ref != 'develop' && !startsWith(github.head_ref, 'ci/') }}
         env:
           BASE_BRANCH: ${{ github.base_ref }}
         run: |
@@ -31,7 +31,7 @@ jobs:
           echo "PRs should only ever be merged into develop"
           exit 1
       - name: Branch verified as based on develop branch
-        if: ${{ github.base_ref == 'develop' }}
+        if: ${{ github.base_ref == 'develop' && !startsWith(github.head_ref, 'ci/') }}
         env:
           BASE_BRANCH: ${{ github.base_ref }}
         run: |
