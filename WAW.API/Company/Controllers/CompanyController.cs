@@ -1,3 +1,4 @@
+using System.Net.Mime;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using WAW.API.Company.Domain.Services;
@@ -10,6 +11,7 @@ using WAW.API.Company.Domain.Models;
 
 [ApiController]
 [Route("[controller]")]
+[Produces(MediaTypeNames.Application.Json)]
 public class CompanyController: ControllerBase {
   private readonly ICompanyService service;
   private readonly IMapper mapper;
