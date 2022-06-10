@@ -23,7 +23,7 @@ public class CompanyRepository: BaseRepository, ICompanyRepository {
   }
 
   public async Task<Company?> FindByName(string name) {
-    return await context.Companies.FindAsync(name);
+    return await context.Companies.FirstOrDefaultAsync(p => p.Name == name);
   }
 
   public void Update(Company company) {
