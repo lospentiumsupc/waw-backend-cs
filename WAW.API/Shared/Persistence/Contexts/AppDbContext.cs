@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WAW.API.Auth.Domain.Models;
+using WAW.API.Employers.Domain.Models;
 using WAW.API.Job.Domain.Models;
 using WAW.API.Shared.Extensions;
 
@@ -8,7 +9,7 @@ namespace WAW.API.Shared.Persistence.Contexts;
 public class AppDbContext : DbContext {
   private DbSet<Offer>? offers;
   private DbSet<User>? users;
-  private DbSet<Employers.Domain.Models.Company>? companies;
+  private DbSet<Company>? companies;
 
   public DbSet<Offer> Offers {
     get => GetContext(offers);
@@ -20,7 +21,7 @@ public class AppDbContext : DbContext {
     set => users = value;
   }
 
-  public DbSet<Employers.Domain.Models.Company> Companies {
+  public DbSet<Company> Companies {
     get => GetContext(companies);
     set => companies = value;
   }
@@ -48,7 +49,7 @@ public class AppDbContext : DbContext {
     userEntity.Property(p => p.Email).IsRequired().HasMaxLength(256);
     userEntity.Property(p => p.Birthdate).IsRequired();
 
-    var companyEntity = builder.Entity<Employers.Domain.Models.Company>();
+    var companyEntity = builder.Entity<Company>();
     companyEntity.ToTable("Companies");
     companyEntity.HasKey(p => p.Id);
     companyEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
