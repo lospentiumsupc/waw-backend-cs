@@ -14,17 +14,18 @@ using Domain.Models;
 [Route("[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
 [SwaggerTag("Create, read, update and delete Companies")]
-public class CompanyController : ControllerBase {
+public class CompaniesController : ControllerBase {
   private readonly ICompanyService service;
   private readonly IMapper mapper;
 
-  public CompanyController(ICompanyService service, IMapper mapper) {
+  public CompaniesController(ICompanyService service, IMapper mapper) {
     this.service = service;
     this.mapper = mapper;
   }
 
   [HttpGet]
   [ProducesResponseType(typeof(IEnumerable<CompanyResource>), 200)]
+  [SwaggerResponse(200, "All the stored companies were retrieved successfully.", typeof(IEnumerable<CompanyResource>))]
   public async Task<IEnumerable<CompanyResource>> GetAll() {
     var companies = await service.ListAll();
     return mapper.Map<IEnumerable<Company>, IEnumerable<CompanyResource>>(companies);
@@ -36,7 +37,9 @@ public class CompanyController : ControllerBase {
   [ProducesResponseType(500)]
   [SwaggerResponse(201, "The company was created successfully", typeof(CompanyResource))]
   [SwaggerResponse(400, "The company data is invalid")]
-  public async Task<IActionResult> Post([FromBody] CompanyRequest companyRequest) {
+  public async Task<IActionResult> Post(
+    [FromBody] [SwaggerRequestBody("The company object about to create", Required = true)] CompanyRequest companyRequest
+  ) {
     if (!ModelState.IsValid) return BadRequest(ModelState.GetErrorMessages());
 
     var company = mapper.Map<CompanyRequest, Company>(companyRequest);
@@ -50,7 +53,11 @@ public class CompanyController : ControllerBase {
   [ProducesResponseType(500)]
   [SwaggerResponse(200, "The company was updated successfully", typeof(CompanyResource))]
   [SwaggerResponse(400, "The company data is invalid")]
-  public async Task<IActionResult> Put(int id, [FromBody] CompanyRequest companyRequest) {
+  public async Task<IActionResult> Put(
+    [FromRoute] [SwaggerParameter("Company identifier", Required = true)] int id,
+    [FromBody] [SwaggerRequestBody("The company object about to update and its changes", Required = true)]
+    CompanyRequest companyRequest
+  ) {
     if (!ModelState.IsValid) return BadRequest(ModelState.GetErrorMessages());
 
     var company = mapper.Map<CompanyRequest, Company>(companyRequest);
@@ -64,7 +71,9 @@ public class CompanyController : ControllerBase {
   [ProducesResponseType(500)]
   [SwaggerResponse(200, "The company was deleted successfully", typeof(CompanyResource))]
   [SwaggerResponse(400, "The selected company to delete does not exist")]
-  public async Task<IActionResult> DeleteAsync(int id) {
+  public async Task<IActionResult> DeleteAsync(
+    [FromRoute] [SwaggerParameter("Company identifier", Required = true)] int id
+  ) {
     var result = await service.Delete(id);
     return result.ToResponse<CompanyResource>(this, mapper);
   }
