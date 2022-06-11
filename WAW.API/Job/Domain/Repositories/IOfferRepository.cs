@@ -5,11 +5,11 @@ namespace WAW.API.Job.Domain.Repositories;
 public interface IOfferRepository {
   Task<IEnumerable<Offer>> ListAll();
 
-  Task Add(Offer forecast);
+  Task Add(Offer offer);
 
   Task<Offer?> FindById(long id);
 
-  void Update(Offer forecast);
+  void Update(Offer offer);
 
-  void Remove(Offer forecast);
+  void Remove(Offer offer);
 }
