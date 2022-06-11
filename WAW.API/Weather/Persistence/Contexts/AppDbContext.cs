@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using WAW.API.Job.Domain.Models;
 using WAW.API.Auth.Domain.Models;
 using WAW.API.Shared.Extensions;
 using WAW.API.Weather.Domain.Models;
@@ -9,12 +10,18 @@ using WAW.API.Company.Domain.Models;
 
 public class AppDbContext : DbContext {
   private DbSet<Forecast>? forecasts;
+  private DbSet<Offer>? offers;
   private DbSet<User>? users;
   private DbSet<Company>? companies;
 
   public DbSet<Forecast> Forecasts {
     get => GetContext(forecasts);
     set => forecasts = value;
+  }
+
+  public DbSet<Offer> Offers {
+    get => GetContext(offers);
+    set => offers = value;
   }
 
   public DbSet<User> Users {
@@ -38,6 +45,15 @@ public class AppDbContext : DbContext {
     forecastEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
     forecastEntity.Property(p => p.Date).IsRequired();
     forecastEntity.Property(p => p.TemperatureC).IsRequired();
+
+    var offerEntity = builder.Entity<Offer>();
+    offerEntity.ToTable("Offer");
+    offerEntity.HasKey(p => p.Id);
+    offerEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+    offerEntity.Property(p => p.Title).IsRequired().HasMaxLength(200);
+    offerEntity.Property(p => p.Image).IsRequired().HasMaxLength(500);
+    offerEntity.Property(p => p.Description).IsRequired();
+    offerEntity.Property(p => p.Status).IsRequired();
 
     var userEntity = builder.Entity<User>();
     userEntity.ToTable("Users");

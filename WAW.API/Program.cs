@@ -1,6 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using WAW.API.Job.Domain.Repositories;
+using WAW.API.Job.Domain.Services;
+using WAW.API.Job.Persistence.Repositories;
+using WAW.API.Job.Services;
 using WAW.API.Company.Domain.Repositories;
 using WAW.API.Company.Domain.Services;
 using WAW.API.Company.Persistence.Repositories;
@@ -12,6 +16,8 @@ using WAW.API.Weather.Mapping;
 using WAW.API.Weather.Persistence.Contexts;
 using WAW.API.Weather.Persistence.Repositories;
 using WAW.API.Weather.Services;
+using IUnitOfWork = WAW.API.Weather.Domain.Repositories.IUnitOfWork;
+using UnitOfWork = WAW.API.Weather.Persistence.Repositories.UnitOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -60,6 +66,9 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddScoped<IForecastRepository, ForecastRepository>();
 builder.Services.AddScoped<IForecastService, ForecastService>();
 
+builder.Services.AddScoped<IOfferRepository, OfferRepository>();
+builder.Services.AddScoped<IOfferService, OfferService>();
+
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 builder.Services.AddScoped<ICompanyService, CompanyService>();
 
@@ -70,6 +79,10 @@ builder.Services.AddAutoMapper(typeof(ModelToResourceProfile), typeof(ResourceTo
 builder.Services.AddAutoMapper(
   typeof(WAW.API.Company.Mapping.ModelToResourceProfile),
   typeof(WAW.API.Company.Mapping.ResourceToModelProfile)
+);
+builder.Services.AddAutoMapper(
+  typeof(WAW.API.Job.Mapping.ModelToResourceProfile),
+  typeof(WAW.API.Job.Mapping.ResourceToModelProfile)
 );
 
 var app = builder.Build();

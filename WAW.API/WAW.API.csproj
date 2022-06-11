@@ -23,6 +23,11 @@
     <InternalsVisibleTo Include="WAW.API.Tests" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Job\Controllers" />
+    <Folder Include="Job\Domain\Models" />
+    <Folder Include="Job\Domain\Repositories" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Company\Controllers" />
   </ItemGroup>
   <Target Name="RestoreTools" BeforeTargets="Restore;CollectPackageReferences;Husky">
