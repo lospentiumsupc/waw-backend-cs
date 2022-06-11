@@ -1,9 +1,9 @@
-using WAW.API.Company.Domain.Repositories;
-using WAW.API.Company.Domain.Services;
-using WAW.API.Company.Domain.Services.Communication;
+using WAW.API.Employers.Domain.Repositories;
+using WAW.API.Employers.Domain.Services;
+using WAW.API.Employers.Domain.Services.Communication;
 using WAW.API.Shared.Domain.Repositories;
 
-namespace WAW.API.Company.Services;
+namespace WAW.API.Employers.Services;
 
 using Domain.Models;
 

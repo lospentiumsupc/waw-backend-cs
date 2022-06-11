@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using WAW.API.Company.Domain.Repositories;
+using WAW.API.Employers.Domain.Repositories;
 using WAW.API.Shared.Persistence.Contexts;
 using WAW.API.Shared.Persistence.Repositories;
 
-namespace WAW.API.Company.Persistence.Repositories;
+namespace WAW.API.Employers.Persistence.Repositories;
 
 using Domain.Models;
 

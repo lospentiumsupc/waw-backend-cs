@@ -1,6 +1,6 @@
 using WAW.API.Shared.Domain.Service.Communication;
 
-namespace WAW.API.Company.Domain.Services.Communication;
+namespace WAW.API.Employers.Domain.Services.Communication;
 
 using Models;
 

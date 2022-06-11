@@ -1,7 +1,7 @@
 using AutoMapper;
-using WAW.API.Company.Resources;
+using WAW.API.Employers.Resources;
 
-namespace WAW.API.Company.Mapping;
+namespace WAW.API.Employers.Mapping;
 
 using Domain.Models;
 

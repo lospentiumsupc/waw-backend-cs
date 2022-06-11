@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace WAW.API.Company.Resources;
+namespace WAW.API.Employers.Resources;
 
 public class CompanyRequest {
   [SwaggerSchema("Category name")]
