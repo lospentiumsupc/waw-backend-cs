@@ -6,7 +6,7 @@ public class User : BaseModel {
   public string FullName { get; set; } = string.Empty;
   public string PreferredName { get; set; } = string.Empty;
   public string Email { get; set; } = string.Empty;
-  public DateOnly Birthdate { get; set; }
+  public DateTime Birthdate { get; set; }
   public string? Location { get; set; }
   public string? Biography { get; set; }
   public string? About { get; set; }
