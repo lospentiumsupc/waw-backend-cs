@@ -24,8 +24,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Chat\Controllers" />
-    <Folder Include="Chat\Domain\Repositories" />
-    <Folder Include="Chat\Domain\Services\Communication" />
     <Folder Include="Chat\Mapping" />
     <Folder Include="Chat\Persistence\Repositories" />
     <Folder Include="Chat\Resources" />
