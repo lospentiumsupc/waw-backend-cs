@@ -20,14 +20,6 @@ jobs:
         run: |
           echo "Current base branch: $BASE_BRANCH"
           echo "Branch rule exception: Continuous Integration branches allowed to be merged into main"
-      - name: Branch is related to CI and is not based on main
-        if: ${{ startsWith(github.head_ref, 'ci/') && github.base_ref != 'main' }}
-        env:
-          BASE_BRANCH: ${{ github.base_ref }}
-        run: |
-          echo "Current base branch: $BASE_BRANCH"
-          echo "Branch rule exception: Continuous Integration branches must only be merged into main"
-          echo 1
       - name: Branch is not based on develop
         if: ${{ github.base_ref != 'develop' && !startsWith(github.head_ref, 'ci/') }}
         env:
