@@ -15,9 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Get short commit hash
-        id: vars
-        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
       - name: Setup .NET
         uses: actions/setup-dotnet@v2
         with:
@@ -39,17 +36,17 @@ jobs:
         uses: actions/upload-artifact@v3
         if: (success() || failure()) && steps.build.outcome == 'success'
         with:
-          name: ${{ env.PROJECT_NAME }}-Release-${{ runner.os }}-${{ steps.vars.outputs.sha_short }}
+          name: ${{ env.PROJECT_NAME }}-Release-${{ runner.os }}-${{ env.GITHUB_RUN_ID }}
           path: ${{ env.PROJECT_NAME }}/bin/Release/net6.0/**
       - name: Upload test results artifact
         uses: actions/upload-artifact@v3
         if: (success() || failure()) && steps.build.outcome == 'success'
         with:
-          name: ${{ env.PROJECT_NAME }}.Tests-${{ runner.os }}-${{ steps.vars.outputs.sha_short }}
+          name: ${{ env.PROJECT_NAME }}.Tests-${{ runner.os }}-${{ env.GITHUB_RUN_ID }}
           path: ${{ env.PROJECT_NAME }}.Tests/TestResults/test-results.trx
       - name: Upload LivingDoc artifact
         if: (success() || failure()) && steps.gen-livingdoc.outcome == 'success'
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.PROJECT_NAME }}.Tests-LivingDoc-${{ runner.os }}-${{ steps.vars.outputs.sha_short }}
+          name: ${{ env.PROJECT_NAME }}.Tests-LivingDoc-${{ runner.os }}-${{ env.GITHUB_RUN_ID }}
           path: LivingDoc.html
