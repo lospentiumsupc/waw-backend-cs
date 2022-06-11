@@ -1,5 +1,3 @@
-using System;
+namespace WAW.API.Tests.Drivers;
 
-namespace WAW.API.Tests.Drivers {
-  public class Driver {}
-}
+public class Driver {}

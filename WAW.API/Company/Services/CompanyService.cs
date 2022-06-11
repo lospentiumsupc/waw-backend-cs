@@ -1,7 +1,7 @@
 using WAW.API.Company.Domain.Repositories;
 using WAW.API.Company.Domain.Services;
 using WAW.API.Company.Domain.Services.Communication;
-using WAW.API.Weather.Domain.Repositories;
+using WAW.API.Shared.Domain.Repositories;
 
 namespace WAW.API.Company.Services;
 
