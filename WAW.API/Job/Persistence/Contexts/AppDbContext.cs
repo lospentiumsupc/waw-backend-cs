@@ -5,11 +5,11 @@ using WAW.API.Shared.Extensions;
 namespace WAW.API.Job.Persistence.Contexts;
 
 public class AppDbContext : DbContext{
-  private DbSet<Offer>? offer;
+  private DbSet<Offer>? offers;
 
-  public DbSet<Offer> Offer {
-    get => GetContext(offer);
-    set => offer = value;
+  public DbSet<Offer> Offers {
+    get => GetContext(offers);
+    set => offers = value;
   }
 
   public AppDbContext(DbContextOptions options) : base(options) {}
