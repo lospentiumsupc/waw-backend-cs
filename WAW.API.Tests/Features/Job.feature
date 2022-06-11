@@ -60,3 +60,16 @@ In order to make it available for client applications.
     And a the updated Offer resource is included in the body
       | Id | Title                                     | Image                                                                                                         | description               | salaryRange | status |
       | 1  | Remote Senior Embedded Android Specialist | https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1 | This is a unique role ... | $115k-$117k | TRUE   |
+
+  Scenario: Delete existing Offer
+    Given I am a client
+    When a DELETE request is sent
+      | Request | Endpoint          |
+      | DELETE  | /api/v1/offer/2 |
+    Then a response with status 200 is received
+    And a the selected Offer is removed from the repository
+      | Id | Title                    | Image                                                                                                         | description               | salaryRange | status |
+      | 1  | Remote Software Engineer | https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1 | This is a unique role ... | $115k-$117k | TRUE   |
+    And the removed Offer resource is included in the body
+      | Id | Title                                     | Image                                                        | description               | salaryRange | status |
+      | 2  | Remote Senior Embedded Android Specialist | https://miro.medium.com/max/875/1*8si943UlaDsBo8i7xm-bGg.png | Hinge Health is buildi .. | $145k-$157k | FALSE  |
