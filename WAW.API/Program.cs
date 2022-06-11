@@ -1,23 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using WAW.API.Job.Domain.Repositories;
-using WAW.API.Job.Domain.Services;
-using WAW.API.Job.Persistence.Repositories;
-using WAW.API.Job.Services;
-using WAW.API.Company.Domain.Repositories;
-using WAW.API.Company.Domain.Services;
-using WAW.API.Company.Persistence.Repositories;
-using WAW.API.Company.Services;
-using WAW.API.Shared.Domain.Repositories;
 using WAW.API.Shared.Extensions;
+using WAW.API.Shared.Injection;
 using WAW.API.Shared.Mapping;
 using WAW.API.Shared.Persistence.Contexts;
-using WAW.API.Shared.Persistence.Repositories;
-using WAW.API.Weather.Domain.Repositories;
-using WAW.API.Weather.Domain.Services;
-using WAW.API.Weather.Persistence.Repositories;
-using WAW.API.Weather.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -61,19 +48,8 @@ builder.Services.AddDbContext<AppDbContext>(
 // Add lowercase routes
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
-// Add path prefix and versioning
-
 // Dependency Injection configuration
-builder.Services.AddScoped<IForecastRepository, ForecastRepository>();
-builder.Services.AddScoped<IForecastService, ForecastService>();
-
-builder.Services.AddScoped<IOfferRepository, OfferRepository>();
-builder.Services.AddScoped<IOfferService, OfferService>();
-
-builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
-builder.Services.AddScoped<ICompanyService, CompanyService>();
-
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+AppInjections.Register(builder.Services);
 
 // AutoMapper configuration
 builder.Services.AddAutoMapper(typeof(ModelToResourceProfile), typeof(ResourceToModelProfile));
