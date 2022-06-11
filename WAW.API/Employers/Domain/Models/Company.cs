@@ -1,6 +1,6 @@
 using WAW.API.Shared.Domain.Model;
 
-namespace WAW.API.Company.Domain.Models;
+namespace WAW.API.Employers.Domain.Models;
 
 public class Company : BaseModel {
   public string Name { get; set; } = string.Empty;

@@ -2,11 +2,11 @@ using System.Net.Mime;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using WAW.API.Company.Domain.Services;
-using WAW.API.Company.Resources;
+using WAW.API.Employers.Domain.Services;
+using WAW.API.Employers.Resources;
 using WAW.API.Shared.Extensions;
 
-namespace WAW.API.Company.Controllers;
+namespace WAW.API.Employers.Controllers;
 
 using Domain.Models;
 
@@ -32,10 +32,10 @@ public class CompaniesController : ControllerBase {
   }
 
   [HttpPost]
-  [ProducesResponseType(typeof(CompanyResource), 200)]
+  [ProducesResponseType(typeof(CompanyResource), 201)]
   [ProducesResponseType(typeof(List<string>), 400)]
   [ProducesResponseType(500)]
-  [SwaggerResponse(200, "The company was created successfully", typeof(CompanyResource))]
+  [SwaggerResponse(201, "The company was created successfully", typeof(CompanyResource))]
   [SwaggerResponse(400, "The company data is invalid")]
   public async Task<IActionResult> Post(
     [FromBody] [SwaggerRequestBody("The company object about to create", Required = true)] CompanyRequest companyRequest

@@ -1,9 +1,9 @@
-using WAW.API.Company.Domain.Repositories;
-using WAW.API.Company.Domain.Services;
-using WAW.API.Company.Persistence.Repositories;
-using WAW.API.Company.Services;
+using WAW.API.Employers.Domain.Repositories;
+using WAW.API.Employers.Domain.Services;
+using WAW.API.Employers.Persistence.Repositories;
+using WAW.API.Employers.Services;
 
-namespace WAW.API.Company.Injection;
+namespace WAW.API.Employers.Injection;
 
 public static class CompanyInjections {
   public static void Register(IServiceCollection services) {

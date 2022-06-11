@@ -1,5 +1,5 @@
 using WAW.API.Auth.Injection;
-using WAW.API.Company.Injection;
+using WAW.API.Employers.Injection;
 using WAW.API.Job.Injection;
 using WAW.API.Shared.Domain.Repositories;
 using WAW.API.Shared.Persistence.Repositories;

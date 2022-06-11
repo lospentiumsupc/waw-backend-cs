@@ -1,4 +1,4 @@
-namespace WAW.API.Company.Domain.Repositories;
+namespace WAW.API.Employers.Domain.Repositories;
 
 using Models;
 

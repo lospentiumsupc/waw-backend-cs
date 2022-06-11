@@ -1,6 +1,6 @@
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace WAW.API.Company.Resources;
+namespace WAW.API.Employers.Resources;
 
 public class CompanyResource {
   [SwaggerSchema("Company identifier", ReadOnly = true)]

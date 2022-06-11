@@ -1,6 +1,6 @@
 using AutoMapper;
 using WAW.API.Auth.Mapping;
-using WAW.API.Company.Mapping;
+using WAW.API.Employers.Mapping;
 using WAW.API.Job.Mapping;
 
 namespace WAW.API.Shared.Mapping;
