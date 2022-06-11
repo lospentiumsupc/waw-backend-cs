@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
 using TechTalk.SpecFlow.Assist;
+using WAW.API.Job.Resources;
 using WAW.API.Weather.Domain.Models;
 using WAW.API.Weather.Domain.Repositories;
 using WAW.API.Weather.Resources;
@@ -22,7 +23,7 @@ public class ForecastStepDefinitions {
   private HttpResponseMessage response = null!;
   private ForecastResource? entity;
   private IEnumerable<ForecastResource>? entities;
-
+  private IEnumerable<OfferResource>? offers;
   public ForecastStepDefinitions(
     WebApplicationFactory<Program> factory,
     IForecastRepository repository,
@@ -76,5 +77,11 @@ public class ForecastStepDefinitions {
   public async Task ThenAForecastResourceIsIncludedInTheBody(Table table) {
     entity = await response.Content.ReadFromJsonAsync<ForecastResource>();
     table.CompareToInstance(entity);
+  }
+
+  [Then(@"a list of Offer resources is included in the body")]
+  public async Task ThenAListOfOfferResourcesIsIncludedInTheBody(Table table) {
+    offers = await response.Content.ReadFromJsonAsync<List<OfferResource>>();
+    table.CompareToSet(offers);
   }
 }
