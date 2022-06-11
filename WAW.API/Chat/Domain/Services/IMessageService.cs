@@ -6,6 +6,5 @@ namespace WAW.API.Chat.Domain.Services;
 public interface IMessageService {
   Task<IEnumerable<Message>> ListAll();
   Task<MessageResponse> Create(Message message);
-  Task<MessageResponse> Update(long id, Message message);
   Task<MessageResponse> Delete(long id);
 }
