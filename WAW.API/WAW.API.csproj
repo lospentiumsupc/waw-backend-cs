@@ -24,7 +24,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Auth\Controllers" />
-    <Folder Include="Auth\Persistence" />
     <Folder Include="Auth\Services" />
   </ItemGroup>
   <Target Name="RestoreTools" BeforeTargets="Restore;CollectPackageReferences;Husky">
