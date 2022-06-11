@@ -24,7 +24,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Auth\Controllers" />
-    <Folder Include="Auth\Domain\Models" />
     <Folder Include="Auth\Domain\Repositories" />
     <Folder Include="Auth\Domain\Services" />
     <Folder Include="Auth\Mapping" />
