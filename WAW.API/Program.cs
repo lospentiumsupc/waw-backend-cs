@@ -16,8 +16,9 @@ builder.Services.AddControllers(options => options.UseGeneralRoutePrefix("api/v1
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(
-  options => options.SwaggerDoc(
+builder.Services.AddSwaggerGen(options => {
+  options.EnableAnnotations();
+  options.SwaggerDoc(
     "v1",
     new OpenApiInfo {
       Title = "Weather Forecast API",
@@ -27,7 +28,8 @@ builder.Services.AddSwaggerGen(
       Contact = new OpenApiContact {Name = "Example Contact", Url = new Uri("https://example.com/contact"),},
       License = new OpenApiLicense {Name = "MIT", Url = new Uri("https://choosealicense.com/licenses/mit/"),},
     }
-  )
+  );
+}
 );
 
 // Add database connection
