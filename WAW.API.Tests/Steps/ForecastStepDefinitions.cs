@@ -122,4 +122,19 @@ public class ForecastStepDefinitions {
   public void ThenATheUpdatedOfferResourceIsIncludedInTheBody(Table table) {
     ScenarioContext.StepIsPending();
   }
+
+  [When(@"a DELETE request is sent")]
+  public void WhenAdeleteRequestIsSent(Table table) {
+    ScenarioContext.StepIsPending();
+  }
+
+  [Then(@"the removed Offer resource is included in the body")]
+  public void ThenTheRemovedOfferResourceIsIncludedInTheBody(Table table) {
+    ScenarioContext.StepIsPending();
+  }
+
+  [Then(@"a the selected Offer is removed from the repository")]
+  public void ThenATheSelectedOfferIsRemovedFromTheRepository(Table table) {
+    ScenarioContext.StepIsPending();
+  }
 }
