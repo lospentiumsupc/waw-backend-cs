@@ -1,0 +1,38 @@
+name: Branches
+
+on: [pull_request]
+
+jobs:
+  check-base-branch:
+    name: Check Base
+    runs-on: ubuntu-latest
+    steps:
+      - name: Branch is related to CI and is based on main
+        if: ${{ startsWith(github.head_ref, 'ci/') && github.base_ref == 'main' }}
+        env:
+          BASE_BRANCH: ${{ github.base_ref }}
+        run: |
+          echo "Current base branch: $BASE_BRANCH"
+          echo "Branch rule exception: Continuous Integration branches allowed to be merged into main"
+      - name: Branch is related to CI and is not based on main
+        if: ${{ startsWith(github.head_ref, 'ci/') && github.base_ref != 'main' }}
+        env:
+          BASE_BRANCH: ${{ github.base_ref }}
+        run: |
+          echo "Current base branch: $BASE_BRANCH"
+          echo "Branch rule exception: Continuous Integration branches must only be merged into main"
+          echo 1
+      - name: Branch is not based on develop
+        if: ${{ github.base_ref != 'develop' && !startsWith(github.head_ref, 'ci/') }}
+        env:
+          BASE_BRANCH: ${{ github.base_ref }}
+        run: |
+          echo "Current base branch: $BASE_BRANCH"
+          echo "PRs should only ever be merged into develop"
+          exit 1
+      - name: Branch verified as based on develop branch
+        if: ${{ github.base_ref == 'develop' && !startsWith(github.head_ref, 'ci/') }}
+        env:
+          BASE_BRANCH: ${{ github.base_ref }}
+        run: |
+          echo "Branch is correctly branched off of valid base branch to merge PRs into: $BASE_BRANCH"
