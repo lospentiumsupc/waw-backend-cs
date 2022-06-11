@@ -25,9 +25,9 @@ builder.Services.AddSwaggerGen(options => {
   options.SwaggerDoc(
     "v1",
     new OpenApiInfo {
-      Title = "Weather Forecast API",
+      Title = "WAW (We Are Working) API",
       Version = "v1",
-      Description = "An ASP.NET Core Web API for managing Weather Forecast items",
+      Description = "An ASP.NET Core Web API for managing job offers and job applications",
       TermsOfService = new Uri("https://example.com/terms"),
       Contact = new OpenApiContact {Name = "Example Contact", Url = new Uri("https://example.com/contact"),},
       License = new OpenApiLicense {Name = "MIT", Url = new Uri("https://choosealicense.com/licenses/mit/"),},
