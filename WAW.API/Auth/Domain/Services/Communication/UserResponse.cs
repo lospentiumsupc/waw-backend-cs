@@ -1,7 +1,7 @@
 using WAW.API.Auth.Domain.Models;
 using WAW.API.Shared.Domain.Service.Communication;
 
-namespace WAW.API.Auth.Resources;
+namespace WAW.API.Auth.Domain.Services.Communication;
 
 public class UserResponse : BaseResponse<User> {
   public UserResponse(string message) : base(message) {}

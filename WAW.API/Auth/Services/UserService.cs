@@ -1,6 +1,7 @@
 using WAW.API.Auth.Domain.Models;
 using WAW.API.Auth.Domain.Repositories;
-using WAW.API.Auth.Resources;
+using WAW.API.Auth.Domain.Services;
+using WAW.API.Auth.Domain.Services.Communication;
 using WAW.API.Weather.Domain.Repositories;
 
 namespace WAW.API.Auth.Services;

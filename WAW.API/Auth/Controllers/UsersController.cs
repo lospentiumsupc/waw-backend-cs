@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using WAW.API.Auth.Domain.Models;
+using WAW.API.Auth.Domain.Services;
 using WAW.API.Auth.Resources;
 using WAW.API.Shared.Extensions;
 

@@ -1,6 +1,7 @@
 using WAW.API.Auth.Domain.Models;
+using WAW.API.Auth.Domain.Services.Communication;
 
-namespace WAW.API.Auth.Resources;
+namespace WAW.API.Auth.Domain.Services;
 
 public interface IUserService {
   Task<IEnumerable<User>> ListAll();
