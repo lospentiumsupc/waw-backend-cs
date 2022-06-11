@@ -16,7 +16,7 @@ public class UserResource {
   public string Email { get; set; } = string.Empty;
 
   [SwaggerSchema("User birthdate", Nullable = false)]
-  public DateOnly Birthdate { get; set; }
+  public DateTime Birthdate { get; set; }
 
   [SwaggerSchema("User location")]
   public string Location { get; set; } = string.Empty;
