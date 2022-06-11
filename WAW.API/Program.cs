@@ -1,6 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using WAW.API.Job.Domain.Repositories;
+using WAW.API.Job.Domain.Services;
+using WAW.API.Job.Persistence.Repositories;
+using WAW.API.Job.Services;
 using WAW.API.Shared.Extensions;
 using WAW.API.Weather.Domain.Repositories;
 using WAW.API.Weather.Domain.Services;
@@ -8,6 +12,8 @@ using WAW.API.Weather.Mapping;
 using WAW.API.Weather.Persistence.Contexts;
 using WAW.API.Weather.Persistence.Repositories;
 using WAW.API.Weather.Services;
+using IUnitOfWork = WAW.API.Weather.Domain.Repositories.IUnitOfWork;
+using UnitOfWork = WAW.API.Weather.Persistence.Repositories.UnitOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,10 +59,20 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 // Dependency Injection configuration
 builder.Services.AddScoped<IForecastRepository, ForecastRepository>();
 builder.Services.AddScoped<IForecastService, ForecastService>();
+// ============ Offer ====================
+builder.Services.AddScoped<IOfferRepository, OfferRepository>();
+builder.Services.AddScoped<IOfferService, OfferService>();
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // AutoMapper configuration
 builder.Services.AddAutoMapper(typeof(ModelToResourceProfile), typeof(ResourceToModelProfile));
+
+
+
+
+
+builder.Services.AddAutoMapper(typeof(WAW.API.Job.Mapping.ModelToResourceProfile), typeof(WAW.API.Job.Mapping.ResourceToModelProfile));
 
 var app = builder.Build();
 
@@ -84,3 +100,4 @@ app.Run();
 // ReSharper disable once ClassNeverInstantiated.Global
 [SuppressMessage("Design", "CA1050:Declare types in namespaces")]
 public partial class Program {}
+
