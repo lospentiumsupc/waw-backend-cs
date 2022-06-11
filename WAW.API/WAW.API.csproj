@@ -23,9 +23,6 @@
     <InternalsVisibleTo Include="WAW.API.Tests" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Chat\Controllers" />
-    <Folder Include="Chat\Persistence\Repositories" />
-    <Folder Include="Chat\Services" />
     <Folder Include="Company\Controllers" />
   </ItemGroup>
   <Target Name="RestoreTools" BeforeTargets="Restore;CollectPackageReferences;Husky">
