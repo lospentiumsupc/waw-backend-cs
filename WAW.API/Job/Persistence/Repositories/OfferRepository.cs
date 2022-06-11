@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using WAW.API.Job.Domain.Models;
 using WAW.API.Job.Domain.Repositories;
-using WAW.API.Job.Persistence.Contexts;
+using WAW.API.Weather.Persistence.Contexts;
+using WAW.API.Weather.Persistence.Repositories;
 
 namespace WAW.API.Job.Persistence.Repositories;
 
