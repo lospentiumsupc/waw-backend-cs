@@ -12,7 +12,6 @@ jobs:
     outputs:
       run_info: ${{ toJSON(steps.run_info.outputs) }}
       is_pr: ${{ steps.run_info.outputs.sourceEvent == 'pull_request' }}
-      sha_short: ${{ steps.vars.outputs.sha_short }}
     steps:
       - name: Get information about the source run
         id: run_info
@@ -20,9 +19,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           sourceRunId: ${{ github.event.workflow_run.id }}
-      - name: Get short commit hash
-        id: vars
-        run: echo "::set-output name=sha_short::$(echo '${{ steps.run_info.outputs.targetCommitSha }}' | cut -c1-7)"
   before-run:
     name: Before Run
     needs: [vars]
@@ -74,7 +70,7 @@ jobs:
         with:
           workflow: ${{ github.event.workflow.id }}
           run_id: ${{ github.event.workflow_run.id }}
-          name: ${{ env.PROJECT_NAME }}.Tests-LivingDoc-${{ runner.os }}-${{ needs.vars.outputs.sha_short }}
+          name: ${{ env.PROJECT_NAME }}.Tests-LivingDoc-${{ runner.os }}-${{ github.event.workflow_run.id }}
       - name: Move LivingDoc to output directory
         run: |
           mkdir dist
@@ -102,7 +98,7 @@ jobs:
         id: report
         uses: dorny/test-reporter@v1
         with:
-          artifact: ${{ env.PROJECT_NAME }}.Tests-${{ runner.os }}-${{ needs.vars.outputs.sha_short }}
+          artifact: ${{ env.PROJECT_NAME }}.Tests-${{ runner.os }}-${{ github.event.workflow_run.id }}
           name: Test Results
           path: "*.trx"
           reporter: dotnet-trx
