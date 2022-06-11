@@ -2,6 +2,7 @@ using WAW.API.Job.Domain.Models;
 using WAW.API.Job.Domain.Repositories;
 using WAW.API.Job.Domain.Services;
 using WAW.API.Job.Domain.Services.Communication;
+using WAW.API.Weather.Domain.Repositories;
 
 
 namespace WAW.API.Job.Services;
