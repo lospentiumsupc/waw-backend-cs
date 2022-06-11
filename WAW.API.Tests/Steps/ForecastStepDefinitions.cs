@@ -106,4 +106,20 @@ public class ForecastStepDefinitions {
   public void WhenAnInvalidPostRequestIsSent(Table table) {
     ScenarioContext.StepIsPending();
   }
+
+
+  [Then(@"a Error Message is included in the body")]
+  public void ThenAErrorMessageIsIncludedInTheBody(Table table) {
+    ScenarioContext.StepIsPending();
+  }
+
+  [When(@"a PUT request is sent")]
+  public void WhenAputRequestIsSent(Table table) {
+    ScenarioContext.StepIsPending();
+  }
+
+  [Then(@"a the updated Offer resource is included in the body")]
+  public void ThenATheUpdatedOfferResourceIsIncludedInTheBody(Table table) {
+    ScenarioContext.StepIsPending();
+  }
 }

@@ -51,3 +51,12 @@ In order to make it available for client applications.
       | An error occurred while saving the company: {error.Message} |
 
 
+  Scenario: Update existing Offer
+    Given I am a client
+    When a PUT request is sent
+      | Id | Title                    | Image                                                                                                         | description               | salaryRange | status |
+      | 1  | Remote Software Engineer | https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1 | This is a unique role ... | $115k-$117k | TRUE   |
+    Then a response with status 200 is received
+    And a the updated Offer resource is included in the body
+      | Id | Title                                     | Image                                                                                                         | description               | salaryRange | status |
+      | 1  | Remote Senior Embedded Android Specialist | https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1 | This is a unique role ... | $115k-$117k | TRUE   |
