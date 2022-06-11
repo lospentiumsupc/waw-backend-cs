@@ -22,9 +22,6 @@
   <ItemGroup>
     <InternalsVisibleTo Include="WAW.API.Tests" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Auth\Controllers" />
-  </ItemGroup>
   <Target Name="RestoreTools" BeforeTargets="Restore;CollectPackageReferences;Husky">
     <Exec Command="dotnet tool restore" StandardOutputImportance="Low" StandardErrorImportance="High" />
   </Target>
