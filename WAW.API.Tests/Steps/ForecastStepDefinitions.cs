@@ -16,6 +16,7 @@ namespace WAW.API.Tests.Steps;
 [Binding]
 public class ForecastStepDefinitions {
   private const string endpoint = "api/v1/forecast";
+  private const string secondendpoint = "api/v1/offer";
   private readonly WebApplicationFactory<Program> factory;
   private readonly IForecastRepository repository;
   private readonly IUnitOfWork unitOfWork;
@@ -91,4 +92,14 @@ public class ForecastStepDefinitions {
     offer = await response.Content.ReadFromJsonAsync<OfferResource>();
     table.CompareToInstance(offer);
   }
+
+  [When(@"a POST offer request is sent")]
+  public async Task WhenApostOfferRequestIsSent(Table table) {
+    var data = table.CreateInstance<OfferRequest>();
+    var json = JsonConvert.SerializeObject(data);
+    var content = new StringContent(json, Encoding.UTF8, MediaTypeNames.Application.Json);
+    response = await client.PostAsync(secondendpoint, content);
+  }
+
+
 }
