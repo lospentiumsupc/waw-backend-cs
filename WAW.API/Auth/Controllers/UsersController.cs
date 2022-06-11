@@ -9,11 +9,11 @@ namespace WAW.API.Auth.Controllers;
 [ApiController]
 [Route("[controller]")]
 
-public class UserController: ControllerBase {
+public class UsersController: ControllerBase {
   private readonly IUserService service;
   private readonly IMapper mapper;
 
-  public UserController(IUserService service, IMapper mapper) {
+  public UsersController(IUserService service, IMapper mapper) {
     this.service = service;
     this.mapper = mapper;
   }
