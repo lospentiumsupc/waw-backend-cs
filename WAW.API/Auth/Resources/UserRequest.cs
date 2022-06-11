@@ -21,8 +21,7 @@ public class UserRequest {
   [Required]
   public DateOnly Birthdate { get; set; }
 
-  [SwaggerSchema("User location (address, city or country)", Nullable = false)]
-  [Required]
+  [SwaggerSchema("User location (address, city or country)", Nullable = true)]
   public string Location { get; set; } = string.Empty;
 
   [SwaggerSchema("User biography", Nullable = true)]
