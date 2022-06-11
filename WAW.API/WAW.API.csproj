@@ -24,7 +24,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Auth\Controllers" />
-    <Folder Include="Auth\Services" />
   </ItemGroup>
   <Target Name="RestoreTools" BeforeTargets="Restore;CollectPackageReferences;Husky">
     <Exec Command="dotnet tool restore" StandardOutputImportance="Low" StandardErrorImportance="High" />
