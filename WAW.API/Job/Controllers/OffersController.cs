@@ -8,11 +8,11 @@ using WAW.API.Shared.Extensions;
 namespace WAW.API.Job.Controllers;
 [ApiController]
 [Route("[controller]")]
-public class OfferController : ControllerBase {
+public class OffersController : ControllerBase {
   private readonly IOfferService service;
   private readonly IMapper mapper;
 
-  public OfferController(IOfferService service, IMapper mapper) {
+  public OffersController(IOfferService service, IMapper mapper) {
     this.service = service;
     this.mapper = mapper;
   }
@@ -42,16 +42,12 @@ public class OfferController : ControllerBase {
 
     var offer = mapper.Map<OfferRequest, Offer>(resource);
     var result = await service.Update(id, offer);
-    if (!result.Success)
-      return BadRequest(result.Message);
     return result.ToResponse<OfferResource>(this, mapper);
   }
 
   [HttpDelete("{id:int}")]
   public async Task<IActionResult> DeleteAsync(int id) {
     var result = await service.Delete(id);
-    if (!result.Success)
-      return BadRequest(result.Message);
     return result.ToResponse<OfferResource>(this, mapper);
   }
 }
