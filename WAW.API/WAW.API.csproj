@@ -23,7 +23,6 @@
     <InternalsVisibleTo Include="WAW.API.Tests" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Subscription\Persistence\Respositories" />
     <Folder Include="Subscription\Services" />
   </ItemGroup>
   <Target Name="RestoreTools" BeforeTargets="Restore;CollectPackageReferences;Husky">
