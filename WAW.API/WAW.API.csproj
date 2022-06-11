@@ -26,7 +26,6 @@
     <Folder Include="Job\Controllers" />
     <Folder Include="Job\Domain\Models" />
     <Folder Include="Job\Domain\Repositories" />
-    <Folder Include="Weather\Persistence\Contexts" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Company\Controllers" />

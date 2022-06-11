@@ -2,20 +2,13 @@ using Microsoft.EntityFrameworkCore;
 using WAW.API.Auth.Domain.Models;
 using WAW.API.Job.Domain.Models;
 using WAW.API.Shared.Extensions;
-using WAW.API.Weather.Domain.Models;
 
 namespace WAW.API.Shared.Persistence.Contexts;
 
 public class AppDbContext : DbContext {
-  private DbSet<Forecast>? forecasts;
   private DbSet<Offer>? offers;
   private DbSet<User>? users;
   private DbSet<Company.Domain.Models.Company>? companies;
-
-  public DbSet<Forecast> Forecasts {
-    get => GetContext(forecasts);
-    set => forecasts = value;
-  }
 
   public DbSet<Offer> Offers {
     get => GetContext(offers);
@@ -36,13 +29,6 @@ public class AppDbContext : DbContext {
 
   protected override void OnModelCreating(ModelBuilder builder) {
     base.OnModelCreating(builder);
-
-    var forecastEntity = builder.Entity<Forecast>();
-    forecastEntity.ToTable("Forecasts");
-    forecastEntity.HasKey(p => p.Id);
-    forecastEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-    forecastEntity.Property(p => p.Date).IsRequired();
-    forecastEntity.Property(p => p.TemperatureC).IsRequired();
 
     var offerEntity = builder.Entity<Offer>();
     offerEntity.ToTable("Offer");
