@@ -7,7 +7,7 @@ namespace WAW.API.Company.Services;
 
 using Domain.Models;
 
-public class CompanyService: ICompanyService {
+public class CompanyService : ICompanyService {
   private readonly ICompanyRepository repository;
   private readonly IUnitOfWork unitOfWork;
 
@@ -36,7 +36,6 @@ public class CompanyService: ICompanyService {
   }
 
   public async Task<CompanyResponse> Update(long id, Company company) {
-
     var currentCompany = await repository.FindById(id);
 
     // Validate company exists
@@ -45,12 +44,10 @@ public class CompanyService: ICompanyService {
     // Validate existing company with name;
     var existingCompanyWithName = await repository.FindByName(company.Name);
 
-    if (existingCompanyWithName != null && existingCompanyWithName.Id != currentCompany.Id) return new CompanyResponse("Company name already exists");
+    if (existingCompanyWithName != null && existingCompanyWithName.Id != currentCompany.Id)
+      return new CompanyResponse("Company name already exists");
 
-    // Modify company fields
-    currentCompany.Name = company.Name;
-    currentCompany.Address = company.Address;
-    currentCompany.Email = company.Email;
+    company.CopyProperties(currentCompany);
 
     try {
       repository.Update(currentCompany);

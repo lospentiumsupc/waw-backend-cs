@@ -5,9 +5,9 @@ using WAW.API.Weather.Persistence.Repositories;
 
 namespace WAW.API.Company.Persistence.Repositories;
 
-using WAW.API.Company.Domain.Models;
+using Domain.Models;
 
-public class CompanyRepository: BaseRepository, ICompanyRepository {
+public class CompanyRepository : BaseRepository, ICompanyRepository {
   public CompanyRepository(AppDbContext context) : base(context) {}
 
   public async Task<IEnumerable<Company>> ListAll() {

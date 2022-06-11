@@ -9,5 +9,5 @@ public class CompanyRequest {
   public string? Address { get; set; }
 
   [Required]
-  public string? Email {get; set;}
+  public string? Email { get; set; }
 }

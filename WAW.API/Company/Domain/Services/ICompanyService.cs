@@ -2,7 +2,7 @@ using WAW.API.Company.Domain.Services.Communication;
 
 namespace WAW.API.Company.Domain.Services;
 
-using WAW.API.Company.Domain.Models;
+using Models;
 
 public interface ICompanyService {
   Task<IEnumerable<Company>> ListAll();

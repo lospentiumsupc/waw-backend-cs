@@ -1,6 +1,6 @@
 namespace WAW.API.Company.Domain.Repositories;
 
-using WAW.API.Company.Domain.Models;
+using Models;
 
 public interface ICompanyRepository {
   Task<IEnumerable<Company>> ListAll();

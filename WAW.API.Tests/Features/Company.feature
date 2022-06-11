@@ -33,8 +33,8 @@ In order to make it available for client applications.
   Scenario: Add invalid Company
     Given I am a client
     When an invalid POST request is sent
-      | Name   | Address          | Email            |
-      |        | Quito, EC        | company@fake.com |
+      | Name | Address   | Email            |
+      |      | Quito, EC | company@fake.com |
     Then a response with status 400 is received
     And a Error Message is included in the body
       | Message                                                     |

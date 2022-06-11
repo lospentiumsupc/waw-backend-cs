@@ -7,12 +7,12 @@ using WAW.API.Shared.Extensions;
 
 namespace WAW.API.Company.Controllers;
 
-using WAW.API.Company.Domain.Models;
+using Domain.Models;
 
 [ApiController]
 [Route("[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
-public class CompanyController: ControllerBase {
+public class CompanyController : ControllerBase {
   private readonly ICompanyService service;
   private readonly IMapper mapper;
 
@@ -29,9 +29,7 @@ public class CompanyController: ControllerBase {
 
   [HttpPost]
   public async Task<IActionResult> Post([FromBody] CompanyRequest companyRequest) {
-    if (!ModelState.IsValid) {
-      return BadRequest(ModelState.GetErrorMessages());
-    }
+    if (!ModelState.IsValid) return BadRequest(ModelState.GetErrorMessages());
 
     var company = mapper.Map<CompanyRequest, Company>(companyRequest);
     var result = await service.Create(company);
@@ -40,9 +38,7 @@ public class CompanyController: ControllerBase {
 
   [HttpPut("{id:int}")]
   public async Task<IActionResult> Put(int id, [FromBody] CompanyRequest companyRequest) {
-    if (!ModelState.IsValid) {
-      return BadRequest(ModelState.GetErrorMessages());
-    }
+    if (!ModelState.IsValid) return BadRequest(ModelState.GetErrorMessages());
 
     var company = mapper.Map<CompanyRequest, Company>(companyRequest);
     var result = await service.Update(id, company);

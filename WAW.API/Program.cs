@@ -65,6 +65,10 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // AutoMapper configuration
 builder.Services.AddAutoMapper(typeof(ModelToResourceProfile), typeof(ResourceToModelProfile));
+builder.Services.AddAutoMapper(
+  typeof(WAW.API.Company.Mapping.ModelToResourceProfile),
+  typeof(WAW.API.Company.Mapping.ResourceToModelProfile)
+);
 
 var app = builder.Build();
 
