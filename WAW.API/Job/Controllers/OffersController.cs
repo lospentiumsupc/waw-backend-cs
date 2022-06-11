@@ -50,7 +50,10 @@ public class OffersController : ControllerBase {
   [ProducesResponseType(500)]
   [SwaggerResponse(200, "The job offer was updated successfully", typeof(OfferResource))]
   [SwaggerResponse(400, "The job offer data is invalid")]
-  public async Task<IActionResult> Put([FromRoute] [SwaggerParameter("Job offer identifier", Required = true)]int id, [FromBody] OfferRequest resource) {
+  public async Task<IActionResult> Put(
+    [FromRoute] [SwaggerParameter("Job offer identifier", Required = true)] int id,
+    [FromBody] OfferRequest resource
+  ) {
     if (!ModelState.IsValid) return BadRequest(ModelState.GetErrorMessages());
 
     var offer = mapper.Map<OfferRequest, Offer>(resource);
@@ -64,7 +67,9 @@ public class OffersController : ControllerBase {
   [ProducesResponseType(500)]
   [SwaggerResponse(200, "The job offer was deleted successfully", typeof(OfferResource))]
   [SwaggerResponse(400, "The selected job offer to delete does not exist")]
-  public async Task<IActionResult> DeleteAsync([FromRoute] [SwaggerParameter("Job offer identifier", Required = true)]int id) {
+  public async Task<IActionResult> DeleteAsync(
+    [FromRoute] [SwaggerParameter("Job offer identifier", Required = true)] int id
+  ) {
     var result = await service.Delete(id);
     return result.ToResponse<OfferResource>(this, mapper);
   }

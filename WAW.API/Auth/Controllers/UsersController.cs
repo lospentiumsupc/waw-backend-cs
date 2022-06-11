@@ -50,7 +50,10 @@ public class UsersController : ControllerBase {
   [ProducesResponseType(500)]
   [SwaggerResponse(200, "The user was updated successfully", typeof(UserResource))]
   [SwaggerResponse(400, "The user data is invalid")]
-  public async Task<IActionResult> Put( [FromRoute] [SwaggerParameter("User identifier", Required = true)] int id, [FromBody] UserRequest resource) {
+  public async Task<IActionResult> Put(
+    [FromRoute] [SwaggerParameter("User identifier", Required = true)] int id,
+    [FromBody] UserRequest resource
+  ) {
     if (!ModelState.IsValid) return BadRequest(ModelState.GetErrorMessages());
 
     var user = mapper.Map<UserRequest, User>(resource);
@@ -64,7 +67,9 @@ public class UsersController : ControllerBase {
   [ProducesResponseType(500)]
   [SwaggerResponse(200, "The user was deleted successfully", typeof(UserResource))]
   [SwaggerResponse(400, "The selected user to delete does not exist")]
-  public async Task<IActionResult> DeleteAsync([FromRoute] [SwaggerParameter("User identifier", Required = true)]int id) {
+  public async Task<IActionResult> DeleteAsync(
+    [FromRoute] [SwaggerParameter("User identifier", Required = true)] int id
+  ) {
     var result = await service.Delete(id);
     return result.ToResponse<UserResource>(this, mapper);
   }

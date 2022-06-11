@@ -3,7 +3,7 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace WAW.API.Auth.Resources;
 
-[SwaggerSchema(Required = new[]{"FullName", "PreferredName", "Email", "Birthdate", "Location",})]
+[SwaggerSchema(Required = new[] {"FullName", "PreferredName", "Email", "Birthdate", "Location",})]
 public class UserRequest {
   [SwaggerSchema("User fullname", Nullable = false)]
   [Required]

@@ -3,9 +3,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace WAW.API.Job.Resources;
 
-[SwaggerSchema(Required = new[]{"Title", "Description", "SalaryRange", "Status",})]
+[SwaggerSchema(Required = new[] {"Title", "Description", "SalaryRange", "Status",})]
 public class OfferRequest {
-  [SwaggerSchema("Job offer title",  Nullable = false)]
+  [SwaggerSchema("Job offer title", Nullable = false)]
   [Required]
   public string Title { get; set; } = string.Empty;
 
