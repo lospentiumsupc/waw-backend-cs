@@ -32,10 +32,10 @@ public class CompaniesController : ControllerBase {
   }
 
   [HttpPost]
-  [ProducesResponseType(typeof(CompanyResource), 201)]
+  [ProducesResponseType(typeof(CompanyResource), 200)]
   [ProducesResponseType(typeof(List<string>), 400)]
   [ProducesResponseType(500)]
-  [SwaggerResponse(201, "The company was created successfully", typeof(CompanyResource))]
+  [SwaggerResponse(200, "The company was created successfully", typeof(CompanyResource))]
   [SwaggerResponse(400, "The company data is invalid")]
   public async Task<IActionResult> Post(
     [FromBody] [SwaggerRequestBody("The company object about to create", Required = true)] CompanyRequest companyRequest

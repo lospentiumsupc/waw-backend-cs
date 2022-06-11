@@ -1,5 +1,7 @@
+using System.Net.Mime;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using WAW.API.Job.Domain.Models;
 using WAW.API.Job.Domain.Services;
 using WAW.API.Job.Resources;
@@ -9,6 +11,8 @@ namespace WAW.API.Job.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Produces(MediaTypeNames.Application.Json)]
+[SwaggerTag("Create, read, update and delete Job Offers")]
 public class OffersController : ControllerBase {
   private readonly IOfferService service;
   private readonly IMapper mapper;
@@ -19,12 +23,19 @@ public class OffersController : ControllerBase {
   }
 
   [HttpGet]
+  [ProducesResponseType(typeof(IEnumerable<OfferResource>), 200)]
+  [SwaggerResponse(200, "All the stored job offers were retrieved successfully.", typeof(IEnumerable<OfferResource>))]
   public async Task<IEnumerable<OfferResource>> GetAll() {
     var offers = await service.ListAll();
     return mapper.Map<IEnumerable<Offer>, IEnumerable<OfferResource>>(offers);
   }
 
   [HttpPost]
+  [ProducesResponseType(typeof(OfferResource), 200)]
+  [ProducesResponseType(typeof(List<string>), 400)]
+  [ProducesResponseType(500)]
+  [SwaggerResponse(200, "The job offer was created successfully", typeof(OfferResource))]
+  [SwaggerResponse(400, "The job offer data is invalid")]
   public async Task<IActionResult> Post([FromBody] OfferRequest resource) {
     if (!ModelState.IsValid) return BadRequest(ModelState.GetErrorMessages());
 
@@ -34,7 +45,15 @@ public class OffersController : ControllerBase {
   }
 
   [HttpPut("{id:int}")]
-  public async Task<IActionResult> Put(int id, [FromBody] OfferRequest resource) {
+  [ProducesResponseType(typeof(OfferResource), 200)]
+  [ProducesResponseType(typeof(List<string>), 400)]
+  [ProducesResponseType(500)]
+  [SwaggerResponse(200, "The job offer was updated successfully", typeof(OfferResource))]
+  [SwaggerResponse(400, "The job offer data is invalid")]
+  public async Task<IActionResult> Put(
+    [FromRoute] [SwaggerParameter("Job offer identifier", Required = true)] int id,
+    [FromBody] OfferRequest resource
+  ) {
     if (!ModelState.IsValid) return BadRequest(ModelState.GetErrorMessages());
 
     var offer = mapper.Map<OfferRequest, Offer>(resource);
@@ -43,7 +62,14 @@ public class OffersController : ControllerBase {
   }
 
   [HttpDelete("{id:int}")]
-  public async Task<IActionResult> DeleteAsync(int id) {
+  [ProducesResponseType(typeof(OfferResource), 200)]
+  [ProducesResponseType(typeof(List<string>), 400)]
+  [ProducesResponseType(500)]
+  [SwaggerResponse(200, "The job offer was deleted successfully", typeof(OfferResource))]
+  [SwaggerResponse(400, "The selected job offer to delete does not exist")]
+  public async Task<IActionResult> DeleteAsync(
+    [FromRoute] [SwaggerParameter("Job offer identifier", Required = true)] int id
+  ) {
     var result = await service.Delete(id);
     return result.ToResponse<OfferResource>(this, mapper);
   }
