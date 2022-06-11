@@ -50,8 +50,8 @@ public class AppDbContext : DbContext {
     offerEntity.ToTable("Offer");
     offerEntity.HasKey(p => p.Id);
     offerEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-    offerEntity.Property(p => p.Title).IsRequired().HasMaxLength(200);
-    offerEntity.Property(p => p.Image).IsRequired().HasMaxLength(500);
+    offerEntity.Property(p => p.Title).IsRequired().HasMaxLength(256);
+    offerEntity.Property(p => p.Image).HasMaxLength(2048);
     offerEntity.Property(p => p.Description).IsRequired();
     offerEntity.Property(p => p.Status).IsRequired();
 
