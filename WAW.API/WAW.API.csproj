@@ -23,7 +23,6 @@
     <InternalsVisibleTo Include="WAW.API.Tests" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Subscription\Domain\Repositories" />
     <Folder Include="Subscription\Persistence" />
     <Folder Include="Subscription\Services" />
   </ItemGroup>
