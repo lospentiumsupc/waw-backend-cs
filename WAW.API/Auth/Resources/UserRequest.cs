@@ -4,20 +4,20 @@ namespace WAW.API.Auth.Resources;
 
 public class UserRequest {
   [Required]
-  public string FullName { get; set; }
+  public string FullName { get; set; } = string.Empty;
 
   [Required]
-  public string PreferredName { get; set; }
+  public string PreferredName { get; set; }= string.Empty;
 
   [Required]
-  public string Email { get; set; }
+  public string Email { get; set; }= string.Empty;
 
   [Required]
   public DateOnly Birthdate { get; set; }
 
   [Required]
-  public string Location { get; set; }
+  public string Location { get; set; }= string.Empty;
 
-  public string Biography { get; set; }
-  public string About { get; set; }
+  public string Biography { get; set; }= string.Empty;
+  public string About { get; set; }= string.Empty;
 }
