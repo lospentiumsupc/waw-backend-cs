@@ -31,10 +31,10 @@ public class UsersController : ControllerBase {
   }
 
   [HttpPost]
-  [ProducesResponseType(typeof(UserResource), 201)]
+  [ProducesResponseType(typeof(UserResource), 200)]
   [ProducesResponseType(typeof(List<string>), 400)]
   [ProducesResponseType(500)]
-  [SwaggerResponse(201, "The user was created successfully", typeof(UserResource))]
+  [SwaggerResponse(200, "The user was created successfully", typeof(UserResource))]
   [SwaggerResponse(400, "The user data is invalid")]
   public async Task<IActionResult> Post([FromBody] UserRequest resource) {
     if (!ModelState.IsValid) return BadRequest(ModelState.GetErrorMessages());

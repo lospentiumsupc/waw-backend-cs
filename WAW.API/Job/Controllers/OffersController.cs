@@ -31,10 +31,10 @@ public class OffersController : ControllerBase {
   }
 
   [HttpPost]
-  [ProducesResponseType(typeof(OfferResource), 201)]
+  [ProducesResponseType(typeof(OfferResource), 200)]
   [ProducesResponseType(typeof(List<string>), 400)]
   [ProducesResponseType(500)]
-  [SwaggerResponse(201, "The job offer was created successfully", typeof(OfferResource))]
+  [SwaggerResponse(200, "The job offer was created successfully", typeof(OfferResource))]
   [SwaggerResponse(400, "The job offer data is invalid")]
   public async Task<IActionResult> Post([FromBody] OfferRequest resource) {
     if (!ModelState.IsValid) return BadRequest(ModelState.GetErrorMessages());
