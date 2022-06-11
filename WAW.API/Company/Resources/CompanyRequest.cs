@@ -3,7 +3,6 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace WAW.API.Company.Resources;
 
-[SwaggerSchema(Required = new[] {"Name", "Email",})]
 public class CompanyRequest {
   [SwaggerSchema("Category name")]
   [Required]
