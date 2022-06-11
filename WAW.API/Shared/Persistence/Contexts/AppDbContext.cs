@@ -32,7 +32,7 @@ public class AppDbContext : DbContext {
     base.OnModelCreating(builder);
 
     var offerEntity = builder.Entity<Offer>();
-    offerEntity.ToTable("Offer");
+    offerEntity.ToTable("Offers");
     offerEntity.HasKey(p => p.Id);
     offerEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
     offerEntity.Property(p => p.Title).IsRequired().HasMaxLength(256);
