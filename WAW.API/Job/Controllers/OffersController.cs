@@ -6,6 +6,7 @@ using WAW.API.Job.Resources;
 using WAW.API.Shared.Extensions;
 
 namespace WAW.API.Job.Controllers;
+
 [ApiController]
 [Route("[controller]")]
 public class OffersController : ControllerBase {
@@ -25,9 +26,7 @@ public class OffersController : ControllerBase {
 
   [HttpPost]
   public async Task<IActionResult> Post([FromBody] OfferRequest resource) {
-    if (!ModelState.IsValid) {
-      return BadRequest(ModelState.GetErrorMessages());
-    }
+    if (!ModelState.IsValid) return BadRequest(ModelState.GetErrorMessages());
 
     var offer = mapper.Map<OfferRequest, Offer>(resource);
     var result = await service.Create(offer);
@@ -36,9 +35,7 @@ public class OffersController : ControllerBase {
 
   [HttpPut("{id:int}")]
   public async Task<IActionResult> Put(int id, [FromBody] OfferRequest resource) {
-    if (!ModelState.IsValid) {
-      return BadRequest(ModelState.GetErrorMessages());
-    }
+    if (!ModelState.IsValid) return BadRequest(ModelState.GetErrorMessages());
 
     var offer = mapper.Map<OfferRequest, Offer>(resource);
     var result = await service.Update(id, offer);

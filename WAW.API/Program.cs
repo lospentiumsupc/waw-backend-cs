@@ -5,6 +5,10 @@ using WAW.API.Job.Domain.Repositories;
 using WAW.API.Job.Domain.Services;
 using WAW.API.Job.Persistence.Repositories;
 using WAW.API.Job.Services;
+using WAW.API.Company.Domain.Repositories;
+using WAW.API.Company.Domain.Services;
+using WAW.API.Company.Persistence.Repositories;
+using WAW.API.Company.Services;
 using WAW.API.Shared.Extensions;
 using WAW.API.Weather.Domain.Repositories;
 using WAW.API.Weather.Domain.Services;
@@ -22,18 +26,20 @@ builder.Services.AddControllers(options => options.UseGeneralRoutePrefix("api/v1
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(
-  options => options.SwaggerDoc(
+builder.Services.AddSwaggerGen(options => {
+  options.EnableAnnotations();
+  options.SwaggerDoc(
     "v1",
     new OpenApiInfo {
-      Title = "Weather Forecast API",
+      Title = "WAW (We Are Working) API",
       Version = "v1",
-      Description = "An ASP.NET Core Web API for managing Weather Forecast items",
+      Description = "An ASP.NET Core Web API for managing job offers and job applications",
       TermsOfService = new Uri("https://example.com/terms"),
       Contact = new OpenApiContact {Name = "Example Contact", Url = new Uri("https://example.com/contact"),},
       License = new OpenApiLicense {Name = "MIT", Url = new Uri("https://choosealicense.com/licenses/mit/"),},
     }
-  )
+  );
+}
 );
 
 // Add database connection
@@ -59,20 +65,25 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 // Dependency Injection configuration
 builder.Services.AddScoped<IForecastRepository, ForecastRepository>();
 builder.Services.AddScoped<IForecastService, ForecastService>();
-// ============ Offer ====================
+
 builder.Services.AddScoped<IOfferRepository, OfferRepository>();
 builder.Services.AddScoped<IOfferService, OfferService>();
+
+builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
+builder.Services.AddScoped<ICompanyService, CompanyService>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // AutoMapper configuration
 builder.Services.AddAutoMapper(typeof(ModelToResourceProfile), typeof(ResourceToModelProfile));
-
-
-
-
-
-builder.Services.AddAutoMapper(typeof(WAW.API.Job.Mapping.ModelToResourceProfile), typeof(WAW.API.Job.Mapping.ResourceToModelProfile));
+builder.Services.AddAutoMapper(
+  typeof(WAW.API.Company.Mapping.ModelToResourceProfile),
+  typeof(WAW.API.Company.Mapping.ResourceToModelProfile)
+);
+builder.Services.AddAutoMapper(
+  typeof(WAW.API.Job.Mapping.ModelToResourceProfile),
+  typeof(WAW.API.Job.Mapping.ResourceToModelProfile)
+);
 
 var app = builder.Build();
 
@@ -100,4 +111,3 @@ app.Run();
 // ReSharper disable once ClassNeverInstantiated.Global
 [SuppressMessage("Design", "CA1050:Declare types in namespaces")]
 public partial class Program {}
-

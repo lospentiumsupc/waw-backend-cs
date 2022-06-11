@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WAW.API.Weather.Persistence.Contexts;
 
@@ -10,9 +11,10 @@ using WAW.API.Weather.Persistence.Contexts;
 namespace WAW.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220611023856_User")]
+    partial class User
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,36 +66,6 @@ namespace WAW.API.Migrations
                         .HasName("p_k_users");
 
                     b.ToTable("users", (string)null);
-                });
-
-            modelBuilder.Entity("WAW.API.Company.Domain.Models.Company", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("id");
-
-                    b.Property<string>("Address")
-                        .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
-                        .HasColumnName("address");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
-                        .HasColumnName("email");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)")
-                        .HasColumnName("name");
-
-                    b.HasKey("Id")
-                        .HasName("p_k_companies");
-
-                    b.ToTable("companies", (string)null);
                 });
 
             modelBuilder.Entity("WAW.API.Weather.Domain.Models.Forecast", b =>

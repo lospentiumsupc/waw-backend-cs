@@ -7,7 +7,7 @@ using WAW.API.Weather.Domain.Repositories;
 
 namespace WAW.API.Job.Services;
 
-public class OfferService : IOfferService{
+public class OfferService : IOfferService {
   private readonly IOfferRepository repository;
   private readonly IUnitOfWork unitOfWork;
 
@@ -32,9 +32,7 @@ public class OfferService : IOfferService{
 
   public async Task<OfferResponse> Update(long id, Offer offer) {
     var current = await repository.FindById(id);
-    if (current == null) {
-      return new OfferResponse("Offer not found");
-    }
+    if (current == null) return new OfferResponse("Offer not found");
 
     offer.CopyProperties(current);
 
@@ -49,9 +47,7 @@ public class OfferService : IOfferService{
 
   public async Task<OfferResponse> Delete(long id) {
     var current = await repository.FindById(id);
-    if (current == null) {
-      return new OfferResponse("Offer not found");
-    }
+    if (current == null) return new OfferResponse("Offer not found");
 
     try {
       repository.Remove(current);
@@ -61,5 +57,4 @@ public class OfferService : IOfferService{
       return new OfferResponse($"An error occurred while deleting the offer: {e.Message}");
     }
   }
-
 }
