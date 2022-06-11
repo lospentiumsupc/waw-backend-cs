@@ -1,4 +1,4 @@
-namespace WAW.API.Weather.Domain.Repositories;
+namespace WAW.API.Shared.Domain.Repositories;
 
 public interface IUnitOfWork {
   Task Complete();

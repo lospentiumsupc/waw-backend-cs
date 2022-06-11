@@ -1,18 +1,16 @@
 using Microsoft.EntityFrameworkCore;
-using WAW.API.Job.Domain.Models;
 using WAW.API.Auth.Domain.Models;
+using WAW.API.Job.Domain.Models;
 using WAW.API.Shared.Extensions;
 using WAW.API.Weather.Domain.Models;
 
-namespace WAW.API.Weather.Persistence.Contexts;
-
-using WAW.API.Company.Domain.Models;
+namespace WAW.API.Shared.Persistence.Contexts;
 
 public class AppDbContext : DbContext {
   private DbSet<Forecast>? forecasts;
   private DbSet<Offer>? offers;
   private DbSet<User>? users;
-  private DbSet<Company>? companies;
+  private DbSet<Company.Domain.Models.Company>? companies;
 
   public DbSet<Forecast> Forecasts {
     get => GetContext(forecasts);
@@ -29,7 +27,7 @@ public class AppDbContext : DbContext {
     set => users = value;
   }
 
-  public DbSet<Company> Companies {
+  public DbSet<Company.Domain.Models.Company> Companies {
     get => GetContext(companies);
     set => companies = value;
   }
@@ -64,7 +62,7 @@ public class AppDbContext : DbContext {
     userEntity.Property(p => p.Email).IsRequired().HasMaxLength(256);
     userEntity.Property(p => p.Birthdate).IsRequired();
 
-    var companyEntity = builder.Entity<Company>();
+    var companyEntity = builder.Entity<Company.Domain.Models.Company>();
     companyEntity.ToTable("Companies");
     companyEntity.HasKey(p => p.Id);
     companyEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();

@@ -7,8 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TechTalk.SpecFlow.Assist.ValueRetrievers;
+using WAW.API.Shared.Domain.Repositories;
+using WAW.API.Shared.Persistence.Contexts;
 using WAW.API.Weather.Domain.Repositories;
-using WAW.API.Weather.Persistence.Contexts;
 
 namespace WAW.API.Tests.Hooks;
 

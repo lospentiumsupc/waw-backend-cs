@@ -1,3 +1,4 @@
+using WAW.API.Shared.Domain.Repositories;
 using WAW.API.Shared.Extensions;
 using WAW.API.Weather.Domain.Models;
 using WAW.API.Weather.Domain.Repositories;

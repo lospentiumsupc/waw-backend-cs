@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
 using TechTalk.SpecFlow.Assist;
+using WAW.API.Shared.Domain.Repositories;
 using WAW.API.Weather.Domain.Models;
 using WAW.API.Weather.Domain.Repositories;
 using WAW.API.Weather.Resources;

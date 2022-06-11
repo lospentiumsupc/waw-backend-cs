@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using WAW.API.Shared.Persistence.Contexts;
+using WAW.API.Shared.Persistence.Repositories;
 using WAW.API.Weather.Domain.Models;
 using WAW.API.Weather.Domain.Repositories;
-using WAW.API.Weather.Persistence.Contexts;
 
 namespace WAW.API.Weather.Persistence.Repositories;
 

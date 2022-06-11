@@ -1,7 +1,7 @@
-using WAW.API.Weather.Domain.Repositories;
-using WAW.API.Weather.Persistence.Contexts;
+using WAW.API.Shared.Domain.Repositories;
+using WAW.API.Shared.Persistence.Contexts;
 
-namespace WAW.API.Weather.Persistence.Repositories;
+namespace WAW.API.Shared.Persistence.Repositories;
 
 public class UnitOfWork : IUnitOfWork {
   private readonly AppDbContext context;

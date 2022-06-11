@@ -10,14 +10,14 @@ using WAW.API.Company.Domain.Services;
 using WAW.API.Company.Persistence.Repositories;
 using WAW.API.Company.Services;
 using WAW.API.Shared.Extensions;
+using WAW.API.Shared.Persistence.Contexts;
 using WAW.API.Weather.Domain.Repositories;
 using WAW.API.Weather.Domain.Services;
 using WAW.API.Weather.Mapping;
-using WAW.API.Weather.Persistence.Contexts;
 using WAW.API.Weather.Persistence.Repositories;
 using WAW.API.Weather.Services;
-using IUnitOfWork = WAW.API.Weather.Domain.Repositories.IUnitOfWork;
-using UnitOfWork = WAW.API.Weather.Persistence.Repositories.UnitOfWork;
+using IUnitOfWork = WAW.API.Shared.Domain.Repositories.IUnitOfWork;
+using UnitOfWork = WAW.API.Shared.Persistence.Repositories.UnitOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -7,34 +7,35 @@
     <UserSecretsId>f3c40075-c3e6-4d76-9976-68c00fc9d286</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="11.0.1"/>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0"/>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.5"/>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.5">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.5"/>
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.1"/>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1"/>
-    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.3.1"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.5" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <InternalsVisibleTo Include="WAW.API.Tests"/>
+    <InternalsVisibleTo Include="WAW.API.Tests" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Job\Controllers"/>
-    <Folder Include="Job\Domain\Models"/>
-    <Folder Include="Job\Domain\Repositories"/>
+    <Folder Include="Job\Controllers" />
+    <Folder Include="Job\Domain\Models" />
+    <Folder Include="Job\Domain\Repositories" />
+    <Folder Include="Weather\Persistence\Contexts" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Company\Controllers"/>
+    <Folder Include="Company\Controllers" />
   </ItemGroup>
   <Target Name="RestoreTools" BeforeTargets="Restore;CollectPackageReferences;Husky">
-    <Exec Command="dotnet tool restore" StandardOutputImportance="Low" StandardErrorImportance="High"/>
+    <Exec Command="dotnet tool restore" StandardOutputImportance="Low" StandardErrorImportance="High" />
   </Target>
   <Target Name="Husky" BeforeTargets="Restore;CollectPackageReferences" Condition="'$(HUSKY)' != 0">
-    <Exec Command="npm install" StandardOutputImportance="Low" StandardErrorImportance="High"/>
-    <Exec Command="dotnet husky install" StandardOutputImportance="Low" StandardErrorImportance="High" WorkingDirectory=".."/>
+    <Exec Command="npm install" StandardOutputImportance="Low" StandardErrorImportance="High" />
+    <Exec Command="dotnet husky install" StandardOutputImportance="Low" StandardErrorImportance="High" WorkingDirectory=".." />
   </Target>
 </Project>
