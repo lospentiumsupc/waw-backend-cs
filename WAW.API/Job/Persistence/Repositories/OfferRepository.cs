@@ -6,7 +6,7 @@ using WAW.API.Weather.Persistence.Repositories;
 
 namespace WAW.API.Job.Persistence.Repositories;
 
-public class OfferRepository: BaseRepository, IOfferRepository {
+public class OfferRepository : BaseRepository, IOfferRepository {
   public OfferRepository(AppDbContext context) : base(context) {}
 
   public async Task<IEnumerable<Offer>> ListAll() {
