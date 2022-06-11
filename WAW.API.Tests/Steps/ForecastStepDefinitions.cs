@@ -102,4 +102,8 @@ public class ForecastStepDefinitions {
   }
 
 
+  [When(@"an invalid POST request is sent")]
+  public void WhenAnInvalidPostRequestIsSent(Table table) {
+    ScenarioContext.StepIsPending();
+  }
 }
