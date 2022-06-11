@@ -22,6 +22,7 @@ public class ForecastStepDefinitions {
   private HttpClient client = null!;
   private HttpResponseMessage response = null!;
   private ForecastResource? entity;
+  private OfferResource? offer;
   private IEnumerable<ForecastResource>? entities;
   private IEnumerable<OfferResource>? offers;
   public ForecastStepDefinitions(
@@ -83,5 +84,11 @@ public class ForecastStepDefinitions {
   public async Task ThenAListOfOfferResourcesIsIncludedInTheBody(Table table) {
     offers = await response.Content.ReadFromJsonAsync<List<OfferResource>>();
     table.CompareToSet(offers);
+  }
+
+  [Then(@"a Offer resource is included in the body")]
+  public async Task ThenAOfferResourceIsIncludedInTheBody(Table table) {
+    offer = await response.Content.ReadFromJsonAsync<OfferResource>();
+    table.CompareToInstance(offer);
   }
 }
