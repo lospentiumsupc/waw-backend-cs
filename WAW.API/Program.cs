@@ -9,15 +9,15 @@ using WAW.API.Company.Domain.Repositories;
 using WAW.API.Company.Domain.Services;
 using WAW.API.Company.Persistence.Repositories;
 using WAW.API.Company.Services;
+using WAW.API.Shared.Domain.Repositories;
 using WAW.API.Shared.Extensions;
+using WAW.API.Shared.Mapping;
 using WAW.API.Shared.Persistence.Contexts;
+using WAW.API.Shared.Persistence.Repositories;
 using WAW.API.Weather.Domain.Repositories;
 using WAW.API.Weather.Domain.Services;
-using WAW.API.Weather.Mapping;
 using WAW.API.Weather.Persistence.Repositories;
 using WAW.API.Weather.Services;
-using IUnitOfWork = WAW.API.Shared.Domain.Repositories.IUnitOfWork;
-using UnitOfWork = WAW.API.Shared.Persistence.Repositories.UnitOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -77,14 +77,6 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // AutoMapper configuration
 builder.Services.AddAutoMapper(typeof(ModelToResourceProfile), typeof(ResourceToModelProfile));
-builder.Services.AddAutoMapper(
-  typeof(WAW.API.Company.Mapping.ModelToResourceProfile),
-  typeof(WAW.API.Company.Mapping.ResourceToModelProfile)
-);
-builder.Services.AddAutoMapper(
-  typeof(WAW.API.Job.Mapping.ModelToResourceProfile),
-  typeof(WAW.API.Job.Mapping.ResourceToModelProfile)
-);
 
 var app = builder.Build();
 
