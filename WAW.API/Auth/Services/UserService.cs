@@ -5,7 +5,7 @@ using WAW.API.Weather.Domain.Repositories;
 
 namespace WAW.API.Auth.Services;
 
-public class UserService: IUserService {
+public class UserService : IUserService {
   private readonly IUserRepository repository;
   private readonly IUnitOfWork unitOfWork;
 
@@ -30,9 +30,7 @@ public class UserService: IUserService {
 
   public async Task<UserResponse> Update(long id, User user) {
     var current = await repository.FindById(id);
-    if (current == null) {
-      return new UserResponse("User not found");
-    }
+    if (current == null) return new UserResponse("User not found");
 
     user.CopyProperties(current);
 
@@ -47,9 +45,7 @@ public class UserService: IUserService {
 
   public async Task<UserResponse> Delete(long id) {
     var current = await repository.FindById(id);
-    if (current == null) {
-      return new UserResponse("User not found");
-    }
+    if (current == null) return new UserResponse("User not found");
 
     try {
       repository.Remove(current);

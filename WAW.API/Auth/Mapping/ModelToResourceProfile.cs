@@ -4,7 +4,7 @@ using WAW.API.Auth.Resources;
 
 namespace WAW.API.Auth.Mapping;
 
-public class ModelToResourceProfile: Profile {
+public class ModelToResourceProfile : Profile {
   public ModelToResourceProfile() {
     CreateMap<User, UserResource>();
   }

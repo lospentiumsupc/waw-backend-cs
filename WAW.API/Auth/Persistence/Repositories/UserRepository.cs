@@ -6,8 +6,9 @@ using WAW.API.Weather.Persistence.Repositories;
 
 namespace WAW.API.Auth.Persistence.Repositories;
 
-public class UserRepository: BaseRepository, IUserRepository {
+public class UserRepository : BaseRepository, IUserRepository {
   public UserRepository(AppDbContext context) : base(context) {}
+
   public async Task<IEnumerable<User>> ListAll() {
     return await context.Users.ToListAsync();
   }
