@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WAW.API.Shared.Persistence.Contexts;
 
@@ -10,9 +11,10 @@ using WAW.API.Shared.Persistence.Contexts;
 namespace WAW.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220611141801_UpdateOffersTable")]
+    partial class UpdateOffersTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,8 +36,8 @@ namespace WAW.API.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("biography");
 
-                    b.Property<DateTime>("Birthdate")
-                        .HasColumnType("datetime(6)")
+                    b.Property<DateOnly>("Birthdate")
+                        .HasColumnType("date")
                         .HasColumnName("birthdate");
 
                     b.Property<string>("Email")

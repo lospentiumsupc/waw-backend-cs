@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WAW.API.Shared.Persistence.Contexts;
 
@@ -10,9 +11,10 @@ using WAW.API.Shared.Persistence.Contexts;
 namespace WAW.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220611133202_RemoveForecasts")]
+    partial class RemoveForecasts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,8 +36,8 @@ namespace WAW.API.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("biography");
 
-                    b.Property<DateTime>("Birthdate")
-                        .HasColumnType("datetime(6)")
+                    b.Property<DateOnly>("Birthdate")
+                        .HasColumnType("date")
                         .HasColumnName("birthdate");
 
                     b.Property<string>("Email")
@@ -66,7 +68,7 @@ namespace WAW.API.Migrations
                     b.ToTable("users", (string)null);
                 });
 
-            modelBuilder.Entity("WAW.API.Employers.Domain.Models.Company", b =>
+            modelBuilder.Entity("WAW.API.Company.Domain.Models.Company", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -129,9 +131,9 @@ namespace WAW.API.Migrations
                         .HasColumnName("title");
 
                     b.HasKey("Id")
-                        .HasName("p_k_offers");
+                        .HasName("p_k_offer");
 
-                    b.ToTable("offers", (string)null);
+                    b.ToTable("offer", (string)null);
                 });
 #pragma warning restore 612, 618
         }
