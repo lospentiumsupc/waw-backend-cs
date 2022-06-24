@@ -2,7 +2,7 @@ using WAW.API.Chat.Domain.Models;
 using WAW.API.Chat.Domain.Repositories;
 using WAW.API.Chat.Domain.Services;
 using WAW.API.Chat.Domain.Services.Communication;
-using WAW.API.Weather.Domain.Repositories;
+using WAW.API.Shared.Domain.Repositories;
 
 namespace WAW.API.Chat.Services;
 

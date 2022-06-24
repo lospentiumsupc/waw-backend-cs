@@ -1,5 +1,5 @@
-namespace WAW.API.Chat.Persistence.Repositories; 
+namespace WAW.API.Chat.Persistence.Repositories;
 
 public class ChatRoomRepository {
-  
+
 }
