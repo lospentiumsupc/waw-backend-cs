@@ -35,7 +35,7 @@ public class MessageService : IMessageService {
 
     try {
       //repository.Remove(current);
-      repository.Delete(current);
+      repository.Remove(current);
       await unitOfWork.Complete();
       return new MessageResponse(current);
     } catch (Exception e) {
