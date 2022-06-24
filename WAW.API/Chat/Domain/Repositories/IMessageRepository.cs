@@ -6,5 +6,5 @@ public interface IMessageRepository {
   Task<IEnumerable<Message>> ListAll();
   Task Add(Message message);
   Task<Message?> FindById(long id);
-  void Remove(Message message);
+  void Delete(Message message);
 }

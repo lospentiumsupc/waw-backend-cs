@@ -21,7 +21,7 @@ public class MessageRepository : BaseRepository, IMessageRepository {
     return await context.Messages.FindAsync(id);
   }
 
-  public void Remove(Message message) {
+  public void Delete(Message message) {
     context.Messages.Remove(message);
   }
 }
