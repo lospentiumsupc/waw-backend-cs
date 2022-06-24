@@ -14,5 +14,5 @@ public class User : BaseModel {
 
   //Relationships
 
-  public IList<Message> Messages { get; set; } = new List<Message>();
+  public IList<ChatRoom> ChatRooms { get; set; } = new List<ChatRoom>();
 }
