@@ -49,11 +49,16 @@ public class AppDbContext : DbContext {
     chatRoomEntity.HasKey(p => p.Id);
     chatRoomEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
     chatRoomEntity.Property(p => p.Date).IsRequired();
+    chatRoomEntity.HasMany(p => p.Messages)
+      .WithOne(p => p.ChatRoom)
+      .HasForeignKey(p => p.ChatRoomId);
 
     var messageEntity = builder.Entity<Message>();
     messageEntity.ToTable("Message");
     messageEntity.HasKey(p => p.Id);
     messageEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+    messageEntity.Property(p => p.MessageContent).IsRequired().HasMaxLength(512);
+    messageEntity.Property(p => p.Date).IsRequired();
 
     var offerEntity = builder.Entity<Offer>();
     offerEntity.ToTable("Offers");
