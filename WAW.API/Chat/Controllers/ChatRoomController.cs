@@ -25,9 +25,25 @@ public class ChatRoomController : ControllerBase {
 
   [HttpGet]
   [ProducesResponseType(typeof(IEnumerable<ChatRoomResource>), 200)]
-  [SwaggerResponse(200, "All the stored chatRooms were retrieved successfully.", typeof(IEnumerable<ChatRoomResource>))]
+  [SwaggerResponse(200, "All the stored chatRoom were retrieved successfully.", typeof(IEnumerable<ChatRoomResource>))]
   public async Task<IEnumerable<ChatRoomResource>> GetAll() {
     var chatRooms = await service.ListAll();
     return mapper.Map<IEnumerable<ChatRoom>, IEnumerable<ChatRoomResource>>(chatRooms);
+  }
+
+  [HttpPost]
+  [ProducesResponseType(typeof(ChatRoomResource), 201)]
+  [ProducesResponseType(typeof(List<string>), 400)]
+  [ProducesResponseType(500)]
+  [SwaggerResponse(201, "The chatRoom was created successfully", typeof(ChatRoomResource))]
+  [SwaggerResponse(400, "The chatRoom data is invalid")]
+  public async Task<IActionResult> Post(
+    [FromBody] [SwaggerRequestBody("The chatRoom object about to create", Required = true)] ChatRoomRequest chatRoomRequest
+  ) {
+    if (!ModelState.IsValid) return BadRequest(ModelState.GetErrorMessages());
+
+    var chatRoom = mapper.Map<ChatRoomRequest, ChatRoom>(chatRoomRequest);
+    var result = await service.Create(chatRoom);
+    return result.ToResponse<ChatRoomResource>(this, mapper);
   }
 }
