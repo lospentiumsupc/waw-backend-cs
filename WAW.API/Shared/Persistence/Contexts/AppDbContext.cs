@@ -11,8 +11,8 @@ public class AppDbContext : DbContext {
   private DbSet<Offer>? offers;
   private DbSet<User>? users;
   private DbSet<Company>? companies;
-  private DbSet<ChatRoom> chatRooms;
-  private DbSet<Message> messages;
+  private DbSet<ChatRoom>? chatRooms;
+  private DbSet<Message>? messages;
 
   public DbSet<Offer> Offers {
     get => GetContext(offers);
@@ -49,15 +49,12 @@ public class AppDbContext : DbContext {
     chatRoomEntity.HasKey(p => p.Id);
     chatRoomEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
     chatRoomEntity.Property(p => p.Date).IsRequired();
-    chatRoomEntity.HasMany(p => p.Messages)
-      .WithOne(p => p.ChatRoom)
-      .HasForeignKey(p => p.ChatRoomId);
 
     var messageEntity = builder.Entity<Message>();
     messageEntity.ToTable("Message");
     messageEntity.HasKey(p => p.Id);
     messageEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-    messageEntity.Property(p => p.MessageContent).IsRequired().HasMaxLength(512);
+    messageEntity.Property(p => p.Content).IsRequired().HasMaxLength(512);
     messageEntity.Property(p => p.Date).IsRequired();
 
     var offerEntity = builder.Entity<Offer>();
@@ -77,9 +74,6 @@ public class AppDbContext : DbContext {
     userEntity.Property(p => p.PreferredName).IsRequired().HasMaxLength(256);
     userEntity.Property(p => p.Email).IsRequired().HasMaxLength(256);
     userEntity.Property(p => p.Birthdate).IsRequired();
-    userEntity.HasMany(p => p.Messages)
-      .WithOne(p => p.User)
-      .HasForeignKey(p => p.UserId);
 
     var companyEntity = builder.Entity<Company>();
     companyEntity.ToTable("Companies");
