@@ -47,7 +47,7 @@ public class MessageController : ControllerBase {
     return result.ToResponse<MessageResource>(this, mapper);
   }
 
-  [HttpDelete("{id:int}")]
+  [HttpDelete("{id:long}")]
   [ProducesResponseType(typeof(MessageResource), 200)]
   [ProducesResponseType(typeof(List<string>), 400)]
   [ProducesResponseType(500)]
