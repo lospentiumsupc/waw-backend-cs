@@ -1,4 +1,7 @@
 {
+  "files.associations": {
+    ".gcloudignore": "gitignore"
+  },
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "package.json": "package-lock.json",

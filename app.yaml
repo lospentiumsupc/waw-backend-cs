@@ -1,0 +1,13 @@
+runtime: aspnetcore
+env: flex
+service: $APPENGINE_SERVICE_NAME
+manual_scaling:
+  instances: 1
+resources:
+  cpu: 1
+  memory_gb: 0.5
+  disk_size_gb: 10
+env_variables:
+  DbConnectionString: "server=localhost;database=$CLOUDSQL_DB_NAME;user=$CLOUDSQL_USERNAME;password=$CLOUDSQL_PASSWORD"
+beta_settings:
+  cloud_sql_instances: $CLOUDSQL_CONN_NAME
