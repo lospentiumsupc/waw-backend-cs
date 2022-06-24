@@ -31,10 +31,10 @@ public class ChatRoomController : ControllerBase {
   }
 
   [HttpPost]
-  [ProducesResponseType(typeof(ChatRoomResource), 201)]
+  [ProducesResponseType(typeof(ChatRoomResource), 200)]
   [ProducesResponseType(typeof(List<string>), 400)]
   [ProducesResponseType(500)]
-  [SwaggerResponse(201, "The chatRoom was created successfully", typeof(ChatRoomResource))]
+  [SwaggerResponse(200, "The chatRoom was created successfully", typeof(ChatRoomResource))]
   [SwaggerResponse(400, "The chatRoom data is invalid")]
   public async Task<IActionResult> Post(
     [FromBody] [SwaggerRequestBody("The chatRoom object about to create", Required = true)] ChatRoomRequest chatRoomRequest

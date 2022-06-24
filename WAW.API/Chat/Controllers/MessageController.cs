@@ -32,10 +32,10 @@ public class MessageController : ControllerBase {
   }
 
   [HttpPost]
-  [ProducesResponseType(typeof(MessageResource), 201)]
+  [ProducesResponseType(typeof(MessageResource), 200)]
   [ProducesResponseType(typeof(List<string>), 400)]
   [ProducesResponseType(500)]
-  [SwaggerResponse(201, "The message was created successfully", typeof(MessageResource))]
+  [SwaggerResponse(200, "The message was created successfully", typeof(MessageResource))]
   [SwaggerResponse(400, "The message data is invalid")]
   public async Task<IActionResult> Post(
     [FromBody] [SwaggerRequestBody("The message object about to create", Required = true)] MessageRequest messageRequest
