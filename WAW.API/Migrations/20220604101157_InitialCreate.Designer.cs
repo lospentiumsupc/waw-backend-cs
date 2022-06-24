@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WAW.API.Weather.Persistence.Contexts;
+using WAW.API.Shared.Persistence.Contexts;
 
 namespace WAW.API.Migrations
 {

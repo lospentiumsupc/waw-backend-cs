@@ -3,7 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WAW.API.Weather.Persistence.Contexts;
+using WAW.API.Shared.Persistence.Contexts;
 
 #nullable disable
 
@@ -34,8 +34,8 @@ namespace WAW.API.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("biography");
 
-                    b.Property<DateOnly>("Birthdate")
-                        .HasColumnType("date")
+                    b.Property<DateTime>("Birthdate")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("birthdate");
 
                     b.Property<string>("Email")
@@ -66,7 +66,7 @@ namespace WAW.API.Migrations
                     b.ToTable("users", (string)null);
                 });
 
-            modelBuilder.Entity("WAW.API.Company.Domain.Models.Company", b =>
+            modelBuilder.Entity("WAW.API.Employers.Domain.Models.Company", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -96,29 +96,42 @@ namespace WAW.API.Migrations
                     b.ToTable("companies", (string)null);
                 });
 
-            modelBuilder.Entity("WAW.API.Weather.Domain.Models.Forecast", b =>
+            modelBuilder.Entity("WAW.API.Job.Domain.Models.Offer", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("date");
-
-                    b.Property<string>("Summary")
+                    b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("longtext")
-                        .HasColumnName("summary");
+                        .HasColumnName("description");
 
-                    b.Property<int>("TemperatureC")
-                        .HasColumnType("int")
-                        .HasColumnName("temperature_c");
+                    b.Property<string>("Image")
+                        .HasMaxLength(2048)
+                        .HasColumnType("varchar(2048)")
+                        .HasColumnName("image");
+
+                    b.Property<string>("SalaryRange")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("salary_range");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("status");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)")
+                        .HasColumnName("title");
 
                     b.HasKey("Id")
-                        .HasName("p_k_forecasts");
+                        .HasName("p_k_offers");
 
-                    b.ToTable("forecasts", (string)null);
+                    b.ToTable("offers", (string)null);
                 });
 #pragma warning restore 612, 618
         }
