@@ -48,7 +48,8 @@ public class AppDbContext : DbContext {
     chatRoomEntity.ToTable("ChatRoom");
     chatRoomEntity.HasKey(p => p.Id);
     chatRoomEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-    chatRoomEntity.Property(p => p.Date).IsRequired();
+    chatRoomEntity.Property(p => p.CreationDate).IsRequired();
+    chatRoomEntity.Property(p => p.LastUpdateDate).IsRequired();
 
     var messageEntity = builder.Entity<Message>();
     messageEntity.ToTable("Message");
