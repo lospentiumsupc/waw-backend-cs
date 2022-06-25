@@ -32,8 +32,8 @@ builder.Services.AddSwaggerGen(
 
 // Add database connection
 var connectionString = builder.Configuration["DbConnectionString"];
-var logLevel = builder.Environment.IsProduction() ? LogLevel.Warning : LogLevel.Information;
-var enableDebugInfo = !builder.Environment.IsProduction();
+var logLevel = builder.Environment.IsDevelopment() ? LogLevel.Information : LogLevel.Warning;
+var enableDebugInfo = builder.Environment.IsDevelopment();
 
 builder.Services.AddDbContext<AppDbContext>(
   options => {
