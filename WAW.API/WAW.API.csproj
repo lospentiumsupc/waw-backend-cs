@@ -37,7 +37,8 @@
     <Exec Command="npm install" StandardOutputImportance="Low" StandardErrorImportance="High" />
     <Exec Command="dotnet husky install" StandardOutputImportance="Low" StandardErrorImportance="High" WorkingDirectory=".." />
   </Target>
-  <Target Name="CopyAppYaml" AfterTargets="AfterBuild">
-    <Copy SourceFiles="app.yaml" DestinationFolder="$(OutDir)" />
+  <Target Name="CopyAppEngineFilesPublish" AfterTargets="Publish">
+    <Copy SourceFiles="app.yaml" DestinationFolder="$(PublishDir)" />
+    <Copy SourceFiles="Dockerfile" DestinationFolder="$(PublishDir)" />
   </Target>
 </Project>

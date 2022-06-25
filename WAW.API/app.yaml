@@ -1,4 +1,4 @@
-runtime: aspnetcore
+runtime: custom
 env: flex
 service: $APPENGINE_SERVICE_NAME
 manual_scaling:
@@ -10,4 +10,4 @@ resources:
 env_variables:
   DbConnectionString: "server=localhost;database=$CLOUDSQL_DB_NAME;user=$CLOUDSQL_USERNAME;password=$CLOUDSQL_PASSWORD"
 beta_settings:
-  cloud_sql_instances: $CLOUDSQL_CONN_NAME
+  cloud_sql_instances: $CLOUDSQL_CONN_NAME=tcp:3306
