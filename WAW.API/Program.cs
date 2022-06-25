@@ -23,8 +23,8 @@ builder.Services.AddSwaggerGen(
         Version = "v1",
         Description = "An ASP.NET Core Web API for managing job offers and job applications",
         TermsOfService = new Uri("https://example.com/terms"),
-        Contact = new OpenApiContact {Name = "Example Contact", Url = new Uri("https://example.com/contact"),},
-        License = new OpenApiLicense {Name = "MIT", Url = new Uri("https://choosealicense.com/licenses/mit/"),},
+        Contact = new OpenApiContact { Name = "Example Contact", Url = new Uri("https://example.com/contact"), },
+        License = new OpenApiLicense { Name = "MIT", Url = new Uri("https://choosealicense.com/licenses/mit/"), },
       }
     );
   }
@@ -56,8 +56,11 @@ builder.Services.AddAutoMapper(typeof(ModelToResourceProfile), typeof(ResourceTo
 
 var app = builder.Build();
 
-// Database objects validation
-if (app.Environment.IsDevelopment()) {
+if (app.Environment.IsProduction() || app.Environment.IsStaging()) {
+  // Trust the reverse proxy
+  app.UseForwardedHeaders();
+
+  // Apply any migrations needed automatically
   var scope = app.Services.CreateScope();
   var context = scope.ServiceProvider.GetService<AppDbContext>();
   context?.Database.Migrate();
@@ -69,8 +72,6 @@ if (app.Environment.IsDevelopment()) {
   _ = app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
 app.UseAuthorization();
 
 app.MapControllers();
@@ -79,4 +80,4 @@ app.Run();
 
 // ReSharper disable once ClassNeverInstantiated.Global
 [SuppressMessage("Design", "CA1050:Declare types in namespaces")]
-public partial class Program {}
+public partial class Program { }
