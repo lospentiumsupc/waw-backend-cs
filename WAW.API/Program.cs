@@ -79,10 +79,12 @@ try {
     // Trust the reverse proxy
     app.UseForwardedHeaders();
 
-    // Apply any migrations needed automatically
-    var scope = app.Services.CreateScope();
-    var context = scope.ServiceProvider.GetService<AppDbContext>();
-    context?.Database.Migrate();
+    if (!app.Environment.IsEnvironment("Testing")) {
+      // Apply any migrations needed automatically
+      var scope = app.Services.CreateScope();
+      var context = scope.ServiceProvider.GetService<AppDbContext>();
+      context?.Database.Migrate();
+    }
   }
 
   app.UseAuthorization();
