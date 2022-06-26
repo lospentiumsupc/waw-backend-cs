@@ -7,6 +7,7 @@
       "type": "process",
       "args": [
         "build",
+        "--no-restore",
         "${workspaceFolder}/WAW.API/WAW.API.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
@@ -19,6 +20,7 @@
       "type": "process",
       "args": [
         "publish",
+        "--no-restore",
         "${workspaceFolder}/WAW.API/WAW.API.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
@@ -32,6 +34,7 @@
       "args": [
         "watch",
         "run",
+        "--no-restore",
         "--project",
         "${workspaceFolder}/WAW.API/WAW.API.csproj"
       ],
