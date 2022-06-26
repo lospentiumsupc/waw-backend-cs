@@ -13,6 +13,5 @@ public class User : BaseModel {
   public string? About { get; set; }
 
   //Relationships
-
   public IList<ChatRoom> ChatRooms { get; set; } = new List<ChatRoom>();
 }
