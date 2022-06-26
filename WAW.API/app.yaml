@@ -22,6 +22,6 @@ readiness_check:
   success_threshold: 2
   app_start_timeout_sec: '300'
 env_variables:
-  DbConnectionString: "server=localhost;database=$CLOUDSQL_DB_NAME;user=$CLOUDSQL_USERNAME;password=$CLOUDSQL_PASSWORD"
+  DbConnectionString: "server=cloudsql;database=$CLOUDSQL_DB_NAME;user=$CLOUDSQL_USERNAME;password=$CLOUDSQL_PASSWORD"
 beta_settings:
   cloud_sql_instances: $CLOUDSQL_CONN_NAME=tcp:3306
