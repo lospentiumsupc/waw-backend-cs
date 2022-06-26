@@ -4,6 +4,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>WAW.API</RootNamespace>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <UserSecretsId>f3c40075-c3e6-4d76-9976-68c00fc9d286</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
@@ -16,6 +17,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.5" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.3.1" />
   </ItemGroup>
@@ -36,5 +38,9 @@
   <Target Name="Husky" BeforeTargets="Restore;CollectPackageReferences" Condition="'$(HUSKY)' != 0">
     <Exec Command="npm install" StandardOutputImportance="Low" StandardErrorImportance="High" />
     <Exec Command="dotnet husky install" StandardOutputImportance="Low" StandardErrorImportance="High" WorkingDirectory=".." />
+  </Target>
+  <Target Name="CopyAppEngineFilesPublish" AfterTargets="Publish">
+    <Copy SourceFiles="app.yaml" DestinationFolder="$(PublishDir)" />
+    <Copy SourceFiles="Dockerfile" DestinationFolder="$(PublishDir)" />
   </Target>
 </Project>

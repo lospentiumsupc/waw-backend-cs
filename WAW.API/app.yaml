@@ -1,0 +1,27 @@
+runtime: custom
+env: flex
+service: $APPENGINE_SERVICE_NAME
+manual_scaling:
+  instances: 1
+resources:
+  cpu: 1
+  memory_gb: 0.5
+  disk_size_gb: 10
+liveness_check:
+  path: "/api/v1/_health/liveness"
+  initial_delay_sec: '300'
+  check_interval_sec: '30'
+  timeout_sec: '4'
+  failure_threshold: 4
+  success_threshold: 2
+readiness_check:
+  path: "/api/v1/_health/readiness"
+  check_interval_sec: '5'
+  timeout_sec: '4'
+  failure_threshold: 2
+  success_threshold: 2
+  app_start_timeout_sec: '300'
+env_variables:
+  DbConnectionString: "server=cloudsql;database=$CLOUDSQL_DB_NAME;user=$CLOUDSQL_USERNAME;password=$CLOUDSQL_PASSWORD"
+beta_settings:
+  cloud_sql_instances: $CLOUDSQL_CONN_NAME=tcp:3306
