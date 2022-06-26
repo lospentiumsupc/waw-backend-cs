@@ -9,5 +9,5 @@ public class ChatRoom : BaseModel {
 
   //Relationship
   public IList<Message> Messages { get; set; } = new List<Message>();
-  public IList<User> Users { get; set; } = new List<User>();
+  public IList<User> Participants { get; set; } = new List<User>();
 }
