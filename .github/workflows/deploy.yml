@@ -53,5 +53,5 @@ jobs:
         run: dotnet publish --no-restore --configuration Release
       - name: Deploy to App Engine
         run: |
-          cd WAW.API\bin\Release\net6.0\publish
+          cd WAW.API/bin/Release/net6.0/publish
           gcloud app deploy --quiet
