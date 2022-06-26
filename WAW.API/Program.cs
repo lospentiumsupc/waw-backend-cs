@@ -56,7 +56,11 @@ builder.Services.AddAutoMapper(typeof(ModelToResourceProfile), typeof(ResourceTo
 
 var app = builder.Build();
 
-if (app.Environment.IsProduction() || app.Environment.IsStaging()) {
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment()) {
+  _ = app.UseSwagger();
+  _ = app.UseSwaggerUI();
+} else {
   // Trust the reverse proxy
   app.UseForwardedHeaders();
 
@@ -64,12 +68,6 @@ if (app.Environment.IsProduction() || app.Environment.IsStaging()) {
   var scope = app.Services.CreateScope();
   var context = scope.ServiceProvider.GetService<AppDbContext>();
   context?.Database.Migrate();
-}
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment()) {
-  _ = app.UseSwagger();
-  _ = app.UseSwaggerUI();
 }
 
 app.UseAuthorization();
