@@ -4,7 +4,7 @@ using WAW.API.Chat.Resources;
 
 namespace WAW.API.Chat.Mapping;
 
-public class ChatModelToResourceProfile {
+public static class ChatModelToResourceProfile {
   public static void Register(IProfileExpression profile) {
     profile.CreateMap<ChatRoom, ChatRoomResource>();
     profile.CreateMap<Message, MessageResource>();

@@ -6,7 +6,7 @@ using WAW.API.Chat.Services;
 
 namespace WAW.API.Chat.Injection;
 
-public class ChatInjections {
+public static class ChatInjections {
   public static void Register(IServiceCollection services) {
     services.AddScoped<IChatRoomRepository, ChatRoomRepository>();
     services.AddScoped<IChatRoomService, ChatRoomService>();
