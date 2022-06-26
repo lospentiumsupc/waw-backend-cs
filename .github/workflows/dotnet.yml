@@ -23,6 +23,12 @@ jobs:
           root-password: tests
       - name: Initialize database for tests
         run: mysql -h127.0.0.1 -uroot -ptests -e 'CREATE DATABASE tests'
+      - uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
       - name: Setup .NET
         uses: actions/setup-dotnet@v2
         with:
@@ -30,12 +36,6 @@ jobs:
       - name: Restore dependencies
         id: restore
         run: dotnet restore --locked-mode
-      - uses: actions/cache@v3
-        with:
-          path: ~/.nuget/packages
-          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-nuget-
       - name: Build
         id: build
         run: dotnet build --no-restore --configuration Release

@@ -26,6 +26,12 @@ jobs:
         uses: google-github-actions/setup-gcloud@v0
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
+      - uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
       - name: Setup .NET
         uses: actions/setup-dotnet@v2
         with:
@@ -33,12 +39,6 @@ jobs:
       - name: Restore dependencies
         id: restore
         run: dotnet restore --locked-mode
-      - uses: actions/cache@v3
-        with:
-          path: ~/.nuget/packages
-          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-nuget-
       - name: Replace database secrets and other placeholders
         run: |
           sed -i 's/$CLOUDSQL_USERNAME/${{ secrets.CLOUDSQL_USERNAME }}/g' WAW.API/app.yaml
