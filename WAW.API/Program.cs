@@ -13,9 +13,12 @@ Log.Logger = new LoggerConfiguration()
 
 Log.Information("Starting up...");
 
+var environment = string.Empty;
+
 try {
   var builder = WebApplication.CreateBuilder(args);
 
+  environment = builder.Environment.EnvironmentName;
   builder.Host.UseSerilog((ctx, lc) => lc.ReadFrom.Configuration(ctx.Configuration));
 
   // Add services to the container with path prefix
@@ -89,6 +92,10 @@ try {
   app.Run();
   return 0;
 } catch (Exception ex) {
+  if (environment.Equals("Testing")) {
+    throw;
+  }
+
   Log.Fatal(ex, "Host terminated unexpectedly.");
   return 1;
 } finally {
