@@ -7,9 +7,9 @@ using WAW.API.Shared.Mapping;
 using WAW.API.Shared.Persistence.Contexts;
 using Serilog;
 
-Log.Logger = new LoggerConfiguration()
+Log.Logger = new LoggerConfiguration().Enrich.FromLogContext()
   .WriteTo.Console(outputTemplate: "[{Timestamp:u} {Level}]: {Message:l}{NewLine}{Exception}")
-  .CreateBootstrapLogger();
+  .CreateLogger();
 
 Log.Information("Starting up...");
 
