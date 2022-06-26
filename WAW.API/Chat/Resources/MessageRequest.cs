@@ -10,7 +10,7 @@ public class MessageRequest {
 
   [SwaggerSchema("Message content", Nullable = false)]
   [Required]
-  public string MessageContent { get; set; } = string.Empty;
+  public string Content { get; set; } = string.Empty;
 
   [SwaggerSchema("Message date", Nullable = false)]
   [Required]

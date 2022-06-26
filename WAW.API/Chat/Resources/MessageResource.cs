@@ -13,7 +13,7 @@ public class MessageResource {
   public long ChatRoomId { get; set; }
 
   [SwaggerSchema("Message content", Nullable = false)]
-  public string MessageContent { get; set; } = string.Empty;
+  public string Content { get; set; } = string.Empty;
 
   [SwaggerSchema("Message date", Nullable = false)]
   public DateTime Date { get; set; }
