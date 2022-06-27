@@ -27,4 +27,15 @@ public class PromotionRepository: BaseRepository, IPromotionRepository {
   public void Remove(Promotion promotion) {
     context.Promotions.Remove(promotion);
   }
+
+  public async  Task<IEnumerable<Promotion>> FindBySubscriptionPlanId(long id) {
+    return await context.Promotions
+      .Where(p => p.SubscriptionId == id)
+      .Include(p => p.SubscriptionPlan)
+      .ToListAsync();
+  }
+
+
+
+
 }

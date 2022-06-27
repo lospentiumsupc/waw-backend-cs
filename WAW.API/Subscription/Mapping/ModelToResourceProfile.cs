@@ -7,5 +7,7 @@ namespace WAW.API.Subscription.Mapping;
 public class ModelToResourceProfile: Profile {
   public ModelToResourceProfile() {
     CreateMap<SubscriptionPlan, SubscriptionPlanResource>();
+    CreateMap<Promotion, PromotionResource>();
   }
+
 }

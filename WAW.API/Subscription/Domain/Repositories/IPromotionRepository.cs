@@ -8,5 +8,6 @@ public interface IPromotionRepository {
   Task<Promotion?> FindById(long id);
   void Update(Promotion promotion);
   void Remove(Promotion promotion);
+  Task<IEnumerable<Promotion>> FindBySubscriptionPlanId(long id);
 
 }

@@ -7,4 +7,5 @@ public interface IPromotionService {
   Task<PromotionResponse> Create(Promotion promotion);
   Task<PromotionResponse> Update(long id, Promotion promotion);
   Task<PromotionResponse> Delete(long id);
+  Task<IEnumerable<Promotion>> ListBySubscriptionPlanId(long subscriptionPlanId);
 }

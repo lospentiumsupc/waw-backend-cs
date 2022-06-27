@@ -19,6 +19,10 @@ public class PromotionService: IPromotionService {
     return await promotionRepository.ListAll();
   }
 
+  public async Task<IEnumerable<Promotion>> ListBySubscriptionPlanId(long subscriptionPlanId) {
+    return await promotionRepository.FindBySubscriptionPlanId(subscriptionPlanId);
+  }
+
   public async Task<PromotionResponse> Create(Promotion promotion) {
     try {
       await promotionRepository.Add(promotion);

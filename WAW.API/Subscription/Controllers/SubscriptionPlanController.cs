@@ -19,9 +19,17 @@ public class SubscriptionPlanController: ControllerBase {
 
   [HttpGet]
   public async Task<IEnumerable<SubscriptionPlanResource>> GetAll() {
-    var subscriptionPlan = await _subscriptionPlanService.ListAll();
-    return _mapper.Map<IEnumerable<SubscriptionPlan>, IEnumerable<SubscriptionPlanResource>>(subscriptionPlan);
+    var subscriptionPlans = await _subscriptionPlanService.ListAll();
+    return _mapper.Map<IEnumerable<SubscriptionPlan>, IEnumerable<SubscriptionPlanResource>>(subscriptionPlans);
   }
+
+  [HttpDelete("{id:int}")]
+  public async Task<IActionResult> DeleteAsync(int id) {
+    var result = await _subscriptionPlanService.Delete(id);
+    return result.ToResponse<SubscriptionPlanResource>(this, _mapper);
+  }
+
+
 
 
 }
