@@ -11,8 +11,4 @@ public class MessageRequest {
   [SwaggerSchema("Message content", Nullable = false)]
   [Required]
   public string Content { get; set; } = string.Empty;
-
-  [SwaggerSchema("Message date", Nullable = false)]
-  [Required]
-  public DateTime Date { get; set; }
 }
