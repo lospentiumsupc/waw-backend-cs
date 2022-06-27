@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Swashbuckle.AspNetCore.Annotations;
 using WAW.API.Auth.Domain.Models;
+using WAW.API.Chat.Domain.Models;
 
 namespace WAW.API.Chat.Resources;
 

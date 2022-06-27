@@ -3,6 +3,7 @@ using WAW.API.Chat.Domain.Repositories;
 using WAW.API.Shared.Persistence.Contexts;
 using WAW.API.Shared.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
+using WAW.API.Auth.Domain.Models;
 
 namespace WAW.API.Chat.Persistence.Repositories;
 
@@ -19,6 +20,14 @@ public class ChatRoomRepository : BaseRepository, IChatRoomRepository {
 
   public async Task<ChatRoom?> FindById(long id) {
     return await context.ChatRooms.FindAsync(id);
+  }
+
+  public async Task<IEnumerable<Message>> FindMessagesByChatRoomId(long chatRoomId) {
+    return await context.Messages.Where(p => p.ChatRoomId == chatRoomId).ToListAsync();
+  }
+
+  public async Task<IEnumerable<User>> FindParticipantsByChatRoomId(long chatRoomId) {
+    return await context.Users.Where(p => p.ChatRoomId == chatRoomId).ToListAsync();
   }
 
   public void Update(ChatRoom chatRoom) {

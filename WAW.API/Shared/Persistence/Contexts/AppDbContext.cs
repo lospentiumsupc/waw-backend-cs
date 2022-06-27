@@ -50,6 +50,12 @@ public class AppDbContext : DbContext {
     chatRoomEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
     chatRoomEntity.Property(p => p.CreationDate).IsRequired();
     chatRoomEntity.Property(p => p.LastUpdateDate).IsRequired();
+    chatRoomEntity.HasMany(p => p.Messages)
+      .WithOne(p => p.ChatRoom)
+      .HasForeignKey(p => p.ChatRoomId);
+    chatRoomEntity.HasMany(p => p.Messages)
+      .WithOne(p => p.ChatRoom)
+      .HasForeignKey(p => p.ChatRoomId);
 
     var messageEntity = builder.Entity<Message>();
     messageEntity.ToTable("Message");
@@ -75,6 +81,8 @@ public class AppDbContext : DbContext {
     userEntity.Property(p => p.PreferredName).IsRequired().HasMaxLength(256);
     userEntity.Property(p => p.Email).IsRequired().HasMaxLength(256);
     userEntity.Property(p => p.Birthdate).IsRequired();
+    userEntity.Property(p => p.ChatRoomId).IsRequired();
+    userEntity.HasMany(p => p.ChatRooms).WithMany(p => p.Participants);
 
     var companyEntity = builder.Entity<Company>();
     companyEntity.ToTable("Companies");

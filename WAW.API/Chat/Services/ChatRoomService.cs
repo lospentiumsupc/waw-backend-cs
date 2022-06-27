@@ -1,3 +1,4 @@
+using WAW.API.Auth.Domain.Models;
 using WAW.API.Chat.Domain.Models;
 using WAW.API.Chat.Domain.Repositories;
 using WAW.API.Chat.Domain.Services;
@@ -17,6 +18,14 @@ public class ChatRoomService : IChatRoomService {
 
   public Task<IEnumerable<ChatRoom>> ListAll() {
     return repository.ListAll();
+  }
+
+  public Task<IEnumerable<Message>> ListMessagesByChatRoomId(long chatRoomId) {
+    return repository.FindMessagesByChatRoomId(chatRoomId);
+  }
+
+  public Task<IEnumerable<User>> ListParticipantsByChatRoomId(long chatRoomId) {
+    return repository.FindParticipantsByChatRoomId(chatRoomId);
   }
 
   public async Task<ChatRoomResponse> Create(ChatRoom chatRoom) {
