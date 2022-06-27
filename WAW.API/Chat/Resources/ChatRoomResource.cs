@@ -14,6 +14,6 @@ public class ChatRoomResource {
   [SwaggerSchema("Chat room last update date", Nullable = false)]
   public DateTime LastUpdateDate { get; set; }
 
-  [SwaggerSchema("Chat room last update date", Nullable = false)]
+  [SwaggerSchema("Chat room participants", Nullable = false)]
   public IList<User> Participants { get; set; } = new List<User>();
 }
