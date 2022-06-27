@@ -20,11 +20,11 @@ public class ChatRoomService : IChatRoomService {
     return repository.ListAll();
   }
 
-  public Task<IEnumerable<Message>> ListMessagesByChatRoomId(long chatRoomId) {
+  public Task<IEnumerable<Message>?> ListMessagesByChatRoomId(long chatRoomId) {
     return repository.FindMessagesByChatRoomId(chatRoomId);
   }
 
-  public Task<IEnumerable<User>> ListParticipantsByChatRoomId(long chatRoomId) {
+  public Task<IEnumerable<User>?> ListParticipantsByChatRoomId(long chatRoomId) {
     return repository.FindParticipantsByChatRoomId(chatRoomId);
   }
 

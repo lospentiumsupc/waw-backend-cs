@@ -26,7 +26,4 @@ public class UserResource {
 
   [SwaggerSchema("User abstract")]
   public string About { get; set; } = string.Empty;
-
-  [SwaggerSchema("ChatRoom identifier")]
-  public long ChatRoomId { get; set; }
 }

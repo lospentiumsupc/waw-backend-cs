@@ -1,12 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using Swashbuckle.AspNetCore.Annotations;
-using WAW.API.Auth.Domain.Models;
-using WAW.API.Chat.Domain.Models;
 
 namespace WAW.API.Chat.Resources;
 
 public class ChatRoomRequest {
-  [SwaggerSchema("Chat room creation date", Nullable = false)]
+  [SwaggerSchema("Chat room participants", Nullable = false)]
   [Required]
-  public IList<User> Participants { get; set; } = new List<User>();
+  public IList<long>? Participants { get; set; }
 }

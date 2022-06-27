@@ -35,7 +35,7 @@ namespace WAW.API.Migrations
                     b.HasIndex("ParticipantsId")
                         .HasDatabaseName("i_x_chat_room_user_participants_id");
 
-                    b.ToTable("chat_room_user");
+                    b.ToTable("chat_room_user", (string)null);
                 });
 
             modelBuilder.Entity("WAW.API.Auth.Domain.Models.User", b =>
@@ -56,10 +56,6 @@ namespace WAW.API.Migrations
                     b.Property<DateTime>("Birthdate")
                         .HasColumnType("datetime(6)")
                         .HasColumnName("birthdate");
-
-                    b.Property<long>("ChatRoomId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("chat_room_id");
 
                     b.Property<string>("Email")
                         .IsRequired()

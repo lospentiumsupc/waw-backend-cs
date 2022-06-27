@@ -3,6 +3,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using WAW.API.Auth.Domain.Models;
+using WAW.API.Auth.Domain.Services;
 using WAW.API.Auth.Resources;
 using WAW.API.Chat.Domain.Models;
 using WAW.API.Chat.Domain.Services;
@@ -16,51 +17,76 @@ namespace WAW.API.Chat.Controllers;
 [Produces(MediaTypeNames.Application.Json)]
 [SwaggerTag("Create, read, update and delete ChatRooms")]
 public class ChatRoomController : ControllerBase {
-  private readonly IChatRoomService service;
+  private readonly IChatRoomService chatService;
+  private readonly IUserService userService;
   private readonly IMapper mapper;
 
-  public ChatRoomController(IChatRoomService service, IMapper mapper) {
-    this.service = service;
+  public ChatRoomController(IChatRoomService chatService, IUserService userService, IMapper mapper) {
+    this.chatService = chatService;
+    this.userService = userService;
     this.mapper = mapper;
   }
 
   [HttpGet]
   [ProducesResponseType(typeof(IEnumerable<ChatRoomResource>), 200)]
-  [SwaggerResponse(200, "All the stored chatRoom were retrieved successfully.", typeof(IEnumerable<ChatRoomResource>))]
+  [SwaggerResponse(200, "All the stored chat room were retrieved successfully.", typeof(IEnumerable<ChatRoomResource>))]
   public async Task<IEnumerable<ChatRoomResource>> GetAll() {
-    var chatRooms = await service.ListAll();
+    var chatRooms = await chatService.ListAll();
     return mapper.Map<IEnumerable<ChatRoom>, IEnumerable<ChatRoomResource>>(chatRooms);
   }
 
-  [HttpGet("{id}/messages")]
+  [HttpGet("{id:long}/messages")]
   [ProducesResponseType(typeof(IEnumerable<MessageResource>), 200)]
-  [SwaggerResponse(200, "All the stored chatRoom were retrieved successfully.", typeof(IEnumerable<MessageResource>))]
-  public async Task<IEnumerable<MessageResource>> GetMessagesByChatRoomId(long chatRoomId) {
-    var chatRooms = await service.ListMessagesByChatRoomId(chatRoomId);
-    return mapper.Map<IEnumerable<Message>, IEnumerable<MessageResource>>(chatRooms);
+  [ProducesResponseType(404)]
+  [SwaggerResponse(200, "All the stored chat room were retrieved successfully.", typeof(IEnumerable<MessageResource>))]
+  [SwaggerResponse(404, "Unable to find messages for selected chat room.")]
+  public async Task<IActionResult> GetMessagesByChatRoomId(
+    [FromRoute] [SwaggerParameter("ChatRoom identifier", Required = true)] long id
+  ) {
+    var messages = await chatService.ListMessagesByChatRoomId(id);
+    if (messages is null) {
+      return NotFound();
+    }
+
+    var mapped = mapper.Map<IEnumerable<Message>, IEnumerable<MessageResource>>(messages);
+    return Ok(mapped);
   }
 
-  [HttpGet("{id}/participants")]
+  [HttpGet("{id:long}/participants")]
   [ProducesResponseType(typeof(IEnumerable<UserResource>), 200)]
-  [SwaggerResponse(200, "All the stored chatRoom were retrieved successfully.", typeof(IEnumerable<UserResource>))]
-  public async Task<IEnumerable<UserResource>> GetParticipantsByChatRoomId(long chatRoomId) {
-    var chatRooms = await service.ListParticipantsByChatRoomId(chatRoomId);
-    return mapper.Map<IEnumerable<User>, IEnumerable<UserResource>>(chatRooms);
+  [ProducesResponseType(404)]
+  [SwaggerResponse(200, "All the stored chat room were retrieved successfully.", typeof(IEnumerable<UserResource>))]
+  [SwaggerResponse(404, "Unable to find participants for selected chat room.")]
+  public async Task<IActionResult> GetParticipantsByChatRoomId(
+    [FromRoute] [SwaggerParameter("ChatRoom identifier", Required = true)] long id
+  ) {
+    var participants = await chatService.ListParticipantsByChatRoomId(id);
+    if (participants is null) {
+      return NotFound();
+    }
+
+    var mapped = mapper.Map<IEnumerable<User>, IEnumerable<UserResource>>(participants);
+    return Ok(mapped);
   }
 
   [HttpPost]
   [ProducesResponseType(typeof(ChatRoomResource), 200)]
   [ProducesResponseType(typeof(List<string>), 400)]
   [ProducesResponseType(500)]
-  [SwaggerResponse(200, "The chatRoom was created successfully", typeof(ChatRoomResource))]
-  [SwaggerResponse(400, "The chatRoom data is invalid")]
+  [SwaggerResponse(200, "The chat room was created successfully", typeof(ChatRoomResource))]
+  [SwaggerResponse(400, "The chat room data is invalid")]
   public async Task<IActionResult> Post(
-    [FromBody] [SwaggerRequestBody("The chatRoom object about to create", Required = true)] ChatRoomRequest chatRoomRequest
+    [FromBody] [SwaggerRequestBody("The chat room object about to create", Required = true)] ChatRoomRequest request
   ) {
     if (!ModelState.IsValid) return BadRequest(ModelState.GetErrorMessages());
 
-    var chatRoom = mapper.Map<ChatRoomRequest, ChatRoom>(chatRoomRequest);
-    var result = await service.Create(chatRoom);
+    var users = await userService.BatchFindById(request.Participants!);
+    if (users is null) {
+      return BadRequest(new {message = "Unable to find one or more users in the participants list.",});
+    }
+
+    var chatRoom = new ChatRoom {Participants = users,};
+    var result = await chatService.Create(chatRoom);
     return result.ToResponse<ChatRoomResource>(this, mapper);
   }
 
@@ -68,17 +94,22 @@ public class ChatRoomController : ControllerBase {
   [ProducesResponseType(typeof(ChatRoomResource), 200)]
   [ProducesResponseType(typeof(List<string>), 400)]
   [ProducesResponseType(500)]
-  [SwaggerResponse(200, "The chatRoom was updated successfully", typeof(ChatRoomResource))]
-  [SwaggerResponse(400, "The chatRoom data is invalid")]
+  [SwaggerResponse(200, "The chat room was updated successfully", typeof(ChatRoomResource))]
+  [SwaggerResponse(400, "The chat room data is invalid")]
   public async Task<IActionResult> Put(
     [FromRoute] [SwaggerParameter("ChatRoom identifier", Required = true)] long id,
-    [FromBody] [SwaggerRequestBody("The chatRoom object about to update and its changes", Required = true)]
-    ChatRoomRequest chatRoomRequest
+    [FromBody] [SwaggerRequestBody("The chat room object about to update and its changes", Required = true)]
+    ChatRoomRequest request
   ) {
     if (!ModelState.IsValid) return BadRequest(ModelState.GetErrorMessages());
 
-    var chatRoom = mapper.Map<ChatRoomRequest, ChatRoom>(chatRoomRequest);
-    var result = await service.Update(id, chatRoom);
+    var users = await userService.BatchFindById(request.Participants!);
+    if (users is null) {
+      return BadRequest(new {message = "Unable to find one or more users in the participants list.",});
+    }
+
+    var chatRoom = new ChatRoom {Participants = users,};
+    var result = await chatService.Update(id, chatRoom);
     return result.ToResponse<ChatRoomResource>(this, mapper);
   }
 
@@ -86,12 +117,12 @@ public class ChatRoomController : ControllerBase {
   [ProducesResponseType(typeof(ChatRoomResource), 200)]
   [ProducesResponseType(typeof(List<string>), 400)]
   [ProducesResponseType(500)]
-  [SwaggerResponse(200, "The chatRoom was deleted successfully", typeof(ChatRoomResource))]
-  [SwaggerResponse(400, "The selected chatRoom to delete does not exist")]
+  [SwaggerResponse(200, "The chat room was deleted successfully", typeof(ChatRoomResource))]
+  [SwaggerResponse(400, "The selected chat room to delete does not exist")]
   public async Task<IActionResult> DeleteAsync(
     [FromRoute] [SwaggerParameter("ChatRoom identifier", Required = true)] long id
   ) {
-    var result = await service.Delete(id);
+    var result = await chatService.Delete(id);
     return result.ToResponse<ChatRoomResource>(this, mapper);
   }
 }
