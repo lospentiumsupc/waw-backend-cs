@@ -35,6 +35,8 @@ public class ChatRoomService : IChatRoomService {
 
     chatRoom.CopyProperties(current);
 
+    current.LastUpdateDate = DateTime.Now;
+
     try {
       repository.Update(current);
       await unitOfWork.Complete();
