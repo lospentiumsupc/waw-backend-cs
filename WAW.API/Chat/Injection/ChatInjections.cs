@@ -1,7 +1,6 @@
-using WAW.API.Chat.Domain.Models;
 using WAW.API.Chat.Domain.Repositories;
-using WAW.API.Chat.Persistence.Repositories;
 using WAW.API.Chat.Domain.Services;
+using WAW.API.Chat.Persistence.Repositories;
 using WAW.API.Chat.Services;
 
 namespace WAW.API.Chat.Injection;
