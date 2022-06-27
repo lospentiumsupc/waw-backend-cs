@@ -61,6 +61,26 @@ try {
   // Add lowercase routes
   builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
+  // Add CORS
+  var origins = builder.Configuration.GetSection("AllowedOrigins").Get<List<string>>() ?? new List<string>();
+  Log.Information("GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA1231231231231231");
+  Log.Information(string.Join(";", origins));
+  Log.Information("GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA1231231231231231");
+
+  builder.Services.AddCors(
+    options => {
+      options.AddDefaultPolicy(
+        policy => {
+          policy.WithOrigins(origins.ToArray())
+            .AllowAnyHeader()
+            .AllowCredentials()
+            .AllowAnyMethod()
+            .SetPreflightMaxAge(TimeSpan.FromMinutes(5));
+        }
+      );
+    }
+  );
+
   // Dependency Injection configuration
   AppInjections.Register(builder.Services);
 
@@ -86,6 +106,8 @@ try {
       context?.Database.Migrate();
     }
   }
+
+  app.UseCors();
 
   app.UseAuthorization();
 
