@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using WAW.API.Auth.Domain.Models;
 using WAW.API.Employers.Domain.Models;
 using WAW.API.Job.Domain.Models;
+using WAW.API.Chat.Domain.Models;
 using WAW.API.Shared.Extensions;
 
 namespace WAW.API.Shared.Persistence.Contexts;
@@ -10,6 +11,8 @@ public class AppDbContext : DbContext {
   private DbSet<Offer>? offers;
   private DbSet<User>? users;
   private DbSet<Company>? companies;
+  private DbSet<ChatRoom>? chatRooms;
+  private DbSet<Message>? messages;
 
   public DbSet<Offer> Offers {
     get => GetContext(offers);
@@ -26,10 +29,34 @@ public class AppDbContext : DbContext {
     set => companies = value;
   }
 
+  public DbSet<ChatRoom> ChatRooms {
+    get => GetContext(chatRooms);
+    set => chatRooms = value;
+  }
+
+  public DbSet<Message> Messages {
+    get => GetContext(messages);
+    set => messages = value;
+  }
+
   public AppDbContext(DbContextOptions options) : base(options) {}
 
   protected override void OnModelCreating(ModelBuilder builder) {
     base.OnModelCreating(builder);
+
+    var chatRoomEntity = builder.Entity<ChatRoom>();
+    chatRoomEntity.ToTable("ChatRoom");
+    chatRoomEntity.HasKey(p => p.Id);
+    chatRoomEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+    chatRoomEntity.Property(p => p.CreationDate).IsRequired();
+    chatRoomEntity.Property(p => p.LastUpdateDate).IsRequired();
+
+    var messageEntity = builder.Entity<Message>();
+    messageEntity.ToTable("Message");
+    messageEntity.HasKey(p => p.Id);
+    messageEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+    messageEntity.Property(p => p.Content).IsRequired().HasMaxLength(512);
+    messageEntity.Property(p => p.Date).IsRequired();
 
     var offerEntity = builder.Entity<Offer>();
     offerEntity.ToTable("Offers");
