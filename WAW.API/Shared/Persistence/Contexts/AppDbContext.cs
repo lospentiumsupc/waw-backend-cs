@@ -81,7 +81,6 @@ public class AppDbContext : DbContext {
     userEntity.Property(p => p.PreferredName).IsRequired().HasMaxLength(256);
     userEntity.Property(p => p.Email).IsRequired().HasMaxLength(256);
     userEntity.Property(p => p.Birthdate).IsRequired();
-    userEntity.Property(p => p.ChatRoomId).IsRequired();
     userEntity.HasMany(p => p.ChatRooms).WithMany(p => p.Participants);
 
     var companyEntity = builder.Entity<Company>();
