@@ -7,10 +7,15 @@ namespace WAW.API.Subscription.Persistence.Contexts;
 public class AppDbContext: DbContext {
 
   private DbSet<SubscriptionPlan>? subscriptionPlans;
+  private DbSet<Promotion>? promotion;
 
   public DbSet<SubscriptionPlan> SubscriptionPlans {
     get => GetContext(subscriptionPlans);
     set => subscriptionPlans = value;
+  }
+  public DbSet<Promotion> Promotions {
+    get => GetContext(promotion);
+    set => promotion = value;
   }
 
   public AppDbContext(DbContextOptions options) : base(options) {}

@@ -41,14 +41,14 @@ public class SubscriptionPlanService: ISubscriptionPlanService {
       await unitOfWork.Complete();
       return new SubscriptionPlanResponse(current);
     } catch (Exception e) {
-      return new SubscriptionPlanResponse($"An error occurred while updating the forecast: {e.Message}");
+      return new SubscriptionPlanResponse($"An error occurred while updating the subscription plan: {e.Message}");
     }
   }
 
   public async Task<SubscriptionPlanResponse> Delete(long id) {
     var current = await subscriptionPlanRepository.FindById(id);
     if (current == null) {
-      return new SubscriptionPlanResponse("Forecast not found");
+      return new SubscriptionPlanResponse("Subscription plan not found");
     }
 
     try {
@@ -56,7 +56,7 @@ public class SubscriptionPlanService: ISubscriptionPlanService {
       await unitOfWork.Complete();
       return new SubscriptionPlanResponse(current);
     } catch (Exception e) {
-      return new SubscriptionPlanResponse($"An error occurred while deleting the forecast: {e.Message}");
+      return new SubscriptionPlanResponse($"An error occurred while deleting the subscription plan: {e.Message}");
     }
   }
 
