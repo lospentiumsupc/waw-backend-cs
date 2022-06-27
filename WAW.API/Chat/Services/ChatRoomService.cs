@@ -20,6 +20,9 @@ public class ChatRoomService : IChatRoomService {
   }
 
   public async Task<ChatRoomResponse> Create(ChatRoom chatRoom) {
+    var currentDate = DateTime.Now;
+    chatRoom.CreationDate = currentDate;
+    chatRoom.LastUpdateDate = currentDate;
     try {
       await repository.Add(chatRoom);
       await unitOfWork.Complete();

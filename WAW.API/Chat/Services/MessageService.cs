@@ -20,6 +20,8 @@ public class MessageService : IMessageService {
   }
 
   public async Task<MessageResponse> Create(Message message) {
+    var currentDate = DateTime.Now;
+    message.Date = currentDate;
     try {
       await repository.Add(message);
       await unitOfWork.Complete();
