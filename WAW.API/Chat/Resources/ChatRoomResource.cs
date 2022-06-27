@@ -1,6 +1,5 @@
 using Swashbuckle.AspNetCore.Annotations;
-using WAW.API.Auth.Domain.Models;
-using WAW.API.Chat.Domain.Models;
+using WAW.API.Auth.Resources;
 
 namespace WAW.API.Chat.Resources;
 
@@ -15,5 +14,5 @@ public class ChatRoomResource {
   public DateTime LastUpdateDate { get; set; }
 
   [SwaggerSchema("Chat room participants", Nullable = false)]
-  public IList<User> Participants { get; set; } = new List<User>();
+  public IList<UserResource> Participants { get; set; } = new List<UserResource>();
 }
