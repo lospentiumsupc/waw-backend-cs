@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using WAW.API.Chat.Domain.Models;
 using WAW.API.Shared.Domain.Model;
 
@@ -13,5 +14,6 @@ public class User : BaseModel {
   public string? About { get; set; }
 
   //Relationships
+  [JsonIgnore]
   public IList<ChatRoom> ChatRooms { get; set; } = new List<ChatRoom>();
 }

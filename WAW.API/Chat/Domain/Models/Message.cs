@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using WAW.API.Auth.Domain.Models;
 using WAW.API.Shared.Domain.Model;
 
@@ -9,8 +10,10 @@ public class Message : BaseModel {
 
   //Relationships
   public long SenderId { get; set; }
+  [JsonIgnore]
   public User? Sender { get; set; }
 
   public long ChatRoomId { get; set; }
+  [JsonIgnore]
   public ChatRoom? ChatRoom { get; set; }
 }
