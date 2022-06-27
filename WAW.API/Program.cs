@@ -63,9 +63,6 @@ try {
 
   // Add CORS
   var origins = builder.Configuration.GetSection("AllowedOrigins").Get<List<string>>() ?? new List<string>();
-  Log.Information("GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA1231231231231231");
-  Log.Information(string.Join(";", origins));
-  Log.Information("GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA1231231231231231");
 
   builder.Services.AddCors(
     options => {
