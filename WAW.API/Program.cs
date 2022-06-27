@@ -69,6 +69,7 @@ try {
       options.AddDefaultPolicy(
         policy => {
           policy.WithOrigins(origins.ToArray())
+            .SetIsOriginAllowedToAllowWildcardSubdomains()
             .AllowAnyHeader()
             .AllowCredentials()
             .AllowAnyMethod()
