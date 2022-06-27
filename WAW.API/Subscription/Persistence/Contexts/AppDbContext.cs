@@ -25,6 +25,20 @@ public class AppDbContext: DbContext {
     subscriptionPlanEntity.Property(p => p.Name).IsRequired();
     subscriptionPlanEntity.Property(p => p.BasePrice).IsRequired();
 
+    //relations
+    subscriptionPlanEntity.HasMany(p => p.Promotions)
+      .WithOne(p => p.SubscriptionPlan)
+      .HasForeignKey(p => p.SubscriptionId);
+
+    //definition of promotion
+    var promotionEntity = builder.Entity<Promotion>();
+    promotionEntity.ToTable("Promotion");
+    promotionEntity.HasKey(p => p.Id);
+    promotionEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+    promotionEntity.Property(p => p.Name).IsRequired();
+    promotionEntity.Property(p => p.Date).IsRequired();
+
+
     builder.UseSnakeCase();
   }
 
