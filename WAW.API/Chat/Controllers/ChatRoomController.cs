@@ -2,6 +2,8 @@ using System.Net.Mime;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using WAW.API.Auth.Domain.Models;
+using WAW.API.Auth.Resources;
 using WAW.API.Chat.Domain.Models;
 using WAW.API.Chat.Domain.Services;
 using WAW.API.Chat.Resources;
@@ -28,6 +30,22 @@ public class ChatRoomController : ControllerBase {
   public async Task<IEnumerable<ChatRoomResource>> GetAll() {
     var chatRooms = await service.ListAll();
     return mapper.Map<IEnumerable<ChatRoom>, IEnumerable<ChatRoomResource>>(chatRooms);
+  }
+
+  [HttpGet("{id}/messages")]
+  [ProducesResponseType(typeof(IEnumerable<MessageResource>), 200)]
+  [SwaggerResponse(200, "All the stored chatRoom were retrieved successfully.", typeof(IEnumerable<MessageResource>))]
+  public async Task<IEnumerable<MessageResource>> GetMessagesByChatRoomId(long chatRoomId) {
+    var chatRooms = await service.ListMessagesByChatRoomId(chatRoomId);
+    return mapper.Map<IEnumerable<Message>, IEnumerable<MessageResource>>(chatRooms);
+  }
+
+  [HttpGet("{id}/participants")]
+  [ProducesResponseType(typeof(IEnumerable<UserResource>), 200)]
+  [SwaggerResponse(200, "All the stored chatRoom were retrieved successfully.", typeof(IEnumerable<UserResource>))]
+  public async Task<IEnumerable<UserResource>> GetParticipantsByChatRoomId(long chatRoomId) {
+    var chatRooms = await service.ListParticipantsByChatRoomId(chatRoomId);
+    return mapper.Map<IEnumerable<User>, IEnumerable<UserResource>>(chatRooms);
   }
 
   [HttpPost]
