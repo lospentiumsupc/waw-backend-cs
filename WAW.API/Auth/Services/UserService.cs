@@ -19,6 +19,24 @@ public class UserService : IUserService {
     return repository.ListAll();
   }
 
+  public Task<User?> FindById(long id) {
+    return repository.FindById(id);
+  }
+
+  public async Task<IList<User>?> BatchFindById(IEnumerable<long> ids) {
+    var users = new List<User>();
+    foreach (var id in ids) {
+      var user = await FindById(id);
+      if (user is null) {
+        return null;
+      }
+
+      users.Add(user);
+    }
+
+    return users;
+  }
+
   public async Task<UserResponse> Create(User user) {
     try {
       await repository.Add(user);
