@@ -12,7 +12,7 @@ public class User : BaseModel {
   public string? Location { get; set; }
   public string? Biography { get; set; }
   public string? About { get; set; }
-
+  public long ChatRoomId { get; set; }
   //Relationships
   [JsonIgnore]
   public IList<ChatRoom> ChatRooms { get; set; } = new List<ChatRoom>();

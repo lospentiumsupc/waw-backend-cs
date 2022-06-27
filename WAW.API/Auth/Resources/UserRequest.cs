@@ -28,4 +28,7 @@ public class UserRequest {
 
   [SwaggerSchema("User abstract", Nullable = true)]
   public string About { get; set; } = string.Empty;
+
+  [SwaggerSchema("ChatRoom identifier", Nullable = false)]
+  public long ChatRoomId { get; set; }
 }
