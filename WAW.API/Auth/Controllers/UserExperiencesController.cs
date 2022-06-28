@@ -10,40 +10,40 @@ namespace WAW.API.Auth.Controllers;
 
 [Authorize]
 [ApiController]
-[Route("users/me/education")]
-[SwaggerTag("Create, read, update and delete the current User education info")]
-public class UserEducationsController : ControllerBase {
-  private readonly IUserEducationService service;
+[Route("users/me/experience")]
+[SwaggerTag("Create, read, update and delete the current User experience info")]
+public class UserExperiencesController : ControllerBase {
+  private readonly IUserExperienceService service;
   private readonly IMapper mapper;
 
-  public UserEducationsController(IUserEducationService service, IMapper mapper) {
+  public UserExperiencesController(IUserExperienceService service, IMapper mapper) {
     this.service = service;
     this.mapper = mapper;
   }
 
   [HttpGet]
-  public async Task<IEnumerable<UserEducationResource>> ListAll() {
+  public async Task<IEnumerable<UserExperienceResource>> ListAll() {
     var user = (User) HttpContext.Items["User"]!;
     var results = await service.ListByUserId(user.Id);
-    return mapper.Map<IEnumerable<UserEducation>, IEnumerable<UserEducationResource>>(results);
+    return mapper.Map<IEnumerable<UserExperience>, IEnumerable<UserExperienceResource>>(results);
   }
 
   [HttpPost]
-  public async Task<IActionResult> Create([FromBody] UserEducationRequest request) {
+  public async Task<IActionResult> Create([FromBody] UserExperienceRequest request) {
     var user = (User) HttpContext.Items["User"]!;
-    var mapped = mapper.Map<UserEducationRequest, UserEducation>(request);
+    var mapped = mapper.Map<UserExperienceRequest, UserExperience>(request);
     mapped.UserId = user.Id;
     var result = await service.Add(mapped);
-    return result.ToResponse<UserEducationResource>(this, mapper);
+    return result.ToResponse<UserExperienceResource>(this, mapper);
   }
 
   [HttpPut("{id:long}")]
-  public async Task<IActionResult> Update([FromRoute] long id, [FromBody] UserEducationRequest request) {
+  public async Task<IActionResult> Update([FromRoute] long id, [FromBody] UserExperienceRequest request) {
     var user = (User) HttpContext.Items["User"]!;
-    var mapped = mapper.Map<UserEducationRequest, UserEducation>(request);
+    var mapped = mapper.Map<UserExperienceRequest, UserExperience>(request);
     mapped.UserId = user.Id;
     var result = await service.Update(id, mapped);
-    return result.ToResponse<UserEducationResource>(this, mapper);
+    return result.ToResponse<UserExperienceResource>(this, mapper);
   }
 
   [HttpDelete("{id:long}")]

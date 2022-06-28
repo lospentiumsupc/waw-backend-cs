@@ -25,16 +25,6 @@ public class UsersController : ControllerBase {
     this.mapper = mapper;
   }
 
-  [HttpGet]
-  [ProducesResponseType(typeof(IEnumerable<UserResource>), 200)]
-  [ProducesResponseType(typeof(ErrorResponse), 401)]
-  [SwaggerResponse(200, "All the stored users were retrieved successfully.", typeof(IEnumerable<UserResource>))]
-  [SwaggerResponse(401, "Unauthorized", typeof(ErrorResponse))]
-  public async Task<IEnumerable<UserResource>> GetAll() {
-    var users = await service.ListAll();
-    return mapper.Map<IEnumerable<User>, IEnumerable<UserResource>>(users);
-  }
-
   [HttpGet("me")]
   [ProducesResponseType(typeof(UserResource), 200)]
   [ProducesResponseType(typeof(ErrorResponse), 401)]
@@ -44,7 +34,7 @@ public class UsersController : ControllerBase {
     var user = (User) HttpContext.Items["User"]!;
     return mapper.Map<UserResource>(user);
   }
-  
+
   // [HttpGet("me/experience")]
   // public async Task<IEnumerable<UserExperienceResource>> GetUserExperience() {
   //   var user = (User) HttpContext.Items["User"]!;

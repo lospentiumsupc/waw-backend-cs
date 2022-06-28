@@ -17,4 +17,7 @@ public class UserExperience : BaseModel {
 
   public long? CompanyId { get; set; }
   public Company? Company { get; set; }
+
+  public long? UserId { get; set; }
+  public User? User { get; set; }
 }
