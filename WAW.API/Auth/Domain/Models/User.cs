@@ -18,10 +18,10 @@ public class User : BaseModel {
   public string Password { get; set; } = string.Empty;
 
   // Relationships
-  public long CoverId { get; set; }
+  public long? CoverId { get; set; }
   public ExternalImage? Cover { get; set; }
 
-  public long PictureId { get; set; }
+  public long? PictureId { get; set; }
   public ExternalImage? Picture { get; set; }
 
   public IList<ChatRoom> ChatRooms { get; set; } = new List<ChatRoom>();
