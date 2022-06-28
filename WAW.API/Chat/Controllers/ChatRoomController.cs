@@ -114,15 +114,15 @@ public class ChatRoomController : ControllerBase {
   }
 
   [HttpDelete("{id:long}")]
-  [ProducesResponseType(typeof(ChatRoomResource), 200)]
+  [ProducesResponseType(typeof(NoContentResult), 204)]
   [ProducesResponseType(typeof(List<string>), 400)]
   [ProducesResponseType(500)]
-  [SwaggerResponse(200, "The chat room was deleted successfully", typeof(ChatRoomResource))]
+  [SwaggerResponse(204, "The chat room was deleted successfully", typeof(NoContentResult))]
   [SwaggerResponse(400, "The selected chat room to delete does not exist")]
   public async Task<IActionResult> DeleteAsync(
     [FromRoute] [SwaggerParameter("ChatRoom identifier", Required = true)] long id
   ) {
-    var result = await chatService.Delete(id);
-    return result.ToResponse<ChatRoomResource>(this, mapper);
+    await chatService.Delete(id);
+    return NoContent();
   }
 }

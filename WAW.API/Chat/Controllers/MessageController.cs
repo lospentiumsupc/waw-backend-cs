@@ -48,15 +48,15 @@ public class MessageController : ControllerBase {
   }
 
   [HttpDelete("{id:long}")]
-  [ProducesResponseType(typeof(MessageResource), 200)]
+  [ProducesResponseType(typeof(NoContentResult), 204)]
   [ProducesResponseType(typeof(List<string>), 400)]
   [ProducesResponseType(500)]
-  [SwaggerResponse(200, "The message was deleted successfully", typeof(MessageResource))]
+  [SwaggerResponse(204, "The message was deleted successfully", typeof(NoContentResult))]
   [SwaggerResponse(400, "The selected message to delete does not exist")]
   public async Task<IActionResult> DeleteAsync(
     [FromRoute] [SwaggerParameter("Message identifier", Required = true)] long id
   ) {
-    var result = await service.Delete(id);
-    return result.ToResponse<MessageResponse>(this, mapper);
+    await service.Delete(id);
+    return NoContent();
   }
 }

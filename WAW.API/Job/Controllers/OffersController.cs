@@ -62,15 +62,15 @@ public class OffersController : ControllerBase {
   }
 
   [HttpDelete("{id:int}")]
-  [ProducesResponseType(typeof(OfferResource), 200)]
+  [ProducesResponseType(typeof(NoContentResult), 204)]
   [ProducesResponseType(typeof(List<string>), 400)]
   [ProducesResponseType(500)]
-  [SwaggerResponse(200, "The job offer was deleted successfully", typeof(OfferResource))]
+  [SwaggerResponse(204, "The job offer was deleted successfully", typeof(NoContentResult))]
   [SwaggerResponse(400, "The selected job offer to delete does not exist")]
   public async Task<IActionResult> DeleteAsync(
     [FromRoute] [SwaggerParameter("Job offer identifier", Required = true)] int id
   ) {
-    var result = await service.Delete(id);
-    return result.ToResponse<OfferResource>(this, mapper);
+    await service.Delete(id);
+    return NoContent();
   }
 }

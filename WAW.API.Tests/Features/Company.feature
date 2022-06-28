@@ -59,4 +59,4 @@ In order to make it available for client applications.
       | Id | Name        | Address  | Email           |
       | 1  | Google Inc. | Lima, PE | google@fake.com |
     When a DELETE request is sent to Companies with Id 1
-    Then a CompanyResource response with status 200 is received
+    Then a CompanyResource response with status 204 is received
