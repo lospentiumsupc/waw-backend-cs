@@ -96,6 +96,16 @@ public class AppDbContext : DbContext {
     userEntity.HasOne(p => p.Cover).WithOne().HasForeignKey<User>(p => p.CoverId);
     userEntity.HasOne(p => p.Picture).WithOne().HasForeignKey<User>(p => p.PictureId);
 
+    var educationEntity = builder.Entity<UserEducation>();
+    educationEntity.ToTable("UserEducation");
+    educationEntity.HasKey(p => p.Id);
+    educationEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+    educationEntity.Property(p => p.University).IsRequired().HasMaxLength(200);
+    educationEntity.Property(p => p.Description).IsRequired().HasMaxLength(500);
+    educationEntity.Property(p => p.StartYear).IsRequired();
+    educationEntity.Property(p => p.EndYear).IsRequired();
+    educationEntity.HasOne(p => p.Image).WithOne().HasForeignKey<UserEducation>(p => p.ImageId);
+
     var experienceEntity = builder.Entity<UserExperience>();
     experienceEntity.ToTable("UserExperience");
     experienceEntity.HasKey(p => p.Id);
@@ -108,16 +118,6 @@ public class AppDbContext : DbContext {
     experienceEntity.Property(p => p.Description).IsRequired().HasMaxLength(5000);
     experienceEntity.HasOne(p => p.Image).WithOne().HasForeignKey<UserExperience>(p => p.ImageId);
     experienceEntity.HasOne(p => p.Company).WithOne().HasForeignKey<UserExperience>(p => p.CompanyId);
-
-    var educationEntity = builder.Entity<UserEducation>();
-    educationEntity.ToTable("UserEducation");
-    educationEntity.HasKey(p => p.Id);
-    educationEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-    educationEntity.Property(p => p.University).IsRequired().HasMaxLength(200);
-    educationEntity.Property(p => p.Description).IsRequired().HasMaxLength(500);
-    educationEntity.Property(p => p.StartYear).IsRequired();
-    educationEntity.Property(p => p.EndYear).IsRequired();
-    educationEntity.HasOne(p => p.Image).WithOne().HasForeignKey<UserEducation>(p => p.ImageId);
 
     var projectsEntity = builder.Entity<UserProjects>();
     projectsEntity.ToTable("UserProjects");

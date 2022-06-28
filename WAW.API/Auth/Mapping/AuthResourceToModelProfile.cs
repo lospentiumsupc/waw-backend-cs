@@ -9,5 +9,8 @@ public static class AuthResourceToModelProfile {
     profile.CreateMap<UserCreateRequest, User>();
     profile.CreateMap<UserUpdateRequest, User>();
     profile.CreateMap<ExternalImageRequest, ExternalImage>();
+    profile.CreateMap<UserEducationRequest, UserEducation>();
+    profile.CreateMap<UserExperienceRequest, UserExperience>();
+    profile.CreateMap<UserProjectsRequest, UserProjects>();
   }
 }
