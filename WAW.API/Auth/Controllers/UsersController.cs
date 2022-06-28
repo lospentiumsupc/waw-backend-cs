@@ -35,6 +35,16 @@ public class UsersController : ControllerBase {
     return mapper.Map<IEnumerable<User>, IEnumerable<UserResource>>(users);
   }
 
+  [HttpGet("me")]
+  [ProducesResponseType(typeof(UserResource), 200)]
+  [ProducesResponseType(typeof(ErrorResponse), 401)]
+  [SwaggerResponse(200, "Found current user information", typeof(UserResource))]
+  [SwaggerResponse(401, "Unauthorized", typeof(ErrorResponse))]
+  public UserResource GetMe() {
+    var user = (User) HttpContext.Items["User"]!;
+    return mapper.Map<UserResource>(user);
+  }
+
   [HttpGet("{id:long}")]
   [ProducesResponseType(typeof(UserResource), 200)]
   [ProducesResponseType(typeof(ErrorResponse), 401)]
@@ -47,7 +57,10 @@ public class UsersController : ControllerBase {
   ) {
     var user = await service.FindById(id);
 
-    if (user is not null) return Ok(user);
+    if (user is not null) {
+      var mapped = mapper.Map<UserResource>(user);
+      return Ok(mapped);
+    }
 
     var body = new ErrorResponse($"Unable to find user with ID {id}");
     return NotFound(body);
