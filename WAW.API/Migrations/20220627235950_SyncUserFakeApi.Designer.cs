@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WAW.API.Shared.Persistence.Contexts;
 
@@ -10,9 +11,10 @@ using WAW.API.Shared.Persistence.Contexts;
 namespace WAW.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220627235950_SyncUserFakeApi")]
+    partial class SyncUserFakeApi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,6 +48,7 @@ namespace WAW.API.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("Alt")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)")
                         .HasColumnName("alt");
@@ -81,7 +84,7 @@ namespace WAW.API.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("birthdate");
 
-                    b.Property<long?>("CoverId")
+                    b.Property<long>("CoverId")
                         .HasColumnType("bigint")
                         .HasColumnName("cover_id");
 
@@ -101,13 +104,7 @@ namespace WAW.API.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("location");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("varchar(60)")
-                        .HasColumnName("password");
-
-                    b.Property<long?>("PictureId")
+                    b.Property<long>("PictureId")
                         .HasColumnType("bigint")
                         .HasColumnName("picture_id");
 
@@ -285,11 +282,15 @@ namespace WAW.API.Migrations
                     b.HasOne("WAW.API.Auth.Domain.Models.ExternalImage", "Cover")
                         .WithOne()
                         .HasForeignKey("WAW.API.Auth.Domain.Models.User", "CoverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("f_k_users_images_cover_id");
 
                     b.HasOne("WAW.API.Auth.Domain.Models.ExternalImage", "Picture")
                         .WithOne()
                         .HasForeignKey("WAW.API.Auth.Domain.Models.User", "PictureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("f_k_users_images_picture_id");
 
                     b.Navigation("Cover");

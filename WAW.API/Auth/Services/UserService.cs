@@ -1,18 +1,44 @@
+using AutoMapper;
+using Serilog;
+using WAW.API.Auth.Authorization.Handlers.Interfaces;
 using WAW.API.Auth.Domain.Models;
 using WAW.API.Auth.Domain.Repositories;
 using WAW.API.Auth.Domain.Services;
 using WAW.API.Auth.Domain.Services.Communication;
+using WAW.API.Auth.Resources;
 using WAW.API.Shared.Domain.Repositories;
+using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace WAW.API.Auth.Services;
 
 public class UserService : IUserService {
   private readonly IUserRepository repository;
   private readonly IUnitOfWork unitOfWork;
+  private readonly IJwtHandler jwtHandler;
+  private readonly IMapper mapper;
 
-  public UserService(IUserRepository repository, IUnitOfWork unitOfWork) {
+  public UserService(IUserRepository repository, IUnitOfWork unitOfWork, IJwtHandler jwtHandler, IMapper mapper) {
     this.repository = repository;
     this.unitOfWork = unitOfWork;
+    this.jwtHandler = jwtHandler;
+    this.mapper = mapper;
+  }
+
+  public async Task<AuthResponse> Authenticate(AuthRequest request) {
+    try {
+      var user = await repository.FindByEmail(request.Email);
+
+      if (user == null || !BCryptNet.Verify(request.Password, user.Password)) {
+        return new AuthResponse("Invalid username or password");
+      }
+
+      var response = mapper.Map<AuthResource>(user);
+      response.Token = jwtHandler.GenerateToken(user);
+      return new AuthResponse(response);
+    } catch (Exception e) {
+      Log.Error(e, "An error occurred during authentication");
+      return new AuthResponse($"An error occurred during authentication: ${e.Message}");
+    }
   }
 
   public Task<IEnumerable<User>> ListAll() {
@@ -37,7 +63,13 @@ public class UserService : IUserService {
     return users;
   }
 
-  public async Task<UserResponse> Create(User user) {
+  public async Task<UserResponse> Register(User user) {
+    if (repository.ExistsByEmail(user.Email)) {
+      return new UserResponse($"Email {user.Email} already has an account");
+    }
+
+    user.Password = BCryptNet.HashPassword(user.Password);
+
     try {
       await repository.Add(user);
       await unitOfWork.Complete();
@@ -47,11 +79,11 @@ public class UserService : IUserService {
     }
   }
 
-  public async Task<UserResponse> Update(long id, User user) {
+  public async Task<UserResponse> Update(long id, UserUpdateRequest request) {
     var current = await repository.FindById(id);
     if (current == null) return new UserResponse("User not found");
 
-    user.CopyProperties(current);
+    current.CopyFrom(request, new[] {"Id", "Email",});
 
     try {
       repository.Update(current);

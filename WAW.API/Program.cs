@@ -6,6 +6,8 @@ using WAW.API.Shared.Injection;
 using WAW.API.Shared.Mapping;
 using WAW.API.Shared.Persistence.Contexts;
 using Serilog;
+using WAW.API.Auth.Authorization.Settings;
+using WAW.API.Auth.Extensions;
 
 Log.Logger = new LoggerConfiguration().Enrich.FromLogContext()
   .WriteTo.Console(outputTemplate: "[{Timestamp:u} {Level}]: {Message:l}{NewLine}{Exception}")
@@ -24,6 +26,9 @@ try {
   // Add services to the container with path prefix
   builder.Services.AddControllers(options => options.UseGeneralRoutePrefix("api/v1"));
 
+  // Security configuration
+  builder.Services.Configure<AuthSettings>(builder.Configuration.GetSection("Authentication"));
+
   // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
   builder.Services.AddEndpointsApiExplorer();
   builder.Services.AddSwaggerGen(
@@ -36,8 +41,27 @@ try {
           Version = "v1",
           Description = "An ASP.NET Core Web API for managing job offers and job applications",
           TermsOfService = new Uri("https://example.com/terms"),
-          Contact = new OpenApiContact { Name = "Example Contact", Url = new Uri("https://example.com/contact"), },
-          License = new OpenApiLicense { Name = "MIT", Url = new Uri("https://choosealicense.com/licenses/mit/"), },
+          Contact = new OpenApiContact {Name = "Example Contact", Url = new Uri("https://example.com/contact"),},
+          License = new OpenApiLicense {Name = "MIT", Url = new Uri("https://choosealicense.com/licenses/mit/"),},
+        }
+      );
+      options.AddSecurityDefinition(
+        "Bearer Auth",
+        new OpenApiSecurityScheme {
+          Type = SecuritySchemeType.Http,
+          Scheme = "Bearer",
+          BearerFormat = "JWT",
+          Description = "JWT Authorization header using the Bearer scheme.",
+        }
+      );
+      options.AddSecurityRequirement(
+        new OpenApiSecurityRequirement {
+          {
+            new OpenApiSecurityScheme {
+              Reference = new OpenApiReference {Type = ReferenceType.SecurityScheme, Id = "Bearer Auth",},
+            },
+            Array.Empty<string>()
+          },
         }
       );
     }
@@ -107,6 +131,8 @@ try {
 
   app.UseCors();
 
+  app.UseJwtMiddleware();
+
   app.UseAuthorization();
 
   app.MapControllers();
@@ -126,4 +152,4 @@ try {
 
 // ReSharper disable once ClassNeverInstantiated.Global
 [SuppressMessage("Design", "CA1050:Declare types in namespaces")]
-public partial class Program { }
+public partial class Program {}

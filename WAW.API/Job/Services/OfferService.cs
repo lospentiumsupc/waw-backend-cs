@@ -33,7 +33,7 @@ public class OfferService : IOfferService {
     var current = await repository.FindById(id);
     if (current == null) return new OfferResponse("Offer not found");
 
-    offer.CopyProperties(current);
+    offer.CopyTo(current);
 
     try {
       repository.Update(current);

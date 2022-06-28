@@ -45,7 +45,7 @@ public class ChatRoomService : IChatRoomService {
     var current = await repository.FindById(id);
     if (current == null) return new ChatRoomResponse("Chatroom not found");
 
-    chatRoom.CopyProperties(current);
+    chatRoom.CopyTo(current);
 
     current.LastUpdateDate = DateTime.Now;
 

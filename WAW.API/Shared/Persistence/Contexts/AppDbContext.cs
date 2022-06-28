@@ -13,6 +13,7 @@ public class AppDbContext : DbContext {
   private DbSet<Company>? companies;
   private DbSet<ChatRoom>? chatRooms;
   private DbSet<Message>? messages;
+  private DbSet<ExternalImage>? images;
 
   public DbSet<Offer> Offers {
     get => GetContext(offers);
@@ -37,6 +38,11 @@ public class AppDbContext : DbContext {
   public DbSet<Message> Messages {
     get => GetContext(messages);
     set => messages = value;
+  }
+
+  public DbSet<ExternalImage> Images {
+    get => GetContext(images);
+    set => images = value;
   }
 
   public AppDbContext(DbContextOptions options) : base(options) {}
@@ -79,9 +85,20 @@ public class AppDbContext : DbContext {
     userEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
     userEntity.Property(p => p.FullName).IsRequired().HasMaxLength(256);
     userEntity.Property(p => p.PreferredName).IsRequired().HasMaxLength(256);
-    userEntity.Property(p => p.Email).IsRequired().HasMaxLength(256);
+    userEntity.Property(p => p.Email).IsRequired().HasMaxLength(254);
+    userEntity.Property(p => p.ProfileViews).HasDefaultValue(0);
     userEntity.Property(p => p.Birthdate).IsRequired();
+    userEntity.Property(p => p.Password).IsRequired().HasMaxLength(60);
     userEntity.HasMany(p => p.ChatRooms).WithMany(p => p.Participants);
+    userEntity.HasOne(p => p.Cover).WithOne().HasForeignKey<User>(p => p.CoverId);
+    userEntity.HasOne(p => p.Picture).WithOne().HasForeignKey<User>(p => p.PictureId);
+
+    var imageEntity = builder.Entity<ExternalImage>();
+    imageEntity.ToTable("Images");
+    imageEntity.HasKey(p => p.Id);
+    imageEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+    imageEntity.Property(p => p.Href).IsRequired().HasMaxLength(2000);
+    imageEntity.Property(p => p.Alt).HasMaxLength(100);
 
     var companyEntity = builder.Entity<Company>();
     companyEntity.ToTable("Companies");
