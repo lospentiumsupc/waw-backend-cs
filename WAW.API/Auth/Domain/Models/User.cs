@@ -24,5 +24,11 @@ public class User : BaseModel {
   public long? PictureId { get; set; }
   public ExternalImage? Picture { get; set; }
 
+  public IList<UserExperience> Experience { get; set; } = new List<UserExperience>();
+
+  public IList<UserEducation> Education { get; set; } = new List<UserEducation>();
+
+  public IList<UserProjects> Projects { get; set; } = new List<UserProjects>();
+
   public IList<ChatRoom> ChatRooms { get; set; } = new List<ChatRoom>();
 }
