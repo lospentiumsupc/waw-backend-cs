@@ -2,6 +2,7 @@ using System.Net.Mime;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using WAW.API.Auth.Authorization.Attributes;
 using WAW.API.Job.Domain.Models;
 using WAW.API.Job.Domain.Services;
 using WAW.API.Job.Resources;
@@ -9,6 +10,7 @@ using WAW.API.Shared.Extensions;
 
 namespace WAW.API.Job.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
