@@ -11,4 +11,7 @@ public class UserEducation : BaseModel {
   // Relationships
   public long? ImageId { get; set; }
   public ExternalImage? Image { get; set; }
+
+  public long? UserId { get; set; }
+  public User? User { get; set; }
 }

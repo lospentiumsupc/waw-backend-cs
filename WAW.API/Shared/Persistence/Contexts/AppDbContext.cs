@@ -104,7 +104,7 @@ public class AppDbContext : DbContext {
     userEntity.Property(p => p.Birthdate).IsRequired();
     userEntity.Property(p => p.Password).IsRequired().HasMaxLength(60);
     userEntity.HasMany(p => p.ChatRooms).WithMany(p => p.Participants);
-    userEntity.HasMany(p => p.Education).WithOne();
+    userEntity.HasMany(p => p.Education).WithOne(p => p.User).HasForeignKey(p => p.UserId).IsRequired();
     userEntity.HasMany(p => p.Experience).WithOne();
     userEntity.HasMany(p => p.Projects).WithOne();
     userEntity.HasOne(p => p.Cover).WithOne().HasForeignKey<User>(p => p.CoverId);
