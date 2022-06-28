@@ -31,7 +31,7 @@ public class UserRepository : BaseRepository, IUserRepository {
     return user?.Experience;
   }
 
-  public async Task<IList<UserProjects>?> ListProjectsByUser(long userId) {
+  public async Task<IList<UserProject>?> ListProjectsByUser(long userId) {
     var user = await context.Users.Where(x => x.Id == userId)
       .Include(x => x.Projects)
       .ThenInclude(x => x.Image)

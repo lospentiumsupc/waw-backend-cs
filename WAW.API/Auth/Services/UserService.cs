@@ -53,7 +53,7 @@ public class UserService : IUserService {
     return repository.ListExperienceByUser(userId);
   }
 
-  public Task<IList<UserProjects>?> ListProjectsByUser(long userId) {
+  public Task<IList<UserProject>?> ListProjectsByUser(long userId) {
     return repository.ListProjectsByUser(userId);
   }
 

@@ -9,7 +9,7 @@ public interface IUserRepository {
 
   Task<IList<UserExperience>?> ListExperienceByUser(long userId);
 
-  Task<IList<UserProjects>?> ListProjectsByUser(long userId);
+  Task<IList<UserProject>?> ListProjectsByUser(long userId);
 
   Task Add(User user);
 

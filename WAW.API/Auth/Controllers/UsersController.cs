@@ -68,14 +68,14 @@ public class UsersController : ControllerBase {
   }
 
   [HttpGet("me/projects")]
-  public async Task<IEnumerable<UserProjectsResource>> GetUserProjects() {
+  public async Task<IEnumerable<UserProjectResource>> GetUserProjects() {
     var user = (User) HttpContext.Items["User"]!;
     var projects = await service.ListProjectsByUser(user.Id);
     if (projects == null) {
       throw new Exception($"Unable to fetch projects list for logged in user: {user.Id}");
     }
 
-    return mapper.Map<IEnumerable<UserProjects>, IEnumerable<UserProjectsResource>>(projects);
+    return mapper.Map<IEnumerable<UserProject>, IEnumerable<UserProjectResource>>(projects);
   }
 
   [HttpPut("me")]

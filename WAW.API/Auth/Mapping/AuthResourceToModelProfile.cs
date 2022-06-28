@@ -11,6 +11,6 @@ public static class AuthResourceToModelProfile {
     profile.CreateMap<ExternalImageRequest, ExternalImage>();
     profile.CreateMap<UserEducationRequest, UserEducation>();
     profile.CreateMap<UserExperienceRequest, UserExperience>();
-    profile.CreateMap<UserProjectsRequest, UserProjects>();
+    profile.CreateMap<UserProjectRequest, UserProject>();
   }
 }

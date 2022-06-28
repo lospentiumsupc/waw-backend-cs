@@ -16,7 +16,7 @@ public class AppDbContext : DbContext {
   private DbSet<ExternalImage>? images;
   private DbSet<UserEducation>? userEducation;
   private DbSet<UserExperience>? userExperience;
-  private DbSet<UserProjects>? userProjects;
+  private DbSet<UserProject>? userProject;
 
   public DbSet<Offer> Offers {
     get => GetContext(offers);
@@ -58,9 +58,9 @@ public class AppDbContext : DbContext {
     set => userExperience = value;
   }
 
-  public DbSet<UserProjects> UserProjects {
-    get => GetContext(userProjects);
-    set => userProjects = value;
+  public DbSet<UserProject> UserProject {
+    get => GetContext(userProject);
+    set => userProject = value;
   }
 
   public AppDbContext(DbContextOptions options) : base(options) {}
@@ -133,14 +133,14 @@ public class AppDbContext : DbContext {
     experienceEntity.HasOne(p => p.Image).WithOne().HasForeignKey<UserExperience>(p => p.ImageId);
     experienceEntity.HasOne(p => p.Company).WithOne().HasForeignKey<UserExperience>(p => p.CompanyId);
 
-    var projectsEntity = builder.Entity<UserProjects>();
-    projectsEntity.ToTable("UserProjects");
+    var projectsEntity = builder.Entity<UserProject>();
+    projectsEntity.ToTable("UserProject");
     projectsEntity.HasKey(p => p.Id);
     projectsEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
     projectsEntity.Property(p => p.Title).IsRequired().HasMaxLength(100);
     projectsEntity.Property(p => p.Summary).IsRequired().HasMaxLength(500);
     projectsEntity.Property(p => p.Date).IsRequired();
-    projectsEntity.HasOne(p => p.Image).WithOne().HasForeignKey<UserProjects>(p => p.ImageId);
+    projectsEntity.HasOne(p => p.Image).WithOne().HasForeignKey<UserProject>(p => p.ImageId);
 
     var imageEntity = builder.Entity<ExternalImage>();
     imageEntity.ToTable("Images");

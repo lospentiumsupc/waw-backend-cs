@@ -28,7 +28,7 @@ public class User : BaseModel {
 
   public IList<UserExperience> Experience { get; set; } = new List<UserExperience>();
 
-  public IList<UserProjects> Projects { get; set; } = new List<UserProjects>();
+  public IList<UserProject> Projects { get; set; } = new List<UserProject>();
 
   public IList<ChatRoom> ChatRooms { get; set; } = new List<ChatRoom>();
 }

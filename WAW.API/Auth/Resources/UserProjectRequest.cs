@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WAW.API.Auth.Resources;
 
-public class UserProjectsRequest {
+public class UserProjectRequest {
   [Required]
   public string? Title { get; set; }
   [Required]

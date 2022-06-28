@@ -2,7 +2,7 @@ using WAW.API.Shared.Domain.Model;
 
 namespace WAW.API.Auth.Domain.Models;
 
-public class UserProjects : BaseModel {
+public class UserProject : BaseModel {
   public string Title { get; set; } = string.Empty;
   public string Summary { get; set; } = string.Empty;
   public DateTime Date { get; set; }
