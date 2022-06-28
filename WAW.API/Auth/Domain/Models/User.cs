@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using WAW.API.Chat.Domain.Models;
 using WAW.API.Shared.Domain.Model;
 
@@ -12,6 +13,9 @@ public class User : BaseModel {
   public string? Biography { get; set; }
   public string? About { get; set; }
   public DateTime Birthdate { get; set; }
+
+  [JsonIgnore]
+  public string Password { get; set; } = string.Empty;
 
   // Relationships
   public long CoverId { get; set; }

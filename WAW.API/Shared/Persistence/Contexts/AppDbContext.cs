@@ -88,6 +88,7 @@ public class AppDbContext : DbContext {
     userEntity.Property(p => p.Email).IsRequired().HasMaxLength(254);
     userEntity.Property(p => p.ProfileViews).HasDefaultValue(0);
     userEntity.Property(p => p.Birthdate).IsRequired();
+    userEntity.Property(p => p.Password).IsRequired().HasMaxLength(60);
     userEntity.HasMany(p => p.ChatRooms).WithMany(p => p.Participants);
     userEntity.HasOne(p => p.Cover).WithOne().HasForeignKey<User>(p => p.CoverId).IsRequired();
     userEntity.HasOne(p => p.Picture).WithOne().HasForeignKey<User>(p => p.PictureId).IsRequired();
