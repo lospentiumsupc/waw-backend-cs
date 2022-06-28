@@ -66,15 +66,15 @@ public class CompaniesController : ControllerBase {
   }
 
   [HttpDelete("{id:int}")]
-  [ProducesResponseType(typeof(CompanyResource), 200)]
+  [ProducesResponseType(typeof(NoContentResult), 204)]
   [ProducesResponseType(typeof(List<string>), 400)]
   [ProducesResponseType(500)]
-  [SwaggerResponse(200, "The company was deleted successfully", typeof(CompanyResource))]
+  [SwaggerResponse(204, "The company was deleted successfully", typeof(NoContentResult))]
   [SwaggerResponse(400, "The selected company to delete does not exist")]
   public async Task<IActionResult> DeleteAsync(
     [FromRoute] [SwaggerParameter("Company identifier", Required = true)] int id
   ) {
-    var result = await service.Delete(id);
-    return result.ToResponse<CompanyResource>(this, mapper);
+    await service.Delete(id);
+    return NoContent();
   }
 }

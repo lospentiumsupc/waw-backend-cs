@@ -62,15 +62,15 @@ public class UsersController : ControllerBase {
   }
 
   [HttpDelete("{id:int}")]
-  [ProducesResponseType(typeof(UserResource), 200)]
+  [ProducesResponseType(typeof(NoContentResult), 204)]
   [ProducesResponseType(typeof(List<string>), 400)]
   [ProducesResponseType(500)]
-  [SwaggerResponse(200, "The user was deleted successfully", typeof(UserResource))]
+  [SwaggerResponse(204, "The user was deleted successfully", typeof(NoContentResult))]
   [SwaggerResponse(400, "The selected user to delete does not exist")]
   public async Task<IActionResult> DeleteAsync(
     [FromRoute] [SwaggerParameter("User identifier", Required = true)] int id
   ) {
-    var result = await service.Delete(id);
-    return result.ToResponse<UserResource>(this, mapper);
+    await service.Delete(id);
+    return NoContent();
   }
 }
