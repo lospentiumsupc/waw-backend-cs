@@ -14,7 +14,7 @@ public class UserEducationRepository : BaseRepository, IUserEducationRepository 
   }
 
   public async Task<IList<UserEducation>> ListByUserId(long userId) {
-    return await context.UserEducation.Where(x => x.UserId == userId).ToListAsync();
+    return await context.UserEducation.Where(x => x.UserId == userId).Include(x => x.Image).ToListAsync();
   }
 
   public async Task Add(UserEducation userEducation) {

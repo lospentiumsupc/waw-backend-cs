@@ -14,7 +14,7 @@ public class UserProjectRepository : BaseRepository, IUserProjectRepository {
   }
 
   public async Task<IList<UserProject>> ListByUserId(long userId) {
-    return await context.UserProject.Where(x => x.UserId == userId).ToListAsync();
+    return await context.UserProject.Where(x => x.UserId == userId).Include(x => x.Image).ToListAsync();
   }
 
   public async Task Add(UserProject userProject) {

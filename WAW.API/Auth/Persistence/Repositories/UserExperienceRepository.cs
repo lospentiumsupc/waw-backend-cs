@@ -14,7 +14,10 @@ public class UserExperienceRepository : BaseRepository, IUserExperienceRepositor
   }
 
   public async Task<IList<UserExperience>> ListByUserId(long userId) {
-    return await context.UserExperience.Where(x => x.UserId == userId).ToListAsync();
+    return await context.UserExperience.Where(x => x.UserId == userId)
+      .Include(x => x.Image)
+      .Include(x => x.Company)
+      .ToListAsync();
   }
 
   public async Task Add(UserExperience userExperience) {
