@@ -6,37 +6,37 @@ using WAW.API.Shared.Domain.Repositories;
 
 namespace WAW.API.Auth.Services;
 
-public class UserExperienceService : IUserExperienceService {
-  private readonly IUserExperienceRepository repository;
+public class UserProjectService : IUserProjectService {
+  private readonly IUserProjectRepository repository;
   private readonly IUnitOfWork unitOfWork;
 
-  public UserExperienceService(IUserExperienceRepository repository, IUnitOfWork unitOfWork) {
+  public UserProjectService(IUserProjectRepository repository, IUnitOfWork unitOfWork) {
     this.repository = repository;
     this.unitOfWork = unitOfWork;
   }
 
-  public Task<IList<UserExperience>> ListByUserId(long userId) {
+  public Task<IList<UserProject>> ListByUserId(long userId) {
     return repository.ListByUserId(userId);
   }
 
-  public async Task<UserExperienceResponse> Add(UserExperience request) {
+  public async Task<UserProjectResponse> Add(UserProject request) {
     try {
       await repository.Add(request);
       await unitOfWork.Complete();
-      return new UserExperienceResponse(request);
+      return new UserProjectResponse(request);
     } catch (Exception e) {
-      return new UserExperienceResponse($"An error occurred while saving the experience information: {e.Message}");
+      return new UserProjectResponse($"An error occurred while saving the projects information: {e.Message}");
     }
   }
 
-  public async Task<UserExperienceResponse> Update(long id, UserExperience request) {
+  public async Task<UserProjectResponse> Update(long id, UserProject request) {
     var current = await repository.GetById(id);
     if (current == null) {
-      return new UserExperienceResponse("Experience information not found");
+      return new UserProjectResponse("Project information not found");
     }
 
     if (current.UserId != request.UserId) {
-      return new UserExperienceResponse("Unauthorized");
+      return new UserProjectResponse("Unauthorized");
     }
 
     current.CopyFrom(request);
@@ -44,9 +44,9 @@ public class UserExperienceService : IUserExperienceService {
     try {
       repository.Update(current);
       await unitOfWork.Complete();
-      return new UserExperienceResponse(current);
+      return new UserProjectResponse(current);
     } catch (Exception e) {
-      return new UserExperienceResponse($"An error occurred while saving the experience information: {e.Message}");
+      return new UserProjectResponse($"An error occurred while saving the project information: {e.Message}");
     }
   }
 

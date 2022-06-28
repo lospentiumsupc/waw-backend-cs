@@ -106,7 +106,7 @@ public class AppDbContext : DbContext {
     userEntity.HasMany(p => p.ChatRooms).WithMany(p => p.Participants);
     userEntity.HasMany(p => p.Education).WithOne(p => p.User).HasForeignKey(p => p.UserId).IsRequired();
     userEntity.HasMany(p => p.Experience).WithOne(p => p.User).HasForeignKey(p => p.UserId).IsRequired();
-    userEntity.HasMany(p => p.Projects).WithOne();
+    userEntity.HasMany(p => p.Projects).WithOne(p => p.User).HasForeignKey(p => p.UserId).IsRequired();
     userEntity.HasOne(p => p.Cover).WithOne().HasForeignKey<User>(p => p.CoverId);
     userEntity.HasOne(p => p.Picture).WithOne().HasForeignKey<User>(p => p.PictureId);
 

@@ -1,6 +1,5 @@
 using WAW.API.Auth.Domain.Models;
 using WAW.API.Auth.Domain.Services.Communication;
-using WAW.API.Auth.Resources;
 
 namespace WAW.API.Auth.Domain.Services;
 

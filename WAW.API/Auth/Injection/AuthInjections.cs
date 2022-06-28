@@ -18,6 +18,9 @@ public static class AuthInjections {
     services.AddScoped<IUserExperienceRepository, UserExperienceRepository>();
     services.AddScoped<IUserExperienceService, UserExperienceService>();
 
+    services.AddScoped<IUserProjectRepository, UserProjectRepository>();
+    services.AddScoped<IUserProjectService, UserProjectService>();
+
     services.AddScoped<IJwtHandler, JwtHandler>();
   }
 }
