@@ -35,4 +35,10 @@ public class UserResource {
 
   [SwaggerSchema("User profile picture", Nullable = true)]
   public ExternalImageResource? Picture { get; set; }
+
+  public IEnumerable<UserEducationResource>? Education { get; set; }
+
+  public IEnumerable<UserEducationResource>? Experience { get; set; }
+
+  public IEnumerable<UserEducationResource>? Projects { get; set; }
 }
