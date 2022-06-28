@@ -2,12 +2,19 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using WAW.API.Shared.Extensions;
-using WAW.API.Weather.Domain.Repositories;
+using WAW.API.Subscription.Domain.Repositories;
+using WAW.API.Subscription.Domain.Services;
+using WAW.API.Subscription.Domain.Services.Communication;
+using WAW.API.Subscription.Persistence.Respositories;
+using WAW.API.Subscription.Services;
 using WAW.API.Weather.Domain.Services;
 using WAW.API.Weather.Mapping;
 using WAW.API.Weather.Persistence.Contexts;
-using WAW.API.Weather.Persistence.Repositories;
 using WAW.API.Weather.Services;
+using IUnitOfWork = WAW.API.Weather.Domain.Repositories.IUnitOfWork;
+using ModelToResourceProfile = WAW.API.Subscription.Mapping.ModelToResourceProfile;
+using ResourceToModelProfile = WAW.API.Subscription.Mapping.ResourceToModelProfile;
+using UnitOfWork = WAW.API.Weather.Persistence.Repositories.UnitOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,13 +57,17 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 // Add path prefix and versioning
 
+
 // Dependency Injection configuration
-builder.Services.AddScoped<IForecastRepository, ForecastRepository>();
-builder.Services.AddScoped<IForecastService, ForecastService>();
+builder.Services.AddScoped<ISubscriptionPlanRepository, SubscriptionPlanRepository>();
+builder.Services.AddScoped<ISubscriptionPlanService, SubscriptionPlanService>();
+builder.Services.AddScoped<IPromotionRepository, PromotionRepository>();
+builder.Services.AddScoped<IPromotionService, PromotionService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // AutoMapper configuration
 builder.Services.AddAutoMapper(typeof(ModelToResourceProfile), typeof(ResourceToModelProfile));
+
 
 var app = builder.Build();
 
