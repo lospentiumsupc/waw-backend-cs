@@ -45,25 +45,54 @@ public class UsersController : ControllerBase {
     return mapper.Map<UserResource>(user);
   }
 
-  [HttpGet("{id:long}")]
-  [ProducesResponseType(typeof(UserResource), 200)]
-  [ProducesResponseType(typeof(ErrorResponse), 401)]
-  [ProducesResponseType(typeof(ErrorResponse), 404)]
-  [SwaggerResponse(200, "Found user with requested ID.", typeof(UserResource))]
-  [SwaggerResponse(401, "Unauthorized", typeof(ErrorResponse))]
-  [SwaggerResponse(404, "User couldn't be found", typeof(ErrorResponse))]
-  public async Task<IActionResult> FindById(
-    [FromRoute] [SwaggerParameter("User identifier", Required = true)] long id
-  ) {
-    var user = await service.FindById(id);
-
-    if (user is not null) {
-      var mapped = mapper.Map<UserResource>(user);
-      return Ok(mapped);
+  [HttpGet("me/education")]
+  public async Task<IEnumerable<UserEducationResource>> GetUserEducation() {
+    var user = (User) HttpContext.Items["User"]!;
+    var education = await service.ListEducationByUser(user.Id);
+    if (education == null) {
+      throw new Exception($"Unable to fetch education list for logged in user: {user.Id}");
     }
 
-    var body = new ErrorResponse($"Unable to find user with ID {id}");
-    return NotFound(body);
+    return mapper.Map<IEnumerable<UserEducation>, IEnumerable<UserEducationResource>>(education);
+  }
+
+  [HttpGet("me/experience")]
+  public async Task<IEnumerable<UserExperienceResource>> GetUserExperience() {
+    var user = (User) HttpContext.Items["User"]!;
+    var experience = await service.ListExperienceByUser(user.Id);
+    if (experience == null) {
+      throw new Exception($"Unable to fetch experience list for logged in user: {user.Id}");
+    }
+
+    return mapper.Map<IEnumerable<UserExperience>, IEnumerable<UserExperienceResource>>(experience);
+  }
+
+  [HttpGet("me/projects")]
+  public async Task<IEnumerable<UserProjectsResource>> GetUserProjects() {
+    var user = (User) HttpContext.Items["User"]!;
+    var projects = await service.ListProjectsByUser(user.Id);
+    if (projects == null) {
+      throw new Exception($"Unable to fetch projects list for logged in user: {user.Id}");
+    }
+
+    return mapper.Map<IEnumerable<UserProjects>, IEnumerable<UserProjectsResource>>(projects);
+  }
+
+  [HttpPut("me")]
+  [ProducesResponseType(typeof(UserResource), 200)]
+  [ProducesResponseType(typeof(List<string>), 400)]
+  [ProducesResponseType(typeof(ErrorResponse), 401)]
+  [ProducesResponseType(500)]
+  [SwaggerResponse(200, "The user was updated successfully", typeof(UserResource))]
+  [SwaggerResponse(400, "The user data is invalid")]
+  [SwaggerResponse(401, "Unauthorized", typeof(ErrorResponse))]
+  public async Task<IActionResult> UpdateUser([FromBody] UserUpdateRequest resource) {
+    if (!ModelState.IsValid) return BadRequest(ModelState.GetErrorMessages());
+    var user = (User) HttpContext.Items["User"]!;
+    var id = user.Id;
+
+    var result = await service.Update(id, resource);
+    return result.ToResponse<UserResource>(this, mapper);
   }
 
   [AllowAnonymous]
@@ -87,38 +116,5 @@ public class UsersController : ControllerBase {
     var user = mapper.Map<UserCreateRequest, User>(resource);
     var result = await service.Register(user);
     return result.ToResponse<UserResource>(this, mapper);
-  }
-
-  [HttpPut("{id:int}")]
-  [ProducesResponseType(typeof(UserResource), 200)]
-  [ProducesResponseType(typeof(List<string>), 400)]
-  [ProducesResponseType(typeof(ErrorResponse), 401)]
-  [ProducesResponseType(500)]
-  [SwaggerResponse(200, "The user was updated successfully", typeof(UserResource))]
-  [SwaggerResponse(400, "The user data is invalid")]
-  [SwaggerResponse(401, "Unauthorized", typeof(ErrorResponse))]
-  public async Task<IActionResult> UpdateUser(
-    [FromRoute] [SwaggerParameter("User identifier", Required = true)] int id,
-    [FromBody] UserUpdateRequest resource
-  ) {
-    if (!ModelState.IsValid) return BadRequest(ModelState.GetErrorMessages());
-
-    var result = await service.Update(id, resource);
-    return result.ToResponse<UserResource>(this, mapper);
-  }
-
-  [HttpDelete("{id:int}")]
-  [ProducesResponseType(typeof(NoContentResult), 204)]
-  [ProducesResponseType(typeof(List<string>), 400)]
-  [ProducesResponseType(typeof(ErrorResponse), 401)]
-  [ProducesResponseType(500)]
-  [SwaggerResponse(204, "The user was deleted successfully", typeof(NoContentResult))]
-  [SwaggerResponse(400, "The selected user to delete does not exist")]
-  [SwaggerResponse(401, "Unauthorized", typeof(ErrorResponse))]
-  public async Task<IActionResult> DeleteUser(
-    [FromRoute] [SwaggerParameter("User identifier", Required = true)] int id
-  ) {
-    await service.Delete(id);
-    return NoContent();
   }
 }

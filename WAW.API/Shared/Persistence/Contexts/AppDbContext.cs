@@ -14,6 +14,9 @@ public class AppDbContext : DbContext {
   private DbSet<ChatRoom>? chatRooms;
   private DbSet<Message>? messages;
   private DbSet<ExternalImage>? images;
+  private DbSet<UserEducation>? userEducation;
+  private DbSet<UserExperience>? userExperience;
+  private DbSet<UserProjects>? userProjects;
 
   public DbSet<Offer> Offers {
     get => GetContext(offers);
@@ -45,6 +48,21 @@ public class AppDbContext : DbContext {
     set => images = value;
   }
 
+  public DbSet<UserEducation> UserEducation {
+    get => GetContext(userEducation);
+    set => userEducation = value;
+  }
+
+  public DbSet<UserExperience> UserExperience {
+    get => GetContext(userExperience);
+    set => userExperience = value;
+  }
+
+  public DbSet<UserProjects> UserProjects {
+    get => GetContext(userProjects);
+    set => userProjects = value;
+  }
+
   public AppDbContext(DbContextOptions options) : base(options) {}
 
   protected override void OnModelCreating(ModelBuilder builder) {
@@ -56,12 +74,8 @@ public class AppDbContext : DbContext {
     chatRoomEntity.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
     chatRoomEntity.Property(p => p.CreationDate).IsRequired();
     chatRoomEntity.Property(p => p.LastUpdateDate).IsRequired();
-    chatRoomEntity.HasMany(p => p.Messages)
-      .WithOne(p => p.ChatRoom)
-      .HasForeignKey(p => p.ChatRoomId);
-    chatRoomEntity.HasMany(p => p.Messages)
-      .WithOne(p => p.ChatRoom)
-      .HasForeignKey(p => p.ChatRoomId);
+    chatRoomEntity.HasMany(p => p.Messages).WithOne(p => p.ChatRoom).HasForeignKey(p => p.ChatRoomId);
+    chatRoomEntity.HasMany(p => p.Messages).WithOne(p => p.ChatRoom).HasForeignKey(p => p.ChatRoomId);
 
     var messageEntity = builder.Entity<Message>();
     messageEntity.ToTable("Message");

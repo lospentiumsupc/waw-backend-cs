@@ -13,6 +13,33 @@ public class UserRepository : BaseRepository, IUserRepository {
     return await context.Users.ToListAsync();
   }
 
+  public async Task<IList<UserEducation>?> ListEducationByUser(long userId) {
+    var user = await context.Users.Where(x => x.Id == userId)
+      .Include(x => x.Education)
+      .ThenInclude(x => x.Image)
+      .SingleOrDefaultAsync();
+
+    return user?.Education;
+  }
+
+  public async Task<IList<UserExperience>?> ListExperienceByUser(long userId) {
+    var user = await context.Users.Where(x => x.Id == userId)
+      .Include(x => x.Experience)
+      .ThenInclude(x => x.Company)
+      .SingleOrDefaultAsync();
+
+    return user?.Experience;
+  }
+
+  public async Task<IList<UserProjects>?> ListProjectsByUser(long userId) {
+    var user = await context.Users.Where(x => x.Id == userId)
+      .Include(x => x.Projects)
+      .ThenInclude(x => x.Image)
+      .SingleOrDefaultAsync();
+
+    return user?.Projects;
+  }
+
   public async Task Add(User user) {
     await context.Users.AddAsync(user);
   }
@@ -37,9 +64,5 @@ public class UserRepository : BaseRepository, IUserRepository {
 
   public void Update(User user) {
     context.Users.Update(user);
-  }
-
-  public void Remove(User user) {
-    context.Users.Remove(user);
   }
 }

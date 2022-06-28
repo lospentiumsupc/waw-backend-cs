@@ -30,10 +30,4 @@ public class UserUpdateRequest {
 
   [SwaggerSchema("User profile picture", Nullable = true)]
   public ExternalImageRequest? Picture { get; set; }
-
-  public IEnumerable<UserEducationRequest>? Education { get; set; }
-
-  public IEnumerable<UserExperienceRequest>? Experience { get; set; }
-
-  public IEnumerable<UserProjectsRequest>? Projects { get; set; }
 }

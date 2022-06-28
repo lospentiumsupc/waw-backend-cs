@@ -45,6 +45,18 @@ public class UserService : IUserService {
     return repository.ListAll();
   }
 
+  public Task<IList<UserEducation>?> ListEducationByUser(long userId) {
+    return repository.ListEducationByUser(userId);
+  }
+
+  public Task<IList<UserExperience>?> ListExperienceByUser(long userId) {
+    return repository.ListExperienceByUser(userId);
+  }
+
+  public Task<IList<UserProjects>?> ListProjectsByUser(long userId) {
+    return repository.ListProjectsByUser(userId);
+  }
+
   public Task<User?> FindById(long id) {
     return repository.FindById(id);
   }
@@ -83,7 +95,7 @@ public class UserService : IUserService {
     var current = await repository.FindById(id);
     if (current == null) return new UserResponse("User not found");
 
-    current.CopyFrom(request, new[] {"Id", "Email",});
+    current.CopyFrom(request, new[] {"Id", "Email", "Password",});
 
     try {
       repository.Update(current);
@@ -91,19 +103,6 @@ public class UserService : IUserService {
       return new UserResponse(current);
     } catch (Exception e) {
       return new UserResponse($"An error occurred while updating the user: {e.Message}");
-    }
-  }
-
-  public async Task<UserResponse> Delete(long id) {
-    var current = await repository.FindById(id);
-    if (current == null) return new UserResponse("User not found");
-
-    try {
-      repository.Remove(current);
-      await unitOfWork.Complete();
-      return new UserResponse(current);
-    } catch (Exception e) {
-      return new UserResponse($"An error occurred while deleting the user: {e.Message}");
     }
   }
 }
