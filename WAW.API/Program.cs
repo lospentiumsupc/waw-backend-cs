@@ -95,7 +95,6 @@ try {
           policy.WithOrigins(origins.ToArray())
             .SetIsOriginAllowedToAllowWildcardSubdomains()
             .AllowAnyHeader()
-            .AllowCredentials()
             .AllowAnyMethod()
             .SetPreflightMaxAge(TimeSpan.FromMinutes(5));
         }
