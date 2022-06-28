@@ -1,5 +1,6 @@
 using AutoMapper;
 using WAW.API.Auth.Mapping;
+using WAW.API.Chat.Mapping;
 using WAW.API.Employers.Mapping;
 using WAW.API.Job.Mapping;
 
@@ -10,5 +11,6 @@ public class ResourceToModelProfile : Profile {
     AuthResourceToModelProfile.Register(this);
     CompanyResourceToModelProfile.Register(this);
     JobResourceToModelProfile.Register(this);
+    ChatResourceToModelProfile.Register(this);
   }
 }

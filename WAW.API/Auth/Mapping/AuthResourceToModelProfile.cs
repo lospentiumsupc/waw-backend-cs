@@ -6,6 +6,11 @@ namespace WAW.API.Auth.Mapping;
 
 public static class AuthResourceToModelProfile {
   public static void Register(IProfileExpression profile) {
-    profile.CreateMap<UserRequest, User>();
+    profile.CreateMap<UserCreateRequest, User>();
+    profile.CreateMap<UserUpdateRequest, User>();
+    profile.CreateMap<ExternalImageRequest, ExternalImage>();
+    profile.CreateMap<UserEducationRequest, UserEducation>();
+    profile.CreateMap<UserExperienceRequest, UserExperience>();
+    profile.CreateMap<UserProjectRequest, UserProject>();
   }
 }

@@ -2,6 +2,7 @@ using System.Net.Mime;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using WAW.API.Auth.Authorization.Attributes;
 using WAW.API.Employers.Domain.Services;
 using WAW.API.Employers.Resources;
 using WAW.API.Shared.Extensions;
@@ -10,6 +11,7 @@ namespace WAW.API.Employers.Controllers;
 
 using Domain.Models;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
@@ -66,15 +68,15 @@ public class CompaniesController : ControllerBase {
   }
 
   [HttpDelete("{id:int}")]
-  [ProducesResponseType(typeof(CompanyResource), 200)]
+  [ProducesResponseType(typeof(NoContentResult), 204)]
   [ProducesResponseType(typeof(List<string>), 400)]
   [ProducesResponseType(500)]
-  [SwaggerResponse(200, "The company was deleted successfully", typeof(CompanyResource))]
+  [SwaggerResponse(204, "The company was deleted successfully", typeof(NoContentResult))]
   [SwaggerResponse(400, "The selected company to delete does not exist")]
   public async Task<IActionResult> DeleteAsync(
     [FromRoute] [SwaggerParameter("Company identifier", Required = true)] int id
   ) {
-    var result = await service.Delete(id);
-    return result.ToResponse<CompanyResource>(this, mapper);
+    await service.Delete(id);
+    return NoContent();
   }
 }
