@@ -25,7 +25,7 @@ In order to make it available for client applications.
     When a POST request is sent to Companies
       | Name   | Address          | Email           |
       | Oracle | Buenos Aires, AR | oracle@fake.com |
-    Then a CompanyResource response with status 201 is received
+    Then a CompanyResource response with status 200 is received
     And a CompanyResource is included in the body
       | Id | Name   | Address          | Email           |
       | 3  | Oracle | Buenos Aires, AR | oracle@fake.com |
