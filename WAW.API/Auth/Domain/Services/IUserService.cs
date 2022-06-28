@@ -10,6 +10,6 @@ public interface IUserService {
   Task<User?> FindById(long id);
   Task<IList<User>?> BatchFindById(IEnumerable<long> ids);
   Task<UserResponse> Register(User user);
-  Task<UserResponse> Update(long id, User user);
+  Task<UserResponse> Update(long id, UserUpdateRequest user);
   Task<UserResponse> Delete(long id);
 }

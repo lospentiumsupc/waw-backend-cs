@@ -47,7 +47,7 @@ public class CompanyService : ICompanyService {
     if (existingCompanyWithName != null && existingCompanyWithName.Id != currentCompany.Id)
       return new CompanyResponse("Company name already exists");
 
-    company.CopyProperties(currentCompany);
+    company.CopyTo(currentCompany);
 
     try {
       repository.Update(currentCompany);

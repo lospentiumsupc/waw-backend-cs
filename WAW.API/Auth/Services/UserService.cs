@@ -79,11 +79,11 @@ public class UserService : IUserService {
     }
   }
 
-  public async Task<UserResponse> Update(long id, User user) {
+  public async Task<UserResponse> Update(long id, UserUpdateRequest request) {
     var current = await repository.FindById(id);
     if (current == null) return new UserResponse("User not found");
 
-    user.CopyProperties(current);
+    current.CopyFrom(request, new[] {"Id", "Email",});
 
     try {
       repository.Update(current);

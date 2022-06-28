@@ -90,8 +90,7 @@ public class UsersController : ControllerBase {
   ) {
     if (!ModelState.IsValid) return BadRequest(ModelState.GetErrorMessages());
 
-    var user = mapper.Map<UserUpdateRequest, User>(resource);
-    var result = await service.Update(id, user);
+    var result = await service.Update(id, resource);
     return result.ToResponse<UserResource>(this, mapper);
   }
 
