@@ -24,5 +24,5 @@ public class UserExperienceRequest {
 
   public ExternalImageRequest? Image { get; set; }
 
-  public CompanyRequest? Company { get; set; }
+  public long? CompanyId { get; set; }
 }
