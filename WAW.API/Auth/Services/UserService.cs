@@ -64,6 +64,12 @@ public class UserService : IUserService {
   }
 
   public async Task<UserResponse> Register(User user) {
+    if (repository.ExistsByEmail(user.Email)) {
+      return new UserResponse($"Email {user.Email} already has an account");
+    }
+
+    user.Password = BCryptNet.HashPassword(user.Password);
+
     try {
       await repository.Add(user);
       await unitOfWork.Complete();
