@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WAW.API.Shared.Persistence.Contexts;
 
@@ -10,9 +11,10 @@ using WAW.API.Shared.Persistence.Contexts;
 namespace WAW.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220628034312_AddUserExperienceEducation")]
+    partial class AddUserExperienceEducation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,7 +171,6 @@ namespace WAW.API.Migrations
                         .HasColumnName("university");
 
                     b.Property<long?>("UserId")
-                        .IsRequired()
                         .HasColumnType("bigint")
                         .HasColumnName("user_id");
 
@@ -234,7 +235,6 @@ namespace WAW.API.Migrations
                         .HasColumnName("title");
 
                     b.Property<long?>("UserId")
-                        .IsRequired()
                         .HasColumnType("bigint")
                         .HasColumnName("user_id");
 
@@ -253,51 +253,6 @@ namespace WAW.API.Migrations
                         .HasDatabaseName("i_x_user_experience_user_id");
 
                     b.ToTable("user_experience", (string)null);
-                });
-
-            modelBuilder.Entity("WAW.API.Auth.Domain.Models.UserProject", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("id");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("date");
-
-                    b.Property<long?>("ImageId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("image_id");
-
-                    b.Property<string>("Summary")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)")
-                        .HasColumnName("summary");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)")
-                        .HasColumnName("title");
-
-                    b.Property<long?>("UserId")
-                        .IsRequired()
-                        .HasColumnType("bigint")
-                        .HasColumnName("user_id");
-
-                    b.HasKey("Id")
-                        .HasName("p_k_user_project");
-
-                    b.HasIndex("ImageId")
-                        .IsUnique()
-                        .HasDatabaseName("i_x_user_project_image_id");
-
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("i_x_user_project_user_id");
-
-                    b.ToTable("user_project", (string)null);
                 });
 
             modelBuilder.Entity("WAW.API.Chat.Domain.Models.ChatRoom", b =>
@@ -467,16 +422,12 @@ namespace WAW.API.Migrations
                         .HasForeignKey("WAW.API.Auth.Domain.Models.UserEducation", "ImageId")
                         .HasConstraintName("f_k_user_education_images_image_id");
 
-                    b.HasOne("WAW.API.Auth.Domain.Models.User", "User")
+                    b.HasOne("WAW.API.Auth.Domain.Models.User", null)
                         .WithMany("Education")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("f_k_user_education_users_user_id");
 
                     b.Navigation("Image");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WAW.API.Auth.Domain.Models.UserExperience", b =>
@@ -491,37 +442,14 @@ namespace WAW.API.Migrations
                         .HasForeignKey("WAW.API.Auth.Domain.Models.UserExperience", "ImageId")
                         .HasConstraintName("f_k_user_experience_images_image_id");
 
-                    b.HasOne("WAW.API.Auth.Domain.Models.User", "User")
+                    b.HasOne("WAW.API.Auth.Domain.Models.User", null)
                         .WithMany("Experience")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("f_k_user_experience_users_user_id");
 
                     b.Navigation("Company");
 
                     b.Navigation("Image");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("WAW.API.Auth.Domain.Models.UserProject", b =>
-                {
-                    b.HasOne("WAW.API.Auth.Domain.Models.ExternalImage", "Image")
-                        .WithOne()
-                        .HasForeignKey("WAW.API.Auth.Domain.Models.UserProject", "ImageId")
-                        .HasConstraintName("f_k_user_project_images_image_id");
-
-                    b.HasOne("WAW.API.Auth.Domain.Models.User", "User")
-                        .WithMany("Projects")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("f_k_user_project_users_user_id");
-
-                    b.Navigation("Image");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WAW.API.Chat.Domain.Models.Message", b =>
@@ -550,8 +478,6 @@ namespace WAW.API.Migrations
                     b.Navigation("Education");
 
                     b.Navigation("Experience");
-
-                    b.Navigation("Projects");
                 });
 
             modelBuilder.Entity("WAW.API.Chat.Domain.Models.ChatRoom", b =>

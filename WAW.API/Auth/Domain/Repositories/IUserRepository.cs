@@ -5,6 +5,12 @@ namespace WAW.API.Auth.Domain.Repositories;
 public interface IUserRepository {
   Task<IEnumerable<User>> ListAll();
 
+  Task<IList<UserEducation>?> ListEducationByUser(long userId);
+
+  Task<IList<UserExperience>?> ListExperienceByUser(long userId);
+
+  Task<IList<UserProject>?> ListProjectsByUser(long userId);
+
   Task Add(User user);
 
   Task<User?> FindById(long id);
@@ -14,6 +20,4 @@ public interface IUserRepository {
   bool ExistsByEmail(string email);
 
   void Update(User user);
-
-  void Remove(User user);
 }

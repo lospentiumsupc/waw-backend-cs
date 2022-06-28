@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using WAW.API.Chat.Domain.Models;
 using WAW.API.Chat.Domain.Services;
-using WAW.API.Chat.Domain.Services.Communication;
 using WAW.API.Chat.Resources;
 using WAW.API.Shared.Extensions;
 
