@@ -24,6 +24,9 @@ try {
   // Add services to the container with path prefix
   builder.Services.AddControllers(options => options.UseGeneralRoutePrefix("api/v1"));
 
+  // Security configuration
+  builder.Services.Configure<AuthSettings>(builder.Configuration.GetSection("Authentication"));
+
   // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
   builder.Services.AddEndpointsApiExplorer();
   builder.Services.AddSwaggerGen(
