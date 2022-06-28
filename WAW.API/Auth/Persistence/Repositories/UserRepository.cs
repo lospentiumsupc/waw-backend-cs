@@ -21,6 +21,14 @@ public class UserRepository : BaseRepository, IUserRepository {
     return await context.Users.FindAsync(id);
   }
 
+  public async Task<User?> FindByEmail(string email) {
+    return await context.Users.SingleOrDefaultAsync(x => x.Email == email);
+  }
+
+  public bool ExistsByEmail(string email) {
+    return context.Users.Any(x => x.Email == email);
+  }
+
   public void Update(User user) {
     context.Users.Update(user);
   }

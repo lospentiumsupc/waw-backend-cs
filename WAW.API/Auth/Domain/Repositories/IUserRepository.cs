@@ -9,6 +9,10 @@ public interface IUserRepository {
 
   Task<User?> FindById(long id);
 
+  Task<User?> FindByEmail(string email);
+
+  bool ExistsByEmail(string email);
+
   void Update(User user);
 
   void Remove(User user);

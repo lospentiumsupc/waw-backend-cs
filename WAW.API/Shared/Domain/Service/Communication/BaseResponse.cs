@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace WAW.API.Shared.Domain.Service.Communication;
 
 public abstract class BaseResponse<T> {
-  public bool Success { get; set; }
-  public string Message { get; set; }
-  public T? Resource { get; set; }
+  private bool Success { get; set; }
+  private string Message { get; set; }
+  private T? Resource { get; set; }
 
   protected BaseResponse(string message) {
     Success = false;
@@ -18,6 +18,16 @@ public abstract class BaseResponse<T> {
     Success = true;
     Message = string.Empty;
     Resource = resource;
+  }
+
+  public IActionResult ToResponse(ControllerBase controller) {
+    // ReSharper disable once InvertIf
+    if (!Success || Resource is null) {
+      var body = new ErrorResponse(Message);
+      return controller.BadRequest(body);
+    }
+
+    return controller.Ok(Resource);
   }
 
   public IActionResult ToResponse<TResponse>(ControllerBase controller, IMapper mapper) {
